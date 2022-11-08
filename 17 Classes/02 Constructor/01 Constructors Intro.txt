@@ -1,0 +1,57 @@
+Q1) What are constructors?
+	What are they?special class methods/functions  (are functions!)
+	Why special? no return type
+		      name same as class
+		      What parameter? can / cannot have parameters
+	  when are constructors used ? When we try to create instances of class	    
+	 	
+	  what is use when called? to construct our class objects from blue print
+		  		used to initilaize member variables and put them in state
+	
+	
+		
+
+Q2) How are consturctor parameters passed? Passed by value
+Ex
+
+Q3) Are constructor parameters copied? Yes different address
+class Cylinder {
+ 
+
+
+ private :
+//Properties
+	double base_radius {1.0};
+	double height{1.0}
+
+//Behaviours
+	Cylinder() {	// initilaize member variables and put them in state	//Constructor wo parameter //Default constructor
+	  base_radius = 2.0;  //member variables initialized to 2
+	  height = 2.0;
+};
+
+	Cylinder(double radius_param, double height_[aram){			/Constructor w parameter
+		base_radius = radius_paraml
+		 height = height_param;
+}
+	double volume() {							//member function
+		return PI*base_radius*base_radius*height;
+}
+}
+
+
+Q4)What is Default constructor/empty constructor ?
+      What if we dont create/specify constructor? Still works
+	How? compiler sets up empty contructor/Default constructor
+		like Cylinder() {
+		}
+
+class Cylinder {
+double volume() {....}
+}
+
+int main() {
+	Cylinder cylinder1;		//createinstance
+	std::cout<<cylinder1.volume()
+	return 0;
+}

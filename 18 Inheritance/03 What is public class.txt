@@ -1,0 +1,11 @@
+class Player : public Person
+
+What is the public here?:
+	What can derived/new class access?
+		public members of fundamental/base class
+		 
+	What cant derived/new class access?	
+		private members	
+
+How will we access private members from derived class?
+we will use public getters

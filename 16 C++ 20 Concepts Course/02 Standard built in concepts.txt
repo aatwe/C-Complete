@@ -1,0 +1,63 @@
+Core language concepts: Make our function templates safe
+advantage of concepts over static_cast ? concepts built into signature of function, not in body
+	When you declare/define concept -> function will support it
+
+same_as
+derived_from
+convertible_to
+common_reference_with
+common_with
+integral			/can call function only with integral type template parameter
+				What if violate? compiler error
+signed_integral
+unsigned_integral
+floating_point		//what parameter can only use? int type
+
+
+
+1) How to setup concept? requires keyword , concept , template parameter
+			//if concept true/satisfies -> template will work
+
+Syntax;
+template <typename T>
+requires std::integral<T>
+T add (T a, T b){
+	return a + b;
+}
+
+OR 
+//Could also have writtenbelow:
+template <MyIntegral T>
+T add(T a, T b{
+  return a + b;
+})
+
+OR
+
+template <typename T>
+T add(T a, T b) requiresMyIntegral<T>{
+	return a + b;
+}
+
+OR
+
+MyIntegral autoadd (MyIntegral auto a,  MyIntegral auto b) {
+	return a + b;
+}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Code:
+char a_0 {10};
+char a_1{20};
+
+auto result_a=  add(a_0,a_1);
+std::cout<<static_cast<int>(result_a) <<std::endl;	Works
+
+int b_0{11};
+int b_1{5};
+auto result_b = add(b_0, b_1);
+std::cout<<result_b <<std:;endl;			//Works
+
+double c_0 {};
+double c_1{};
+auto result_c = add(c_0,c_1);				//Doesnt work 

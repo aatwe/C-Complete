@@ -1,0 +1,141 @@
+1) Obejctive #1: Print address of Dog object we construct and destruct 
+		Print inside constructor
+
+//We basically got access to address of fluffy object(current object constructed) using "this" pointer from inside of class
+	What if we didnt have this pointer?We would have had to grab object from main function
+
+2) Objective#2 What if we want to set up setters
+		Our parameter is named as "name"
+		(Using name = name wont work)Compiler cant understand which name we are using
+				this->name= name;  (works)
+
+
+3) Objective #3
+	Setup chain calls using this pointers
+	Make setters return dog* instead of void
+	return this at the end of every setter
+
+	//for objective 3 // dog1.set_dog_name("Pumba")	//Since this will return pointer to current object , we can call other functions through it
+  	dog1.set_dog_name("Pumba")->set_dog_breed("Wire Fox Terrier") -> set_dog_age(4);
+
+#Basically instead of doing below
+	dog1.set_dog_name("Pumba");
+	dog1.set_dog_breed("Wire Fox Terrier");	
+	dog1.set_dog_age(4);
+#We were able to do below 
+	dog1.set_dog_name("Pumba")->set_dog_breed("Wire Fox Terrier") -> set_dog_age(4);
+
+4) Objective #4
+	a) Setters will Return references instead of pointers
+	b) Can we return this; directly now? No Gives Compiler error, why? we are not returning pointer
+		Solution? return *this;
+
+	c) //basically we are able to do 
+		dog1.set_dog_name("Pumba").set_dog_breed("Wire Fox Terrier").set_dog_age(4);	
+
+	Dog& set_dog_name(std::string name){
+		//our parameter name is named
+		this->name = name; 
+		return *this;
+}
+	Dog& set_dog_breed(std::string_view breed){
+		//our parameter name is named
+		this->breed = breed; 
+		return *this;
+}
+	Dog& set_dog_age(int age){
+	    	*(this -> p_age) =age;
+		return *this;
+}
+int main() {
+	Dog dog1("Fluffy", "Shepherd", 2);	//Calls constructor
+	dog1.print_info();	
+
+	/For objective #4 //Setup chain call
+	dog1.set_dog_name("Pumba").set_dog_breed("Wire Fox Terrier").set_dog_age(4);	
+
+	std::cout<<"Done!" <<std::endl;;
+  return 0;
+}
+
+Output:
+Dog constructor called for Fluffy at 0x62fd50
+Dog0x62fd50 : name : Fluffy breed: Shepherd age:2
+Dog0x62fd5 0 : name : Pumba breed: Shepherd age:2
+Done!	
+Dog destructor called for Fluffy at 0x62fd60
+
+If we try to build ? Build finished successfully
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#include <iostream>
+
+class Dog{
+	public:
+	 Dog() = default;
+	 Dog(std::string_view name_param, std::string_view breed_param, int age_param);
+	~Dog();
+
+	void print_info(){
+	  std::cout<<"Dog"<<this <<"name"<< name <<"breed"<<breed<<"age" <<*p_age <<std::endl;
+}
+
+	Dog* set_dog_name(std::string name){
+		//our parameter name is named
+		this->name = name; 
+		return this;
+}
+	Dog* set_dog_breed(std::string_view breed){
+		//our parameter name is named
+		this->breed = breed; 
+		return this;
+}
+	Dog* set_dog_age(int age){
+	    	*(this -> p_age) =age;
+		return this;
+}
+	private :
+	  std::string name;
+	std:; string breed;
+	int *p_age{nullptr};
+};
+Dog::Dog(std::string_view name_param, std::string_view breed_param, int age_param){
+	name = name_param;
+	breed = breed_param;
+	p_age = new int;
+	*p_age = new int;
+	*p_age = age_param;
+	std::cout<<"Dog constructor called for"<<name<< "at" <<this<< std::endl;
+
+		//What will be this here? address in memory of current object being constructed by constructor
+}
+Dog ::~Dog(){
+	delete p_age;
+	std::cout<<"Dog destructor called for"<<name<< std::endl;
+	std::cout<<"Dog destructor called for"<<name<< "at" <<this<< std::endl;
+}	
+int main() {
+	Dog dog1("Fluffy", "Shepherd", 2);	//Calls constructor
+	dog1.print_info();	
+
+	dog1.set_dog_name("Pumba");
+	dog1.set_dog_breed("Wire Fox Terrier");	
+	dog1.set_dog_age(4);
+	dog1.print_info();		
+
+	//for objective 3 //  dog1.set_dog_name("Pumba")->set_dog_breed("Wire Fox Terrier") -> set_dog_age(4);
+	std::cout<<"Done!" <<std::endl;;
+  return 0;
+}
+
+OUTPUT:
+Dog constructor called for Fluffy at 0x62fd60
+Dog0x62fd60 : name : Fluffy breed: Shepherd age:2
+Dog0x62fd60 : name : Pumba breed: Shepherd age:2
+Done!	
+Dog destructor called for Fluffy at 0x62fd60
+
+If we try to build ? Build finished successfully
+
+

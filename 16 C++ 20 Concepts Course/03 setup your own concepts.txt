@@ -1,0 +1,37 @@
+1) template <typename T>
+    concept MyIntegral = std::is_integral_v<T>;
+	conceptname	type_trait	 //forces template parameter to be integral
+				//Is this how std::integral concept is built? Yesin C++ stl
+
+   tempalte <typename T>		
+				//What if we want syntax concept should satisfy?  requires (Ta , Tb) {
+   concept Multipliable = requires(T a, T b){
+	a*b;			//for ex parameters should be multipliable	//not checking for a multiplied to b
+};				//just enforces syntax to be supportive  //for ex if we pass integer -> valid ,since integer multipliable
+									if we pass 2 strings -> fail , cant multiply strings
+				
+  template <typename T>		//What if we have multiple statements in concept?Yes use
+  concept Incrementable = requires (T a){
+	a+=1;	//valid
+	++a;	//valid
+	a++;	//valid
+};
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Use these concepts after defining?
+
+ template <typename T>
+    requires MyIntegral<T>	//our own concept MyIntegral 
+     T add_1(T a, T b){
+	return a + b;
+}
+
+//Syntax2
+template <MyIntegral T>
+T add_2(T a,  T b){
+  return a + b;
+}
+
+//Syntax3
+auto add_3(MyIntegral auto a, MyIntegral auto b){
+	return a + b;
+}

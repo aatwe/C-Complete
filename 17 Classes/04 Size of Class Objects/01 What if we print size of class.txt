@@ -1,0 +1,38 @@
+1) What if we print size of  wrapper object 
+
+Q) What is size of object = sum of size of member variables
+	why not member functions? functions are affiliated with class, not class objects
+	always = sum of member variables?
+		No , Boundary allignment
+		  What is boundary allignment? Gaps in memory in member variables
+			Why gaps? for ease
+			for ease 4 byte member variables : stored at locations multiple of 4	
+		 	when compiler have member variable of different type
+				due to this ease: gaps in memory
+
+			So overall size might be slihtly off than total sum
+Q) How C++ will add size in memory?
+	4 bytes for int m_var1
+	4 bytes for int m_var2
+	unspecified for string m_var2
+	   why? string is internally implemented as class
+	             string stores data as const char pointer
+
+
+class Wrapper{
+public:
+
+  void do_something(){
+
+}
+ void print_info() {
+	std::cout<<"var1"<<m_var1;
+	std::cout<<"var2"<<m_var1;
+	std::cout<<"var3"<<m_var1;
+}
+private:
+	int m_var1();
+	int m_var2();
+	std::string m_name{"Lorem ipsum dolor sit amet"};	/String type member variable
+
+}

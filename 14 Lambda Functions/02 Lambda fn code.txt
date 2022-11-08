@@ -1,0 +1,115 @@
+drag drop folder to VS Code -> main.cpp
+			   .vscode
+/*
+[capture list] (parameters) -> return type {
+	//function body
+};*/
+
+
+Code:
+#include<iostream>
+
+
+int main() {
+
+
+1) declare lambda fn
+auto func = []() -> {
+  std::cout<< "Hello World" <<std::endl;
+};
+func();	//this prints hello world, just writing function wont print, have to call it
+
+2) call the lambda fn
+
+
+	return 0;
+}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++=
+How to call lambda function directly(no need to call) without giving it name? add () in end
+	//dont have to name also
+[]() -> {
+  std::cout<< "Hello World" <<std::endl;
+}();;
+
+O/p :
+	Hello World!
+	Done!
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setup lambda function with parameters
+
+What is below lambda function doing?
+	setting up lambda fn		
+		ends where ? }
+		what parameters takes? 2 //double type
+		What is function body doing? what is sum of a and b
+		What arguments in parameters? 10.0 and 5.0
+
+[](double a, double b) -> {
+  std::cout<< "a + b" <<(a + b) <<std::endl;
+}(10.0,5.0);
+
+std::cout<< "Done!" <<std::endl;
+return 0;
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Lets not call lambda function directly , and instead call multiple times	//give handle name , use handle
+
+auto func1 = [](double a, double b){
+  std::cout<< (a + b) << std::endl;
+}
+//call lambda function multiple times
+func1(10,20));
+func1(5,7);	
+
+
+notice, we passing integer, compiler implictly converts to double type	//Be aware and make them use to your advantage
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Return from lambda function
+
+Q) Will the below print? No, its not printing a + b, only returning 
+[](double a, double b){
+   return a + b;
+}(10,20);
+
+std::cout<<"Done";
+return 0;
+
+Solution? assign return value to a variable
+auto result = [](double a, double b){
+   return a + b;
+}(10,20);
+
+std::cout<< "result : " << result;
+
+std::cout<<"Done";
+return 0;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Give name to lambda function
+auto func1	 = [](double a, double b){
+   return a + b;
+}
+auto result1 = func1(23,7);
+auto result2 = func1(9,45);
+std::cout<< func1(23,7) <<func(5,2) << std::endl;		
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Explicit return type of lambda function
+
+auto func3 =  [](double a, double b)-> int {	//return type explicitly given as int //ealier it was deduced
+   return a + b;
+}
+
+auto func4 =  [](double a, double b)->  {	//return type is deduced
+   return a + b;
+}
+
+double a{6.9};
+double b{3.5};
+
+auto result3 = func3(a,b);
+auto result4 = func4(a,b); 
+
+std::cout<< sizeof(result3);	//4	//int
+std::cout<<sizeof(result4);	//8	//double

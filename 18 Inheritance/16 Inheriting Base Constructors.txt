@@ -1,0 +1,91 @@
+1) Can we inherit base constructors to use in derived class? Yes
+
+2) What hierarchy?
+	Person -> Engineer
+
+3) What do we have in person class?
+	a) member variables	
+	b) Default constructor
+	c) Custom Constructor
+	d) Copy Constructor
+
+#include <string>
+#include <string_view>
+class Person
+
+  friend std::ostream& operator<<(std::ostream&, const Person& person);
+public:
+	Person();		//not defaulting constructor by Person() = default; ///why? we can put output statements in body
+	Person(std::string_view fullname, int age,
+	const std::string address);
+	Person(const Person& source);
+	~Person();
+
+	//Getters
+	std::string get_full_name()const{
+		return m_full_name;
+}
+	int get_age()const{
+	   return m_age;
+}
+	std::string get_address()const{
+	   return m_address;
+}
+
+
+4) What does inheriting constructor mean?
+	Arent base constructors inherited? Derived class cant use BAse constructors for setting up , normally(default way)
+	But possible, how?
+
+5) Use Person::Person
+	//What does it do? tells compiler what? when engineer object wont use our own constructor, set up base like constructor 
+						base like constructor only initilaizes base member variables
+	class Engineer : public Person
+	{
+		using Person::Person;
+	           friend std::ostream& operator<<(std::ostream& out, const Engineer& operand);
+	           public:
+		Engineer(const Engineer& source);
+		~Engineer();
+
+	protected:
+		int contract_count{99999};
+}
+	INHERITING THE BASE CONSTRUCTOR
+###6) Basically after seeing Person::Person###
+ -> it tells compiler to generate a constructor : which only initialize the base member variables
+	The constructor will be callable and usable from engineer class
+
+Engineer(const std::string& fullname, int age, const std::string address) : Person(fullname,age,address)	//forwards to initialize object to person class
+{
+}
+
+What is this above? inheriting base constructor
+What this does? initializes base member variables  //person
+
+Is Engineer part variables initialized? no -> will contain junk data that we get by calling default constructor
+
+Q) What access will constructor have? inherited with whatever access specieifer it has in base class	
+	for ex
+	if constructor is in public scope -> gets inherited with public access			//can use from outside and build engineer objects
+	if constructor is in protected scope -> gets inherited with protected access		//able to use from outside
+	if constructor is in private scope -> gets inherited with private access		//Cant use from derived class
+
+
+Q) Are copy constructors inherited?No
+	Why do we not notice?  Compiler inserts copy constructors for us		//problem when dynamic memory allocation		
+		//Learn about shallow/deep copying
+
+Q) Inherited constructor i.e base constructor -> have no knowledge of derived class member variables
+				they willl only initialize base member variables
+
+Q) What access specifier are they inherited with? Whatever in base
+
+Q) Can we setup our own constructor on top of inherited? Yes
+
+Q) Inherited constructor -> confusing code	//Avoid using
+		how will it confuse
+		for ex people will see engineer constructor
+		they will think this initializes engineer variables
+		But actually it is base constructor -> will initialize only base member variables
+		Leads to confusion

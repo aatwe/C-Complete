@@ -1,0 +1,150 @@
+We learnt how to destroy a class pointer
+How to destroy a created object using constructor?	
+Destructor
+	Q) How to declare destructor?
+		~class_name();
+	Q) Where declared?
+		in public: inside class
+	Q) How to define destructor?(delete class object)
+		~Dog(){
+		   delete dog_age;		//need to have access to dog_age
+		}
+	How declare and define destructor separately?
+		
+	~Dog()
+	Dog::~Dog() {		
+	
+}
+	Q) When are destructors called?
+		When explicitly called
+		if local stack object went out of scope
+		if heap object is released from memory (delete)
+		if object passed by value to function -> destructor called?
+			copy in local scope of function 
+			when function exit -> local copy killed
+		if local object returned from function -> destructor called 
+	Q) Do destructors have parameters? No
+class Dog
+{
+ public :
+  Dog();								//Default constructor
+  Dog(std::string name_param, std::string breed_param, int age_param);	//Param constructor
+  ~Dog();
+}
+
+Dog.cpp
+
+#include "dog.h"
+Dog::Dog() {
+	dog_name = "None";
+	dog_breed = "None"
+	dog_age = new int;	
+	*dog_age=  0;
+}
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Code:
+#include <iostream>
+#include <string_view>
+
+class Dog{
+	public:
+		Dog() = default;								//Declare default constructor
+		Dog(std::string_view name_param, std::string_view breed_param, int p_age_param);	//Declare param constructor
+			//why using string_view in parameterized constructor : AVOID COPIES
+		~Dog();									//Declare Destructor	
+
+	private:
+		std::string_name;
+		std::string_breed;		
+		int *p_age{nullptr};
+};
+//define parameterized constructor just below
+Dog(std::string_view name_param, std::string_view breed_param, int p_age_param){
+	name = name_param;
+	breed = breed_param;
+	p_age = new int;
+	 *p_age = age_param;
+	  std:;cout<<"Dog constructor called for " <<name;
+}
+//Define destructor just below:
+Dog::~Dog(){
+	//What will destructor definition contain?
+	delete p_age;
+	 std:;cout<<"Dog Destructor called for " <<name;
+}
+
+
+int main() {
+	Dog my_dog("Fluffy","Shepherd, 2")	//setup object
+	std::cout<<"Done"; 
+	/?Destructor gets called		//stack object scope ends
+	return 0;
+}
+
+Output:
+Dog constructor called for Fluffy
+Done!
+Dog Destructor called for  Fluffy	
+____________________________________________________________________________________________________________________________________________________
+Q) But where is destructors called in this? after Done when stack class object scope ends, desturctor is called automatically from class
+
+int main() {
+	Dog my_dog("Fluffy")
+}
+____________________________________________________________________________________________________________________________________________________
+Q) Analyse through Debugging
+a) Destructor called when scope ends
+Set 3 break points	
+	a) some_func() {
+		Dog my_dog("Fluffy","Shepherd, 2")
+}
+	b) destructor
+	c) constructor
+Clear and setup terminal
+Start debugging -> run
+	step into some_func()	(main has only some_func() in this case)
+		-> we step into string view class (string literal transform into string view)
+			step out
+	  	Step over
+		     Destructor	//why going into desturctor? after leaving some_func(), dog object is destroyed
+		return 0 , program over
+
+b) Passing by value	//Summaryif we pass class object by value, copy inside that function will call for destructor to be called when function exits
+				why ? copy scoped inside function
+	//things wont run properly //confusing copy constructor topic
+	void some_func(Dog dog_param){
+
+	} 
+	int main() {
+		Dog dog("Fluffy","Shepherd",2)				//constructor called
+		some_func(dog);	//pass dog object instance by value to function  //copy dog object
+				//compiler has to copy dog object
+		std::cout<<"Done!"<<std:;endl;
+		return 0;
+}
+
+
+c) Call destructor explicitly
+	//if we dont explicitly release memory, for ex below case, destructor not called
+	
+
+	void some_func(){
+	Dog *p_dog = new Dog("FLuffy","Shepherd",2);	//memory allocated in heap
+					//What if we dont release memory using new operator? leak memory
+}
+
+	int main(){
+	some_func()
+	std:;cout<<"Done";
+	return 0;
+
+}
+
+SO INSTEAD:	//Release the memory, how? delete
+
+	void some_func(){
+	Dog *p_dog = new Dog("FLuffy","Shepherd",2);	//memory allocated in heap
+					//What if we dont release memory using new operator? leak memory
+	delete p_dog;	//now destructor will be called
+}

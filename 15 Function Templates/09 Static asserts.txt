@@ -1,0 +1,8 @@
+Static assert like below : will force number n to be of type int
+
+
+template <typename T>
+void print_number(T,n){
+	static _assert(std::is_integral<T>::value, "Must pass in an integral argument")
+	std:;cout<< n;
+}

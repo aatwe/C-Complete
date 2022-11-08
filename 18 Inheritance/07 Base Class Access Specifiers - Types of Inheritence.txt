@@ -1,0 +1,53 @@
+What determines, if base class members are accesible from derived class? Base class Access Specifier
+
+1) we used public keyword for Public inheritence
+	What is public keyword? Base class Access Specifier
+
+2) What are basic rules of class inheritence?
+Why use these rules and these base class access specifiers?
+	to control the access of base class members
+
+a) What If we do public inheritence i.e (class Player : public Person)
+Base		Derived
+public		stays public
+protected	stays protected
+private		stays private		//little misleading
+					  player cant access private members from base
+
+b) What if we do protected inheritence i.e (class Player : [protected Person)
+Base		Derived
+public		stays protected
+protected	stays protected
+private		stays private		//We cant access m3 of base directly from derived 
+
+c) What if we do private inheritence i.e (class Player : private Person)	//Super constraint	-> everything becomes private
+Base		Derived
+public		stays private
+protected	stays private
+private		stays private 
+
+
+Anyways, base class private members never accessible from derived regardless of access specifier
+____________________________________________________________________________________________________________
+Player.h
+
+#ifndef PLAYER_H
+#define PLAYER_H
+
+#include<string>
+#include<iostream>
+#include "person.h"
+
+class Player : public Person
+{
+	friend std::ostream& operator <<(std::ostream& out, const Player& player);
+public:
+	Player() = default;
+	Player(std::string_view game_param);
+	//~Player();//no need to use, will use that compiler generated
+
+private:
+	std:string m_game{"None"};	
+};
+	
+#endif

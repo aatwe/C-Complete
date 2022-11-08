@@ -1,0 +1,10 @@
+ When are destructors called?
+		When explicitly called
+		if object passed by value to function -> destructor called?
+			copy in local scope of function 
+			when function exit -> local copy killed
+		if local object returned from function -> destructor called 
+
+OBVIOUS cases:
+		if local stack object went out of scope
+		if heap object is released from memory (delete)

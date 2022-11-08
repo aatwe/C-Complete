@@ -1,0 +1,77 @@
+How we built objects before? default constructor
+	what if we want to pass parameters?		
+
+		
+Q1) How to call custom constructors (not default ones)
+	
+#include <iostream>
+#include "person.h"
+#include "engineer.h"
+#include "civilengineer.h"
+
+int main(int argc, char **argv) {
+	Person person1("John Snow", 27, "Winterfell cold");
+	std::cout<<person1;
+	Engineer eng1("Daniel Gray",41,"Green Sky Oh Blue",12);  	//passing parameters to engineer object
+										//Where is this information stored? Engineer level
+	std::cout<<eng1 <<std::endl;
+	CivilEngineer civil_eng1("John Travolta" ,51,"Tiny Dog 42St#89",31, "Road Strength");  	//passing parameters to engineer object	//notice also passing contract count
+										//why passing parameters? to initialize civil engineer  
+										//where this information is forwarded? to constructor	
+										//Where is this information stored? Civil Engineer level
+		
+	std::cout<<civil_eng1 <<std::endl;
+	
+	return 0;
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to initialize constructor? 
+
+1) WRONG WAY
+What cant we set values like this?
+	We have no access to private members(m_address) from base class(person)
+Engineer::Engineer(const std::string& fullname, int age, const std::string_address, int contract_count)
+	{
+		this ->m_full_name = full_name;
+		this ->m_age = age;
+		this->m_address = address;
+}
+
+2) WRONG WAY (Initializer list)
+	Why doesnt work? initializer list works only for ?
+				what class we building object for? Engineer below
+				Works only for Engineer members	//Not engineer's job to build and set up these variables
+				
+For ex
+What we building object for?
+m_full_name
+m_age
+m_address
+Above 3 donot belong to Engineer class
+
+	Initializer list
+Engineer::Engineer(const std::string& fullname, int age, const std::string_address, int contract_count)
+	{
+		const std::string address, int contract_count)
+		  : m_full_name(fullname), m_age(age), m_address(address), contract_count(contract_count)
+	{
+}
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q) What problem above? cannot forward info from derived to base class
+
+1) Call person constructor in initializer list
+2) Initialiize member variable after that in initializer list
+		//Info forwarded from class Engineer (derived) to Person constructor (base) 
+
+
+How to forward information from derived to base class? Call constructor for Person	//Given that you have member variables part of Person
+Why we calling person constructor? to use parameters and build person part
+
+Engineer::Engineer(const std::string& fullname, int age,
+	const std::string address, int contract_count)
+	:Person(fullname,age,address) ,contract_count(contract_count)
+	{
+
+
+}

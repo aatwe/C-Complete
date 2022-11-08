@@ -1,0 +1,111 @@
+Bypass default template mechanism	 
+How?
+
+1)
+Suppose we have function template
+
+template <typename T > T maximum(T a, T b);		//finds maximum and returns	pass int/double/string
+
+
+What if we pass : const char * g{"wild"};
+problem, why? template will compare pointer to string
+		string data wont be checked
+
+How to tell function? if i pass const * dont do the default thing(replace argument type with template parameter) and do this(xyz) instead]
+
+TEMPLATE SPECIALIZATION:
+Syntax? after <> specify function (spcial case that you want for special type)
+
+//Basically below will compare strings, and not compare pointers directly
+
+template <>	     //explicit arg	  //parameters
+const char * maximum <const *char> (const char* a, const char* b){
+	return (std::strcmp(a,b) > 0) ?a : b;		///What strcmp does? compares string lexicographically
+}
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+2) So if we are using template specialization
+compiler wont compare pointer below, it will compare string
+
+template <typename T> T maximum(T a, T b){
+   return (a>b)? a : b;
+}
+template <>	     //explicit arg	  //parameters
+const char * maximum <const *char> (const char* a, const char* b){
+	return (std::strcmp(a,b) > 0) ?a : b;		///What strcmp does? compares string lexicographically
+}
+int main(int argc, char **argv)
+{
+  int a{10};
+  int b{23};
+  double c{34.7};
+  double d{23.4};
+  std::string e{"hello"};
+  std::string f{"world"};
+
+ auto max_int = maximum(a,b);
+ auto max_double = maximum(c,d);
+ auto max_str = maximum(e,f);
+
+ const char * g{"wild"};	//C string of type const char*
+ const char* h{"animal"};
+
+std::cout<< maximum(g,h);	//will use template specialization to compare	//if not used,  it will return which pointer greater, not actual data	//WILL JUST RETURN ADDRESS
+return 0;
+}
+
++++++++++++++++++++++++++++++++++++++++
+Lets try debugging only this?
+ const char * g{"wild"};	//C string of type const char*
+ const char* h{"animal"};
+
+
+const char* result = maximum(g,h);	//breakpoint
+
+
+Analysis:
+Locals:
+g: 0x405050 "wild"
+   *g: 119 'w'	//can see g is pointer to where? first element 
+h: 0x405500 "animal"		
+   *h: 97 'a'
+result : 0x10000000 <error:	//result containing some junk data
+ 
+
+STEP INTO maximum function
+Locals:
+a: 0x405050 "wild"
+   *g: 119 'w'	//can see g is pointer to where? first element 
+b: 0x405500 "animal"		///can see address of b > address of a	//if we dont use specialization , it will return pointer to b (while we know b is not greater string)
+   *h: 97 'a'
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Solution
+
+
+template <typename T> T maximum(T a, T b){
+   return (a>b)? a : b;
+}
+
+template <>	     //explicit arg	  //parameters
+const char * maximum <const *char> (const char* a, const char* b){
+	return (std::strcmp(a,b) > 0) ?a : b;		///What strcmp does? compares string lexicographically
+}
+
+int main() {
+ const char * g{"wild"};	//C string of type const char*
+ const char* h{"animal"};
+
+const char* result = maximum(g,h);	//will use template specialization to compare	//if not used,  it will return which pointer greater, not actual data	//WILL JUST RETURN ADDRESS
+std:;cout<<result;
+return 0;
+}
+
+Output: wild
+
+Q) What if we dont have this specialization?
+max(const char*) : animal	// pointer address compared lexicographically instead of values

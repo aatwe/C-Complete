@@ -1,0 +1,17 @@
+Confuse compiler bw 2 function templates
+//These below are overloads	
+	
+
+template <typename T > T maximum(T a, T b);		//takes parameters by value
+template <typename T > const T& maximum(const T& a, const T& b);	//takes parameters by reference
+
+int main() {
+  double a {23.5};
+  double b {51.2};
+
+  std::cout<< &a;
+  double max1 = maximum(a,b);	//Compiler error
+  std::cout<<max1;
+
+ return 0;
+}

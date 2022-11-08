@@ -1,0 +1,131 @@
+Objetive: Do setup for player class inheriting from person class
+
+
+
+Q) Can player object access private members from person?No
+	How to get around this? Use public getter methods from Player class to access  -> private members of person class
+
+5) 	Include #include <string view> in player
+	Change parameter to be from std::string to std::string_view 
+	main.cpp -> Create player object
+	Player p1("Basketball:); //works
+
+6) 	See Output:
+	player [ Player [game : Basketball names : Mysterious Person]	//Default data we inherited from person
+Q) 	
+	`How to prove that every player object(derived class) has person part(base) of it baked in / embedded
+	Debug  our player object
+
+	a) put break point at 
+			std::cout<<"player :"<<p1 <<std::endl;
+	    Run -> G++ -> debugging session starts -> binary built -> binary plugged in debugger -> break point hit
+	
+	b) Locals
+		p1 : {}
+		  Person(base): Person	//Person is part of p1 object	//base class		//Base layer
+		     first_name		//member variable #1
+		     last_name		//member variable #2
+		  m_game		player member variable				//On top
+
+	
+__________________________________________________________________________________________________________
+ person.h
+__________________________________________________________________________________________________________
+#include <string>
+#include <iostream>
+
+class Person
+{
+	friend std::ostream& operator <<(std::ostream& out, const Person& person);
+ 
+public:
+	Person();		//since no dynamic memory allocn, constructor wont do anything
+	Person(std::string& first_name_param, std::string& last_name_param);
+	~Person();
+//Getters
+	std::string get_first_name() const{
+		return first_name;
+}
+	std::string get_last_name() const{
+		return first_name;
+}
+private:
+	std::string first_name{"Mysterious"};
+	std::string last_name{"Person"};
+	
+};
+#endif
+__________________________________________________________________________________________________________
+person.cpp
+#include "person.h"
+
+Person::Person(){
+}
+
+Person::Person(std::string& first_name_param, std::string last_name_param)
+	: first_name(first_name_param), last_name(last_name_param)
+{
+}
+
+std:;ostream& operator<<(std::ostream& out, const Person& person){
+	out<< "Person [" person.first_name << " " <<person.last_name << "]";
+	 	<< "names : " <<player.get_first_name()
+		  	 <<"  " << player.get_last_name();
+	return out;
+}
+
+Person :: ~Person() {
+
+}
+___________________________________________________________________________________________________________ 
+Player.h
+
+#ifndef PLAYER_H
+#define PLAYER_H
+
+#include<string>
+#include<iostream>
+#include "person.h"
+
+class Player : public Person
+{
+	friend std::ostream& operator <<(std::ostream& out, const Player& player);
+public:
+	Player() = default;
+	Player(std::string_view game_param);
+	//~Player();//no need to use, will use that compiler generated
+
+private:
+	std:string m_game{"None"};	
+};
+
+#endif
+
+____________________________________________________________________________________________________________
+player.cpp
+
+
+#include<person.h>
+#include<player.h>
+
+Player::Player(std::string_view & game_param)
+  : m_game(game_param)
+{
+}
+std::ostream& operator<<(std::ostream& out, const Player& player){
+	out<< "Player : [ game :" <<player.m_game
+		<< "names : " <<player.get_first_name()
+			<< " " << player.get_last_name() << "]";
+	return out;
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+main.cpp
+#include <iostream>
+#include "player.h"
+
+
+	int main() {
+		Player p1("Basketball:);
+		std::cout<<"player :"<<p1 <<std::endl;
+ return 0;
+}

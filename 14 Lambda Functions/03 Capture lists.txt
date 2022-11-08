@@ -1,0 +1,71 @@
+//Havent used capture list syntax yet
+[capture list] (parameters) -> return type {
+	//function body
+};
+
+If done by default: //compiler error	//an enclosing function local variable cannot be referenced in lambda body unless in capture list
+int main() {
+
+double a{10};
+double b{20};
+
+
+auto func = [](){
+	std::cout<< a + b;
+};
+func();
+
+return 0;
+}
+
+
+WE WILL USE CAPTURE LIST NOW:
+How to use things outside the scope of variable, for ex below function body does not have access to a and b
+How to capture a and b and get access in lambda function?
+ 
+double a{10};
+double b{20};
+
+auto func = [a,b]() {
+   std::cout<< "a + b" << a + b << std::endl;
+};
+func();	
+
+
+How to use capture ?
+1) capture by value
+	c passed is copy of outside variable
+	
+int c{42};
+
+	
+auto func = [c]() {
+   std::cout<< c << std::endl;	//42 copy
+};
+//do whatever you want with c
+for (size_t i{} ; i< 5; ++i) {
+ std::cout<< c;
+ func();			//lambda function called 5 times
+ ++c;	//outer variable incremented 5 times //check if reflected inside lambda function? NOO
+}	
+
+
+Output: 42,42,42,42,42
+
+
+2) Capture by reference
+int c{42};
+
+	
+auto func = [&c]() {
+   std::cout<< c << std::endl;	//42 copy
+};
+//do whatever you want with c
+for (size_t i{} ; i< 5; ++i) {
+ std::cout<<"Outer value"<< c;
+ func();			//lambda function called 5 times
+ ++c;	//outer value incremented 5 times //check if reflected inside lambda function? NOO
+}	
+
+
+Output: 42,43,44,45,46

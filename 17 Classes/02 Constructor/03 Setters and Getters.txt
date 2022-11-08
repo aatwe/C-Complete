@@ -1,0 +1,43 @@
+What use of getter and setter? Get member variables and Modify member variables
+		What input? parameters to set member variables to
+	Where should you keep getter and setter? public
+		Why? to access from outside
+
+	
+Getter? Gets data from class
+Setter? Sets data to class
+
+Where are getter and setters? public scope of class
+
+How to modify member variables of class? Dot notation earlier
+	But what if we want to modify from outside class , cant normally.  (private member variables)
+	Solution? Setters function inside class, call these function instead [insiders!]
+
+
+How to use getter?
+
+
+class Cylinder {
+private:
+ double base_radius;
+ double height;
+
+public:
+//Member functions
+ double get_base_radius() {
+	return base_radius;
+}
+ double get_height() {
+	return height;
+}
+//Setters with parameters
+void set_base_radius(double radius param) {
+	base_radius = radius_param
+}
+void set_height(double height_param){
+	height = height_param;
+}
+}
+
+
+Q) What do getter return? orginal var or copy?COPY

@@ -1,0 +1,26 @@
+#include<iostream>
+#include<concepts>
+
+1) Setup concepts
+template <typename T>
+concept MyIntegral =  std::integral_v<T>
+consteval int get_value() {
+	return 3;
+}
+2) USe concepts
+template  <typename T>
+requires MyIntegral<T>	//concept should satisfy
+T add (T a, T b){
+	return a+ b;
+}
+
+int main() {
+	int x{6};	
+	int y{7};
+
+	add(x,y);	//concept satisfies for argument,coz type trait return true
+	return 0;
+
+}
+
+Q) What if we violate concept? error: use of function add() with unsatisfied constraints ->Check wht consraints violated

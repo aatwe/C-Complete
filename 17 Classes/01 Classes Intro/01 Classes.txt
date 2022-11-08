@@ -1,0 +1,8 @@
+Q) What are classes?
+How to build our own types like int / double?
+	Set up blueprints (Classes)-> Build actual objects using blue prints
+							
+Q) How variables were set?
+	type  var_name {initialized to}
+
+How to design type?

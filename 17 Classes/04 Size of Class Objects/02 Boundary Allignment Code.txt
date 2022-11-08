@@ -1,0 +1,60 @@
+main.cpp
+
+Q) What is the size of dog object dog1
+	ideally = size of size_t = 
+
+
+Output:
+size of (size_t) = 8
+sizeof(Dog)  = 16
+sizeof(arm_count) = 8
+
+//no boundary allignment observed
+//try adding member functions -> do not add to class object size
+//try adding a pointer
+sizeof(int*)  = 8;
+	//Do we care what is the pointer pointing to?NO 
+//What if we try printing std::string object
+sizeof(name):  32
+	//what if we try changing text to something Big		//std::string name{"I am the king of the universe"};
+	//sizeof(name):  32	//why still 32? 
+		We have to know how string stores text
+			string stores text as const char pointer
+			since string is also implemented as class
+				 inside //string class we have pointer as member variable	//guess
+				 string class will account for that pointer size
+				so it doesnt take size of what its pointing to
+
+
+#include <iostream>
+
+class Dog{
+    public:
+      Dog() =  default; 
+       void print_info() {
+
+}
+      void do_something(){
+
+}
+   int *p_age;
+
+   private:
+      size_t leg_count;
+      size_t arm_count; 
+      int *p_age;
+}	
+
+int main() {
+
+   Dog dog1;
+   std::cout<<"size of (size_t)" <<sizeof(size_t)<< std::endl;
+  std::cout<<"sizeof(Dog)" <<sizeof(Dog) <<std::endl;	//sizeof(dog1) or sizeof(dog)  //both works
+ std::cout<<"sizeof(arm_count)" <<arm_count<<std::endl;
+  std::cout<<"sizeof(int*)"<<sizeof(int*);
+ //try adding string object as member variable(initialize it) 
+ std::string name{"Hello World!"};
+std::cout<<sizeof(name)<<std::endl;
+
+  return 0;
+}

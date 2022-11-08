@@ -1,0 +1,30 @@
+What is inheritence?
+Feature C++ provides that allow us to buildclasses that depend on each other
+	and form a cluster
+
+	Build Hierarchy of classes : Classes depending on other classes
+
+Why Inheritence? Makes design much easier to look and understand
+Why need hierarchy of class?
+	Suppose we have type : Person
+		We can have different types of person
+			For ex
+				Doctor
+				Physician
+				Engineer
+
+How to capture these relationships? Inheritance
+
+How make hierarchy
+
+One class person
+Other classes Engineer depending on Person
+Other classes CivilEng depending on Engineer
+
+What Engineer is adding? Adding a layer over Person type
+What is Civil Engineer adding? A layer over Engineer type 
+
+
+Inheritence,Classes are defining feature of OOP(Object Oriented Programming)
+	What is OOP? way to think about programming in terms of objects
+	

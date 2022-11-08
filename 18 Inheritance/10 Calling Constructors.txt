@@ -1,0 +1,191 @@
+Sumamry: To build object 
+	Constructors are called
+	Starting from most basic ----> most specialized
+
+#include <iostream>
+#include "person.h"
+#include "engineer.h"
+#include "civilengineer.h"
+
+
+int main(int argc, char **argv)
+{
+	CivilEngineer civil_eng;
+	return 0;
+} 	
+
+In what order constructor called?
+1) Person default arg constructor
+2) Engineer default arg constructor called
+3) Civil Engineer default arg constructor called
+	//After this object can be used
+
+This why you should always provide default constructor for classes
+Why should we always give default constructor for classes?
+	Compiler may call default constructor in unexpected way in inheritence heirachies
+
+For ex
+	what if building civil engineer object
+		and we dont have default constructor
+			Compiler Error
+
+
+
+Code:
+Person.h
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#include <string>
+#include <string_view>
+class Person
+
+  friend std::ostream& operator<<(std::ostream&, const Person& person);
+public:
+	Person();		//not defaulting constructor by Person() = default; ///why? we can put output statements in body
+	Person(std::string_view fullname, int age,
+	const std::string address);
+	~Person();
+
+	//Getters
+	std::string get_full_name()const{
+		return m_full_name;
+}
+
+Person.cpp
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#include <Person.h>
+#include <iostream>
+
+Person::Person(){
+	std::cout <<"Default Constructor for Person Called" <<std::endl;
+}
+
+
+#include "person.h"
+class Engineer : public Person
+{
+  friend std::ostream& operator<<(std::ostream&, const Engineer& operand);
+public:
+	Engineer();
+	~Engineer();
+
+	void build_something(){
+	m_full_name = "John Snow";
+	m_age = 23;
+}
+
+int get_contract_count() const{
+	return contract_count;
+}
+}
+
+
+Engineer.cpp
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#include "person.h"
+#include "engineer.h"
+#include <iostream>
+
+Engineer ::Engineer() {
+	//What will default constructor do?
+	std::cout<< "Default constructor for engineer called " <<std:;endl;
+}
+
+std::ostream & operator<<(std::ostream& out, const Engineer& operand){
+	out<<"Engineer"<<operand.get_full_name() << "age" <<operand.get_age() << "address" << operand.get_address() <<"contract count" << operand.contract_count;
+
+return out;
+}
+
+Engineer::~Engineer() {
+
+}
+
+
+CivilEngineer.h
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#ifndef CIVIL_ENGINEER_H
+#define CIVIL_ENGINEER_H
+
+#include "engineer.h"
+class CivilEngineer : public Engineer
+{
+	  friend std::ostream& operator<<(std::ostream&, const Engineer& operand);
+public:
+	CivilEngineer();
+	~CivilEngineer();
+
+	void build_road(){
+	add(10,2);
+	add(10,2,4);
+}
+public
+
+
+
+
+CivilEngineer.cpp
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#include "person.h"
+#include "engineer.h"
+#include <iostream>
+#include "civilengineer.h"
+
+CivilEngineer:CivilEngineer()
+{
+	std::cout<<"Default constructor called for Civil Engineer" <<std::endl;
+}
+//Q What order constructor called, if we build civil engineer object
+
+
+std::ostream & operator<<(std::ostream& out, const Engineer& operand){
+	out<<"CivilEngineer"<<operand.get_full_name() << "age" <<operand.get_age() << "address" << operand.get_address() <<"contract count" << operand.contract_count <<"speciality" <<operand.m_speciality <"]"
+
+	return out;
+
+}
+
+CivilEngineer::~CivilEngineer()
+
+Main..cpp
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+#include <iostream>
+#include "person.h"
+#include "engineer.h"=
+#include "civilengineer.h"
+
+int main() {
+	CivilEngineer ce1;
+	std::cout<<"Hello" <<std::endl;
+	return 0;
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Run -> Output
+1) Default constructor for Person called
+2) Default constructor for Engineer called
+3) Default constructor for Civil Engineer
+
+What does this prove?
+Compiler builds Civil Engineer object in parts
+	1) it sees it is drived object
+	2) sees what classes this is deriving from
+	3) compiler build most base part first
+	4)Build other layers 
+	5) Till it reaches Civil Engineer objects
+
+Try Debuggin:
+int main() {
+	CivilEngineer ce1;
+	std::cout<<"Hello" <<std::endl;	//brkpt 
+	return 0;
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Debuggin output:
+Variables
+  Locals
+   ce1: {...}
+   Engineer(base):...
+   	Person(base) : Engineer
+	Person(base) : Person
+	contract_count: 0        
+   m_speciality

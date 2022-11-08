@@ -1,0 +1,45 @@
+How to return from a function? 
+	1) parameter
+	2) return	//alternative
+
+Q) Where does returned value go? copied into function call result1
+	 
+int sum (int a, int b){
+  int result = a + b;		//is result local to function? yes
+  std::cout<< &result;
+  return result;		//is var destroyed after function terminates	 
+}
+
+
+int main(int argc, char **argv) {
+
+  int a {34};
+  int b {16};
+
+  int result1 =  sum (a,b);	
+  std::cout<< &result1;
+  std::cout<<result1;
+}
+Q) Does this code actually return by value?
+compiler will optimize to return by reference
+	in this case will re-use local variable and NOT make copy
+
+
+How compiler opitimizes?
+std::string add_strings(std::string str1, std::string str2){
+  std::string result = str1 + str2; 
+  std::cout<<&result << std::endl;				//Address result     XXXX
+  return result;
+}
+int main (int argc, char **argv) 
+{
+  std::string str_result = add_strings(std::string("Hello"), std::string("World"));
+  std::cout<< &str_result << std::endl;				//Address str_result XXXX
+  std::cout<<str_result << std::endl;
+  return 0;
+}
+
+Why same address?
+compiler magic -> return local variable result
+		 instead of copying from result to str_result 
+		 

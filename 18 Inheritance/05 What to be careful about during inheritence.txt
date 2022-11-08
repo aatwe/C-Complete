@@ -1,0 +1,104 @@
+1) We dont have access to private parts(first_name) of base class(person)
+	How to get access/change private members of rd
+
+	Solution: Use public getters , 
+		What if try to access normally? for ex
+			player.first_name;	-> Error
+	What error: first_name is private within this context
+	private to base, cant be accessed by derived
+
+There are 2 ways to test access for private members
+a) Player.cpp	//Global function 	
+		//Doesnt work
+#include<person.h>
+#include<player.h>
+
+Player::Player(std::string_view & game_param)
+  : m_game(game_param)
+{
+}
+std::ostream& operator<<(std::ostream& out, const Player& player){
+	out<< "Player : [ game :" <<player.m_game
+		<< "names : " <<player.get_first_name()
+			<< " " << player.get_last_name() << "]";
+	return out;
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+b) From member function
+	//Try to changefirst_name and last_name into constructor for derived class
+	//Will wont work, why? Private members of base class cant be accessed from derived class
+#include<person.h>
+#include<player.h>
+
+Player::Player(std::string_view & game_param)
+  : m_game(game_param)
+{
+	first_name =  "John";
+	last_name = "Snow";
+}
+std::ostream& operator<<(std::ostream& out, const Player& player){
+	out<< "Player : [ game :" <<player.m_game
+		<< "names : " <<player.get_first_name()
+			<< " " << player.get_last_name() << "]";
+	return out;
+}	
+  =========================================================================
+2)  Set up Setters
+
+#include <string>
+#include <iostream>
+
+class Person
+{
+	friend std::ostream& operator <<(std::ostream& out, const Person& person);
+ 
+public:
+	Person();		//since no dynamic memory allocn, constructor wont do anything
+	Person(std::string& first_name_param, std::string& last_name_param);
+	~Person();
+//Getters
+	std::string get_first_name() const{
+		return first_name;
+}
+	std::string get_last_name() const{
+		return first_name;
+}
+
+//Setters
+	void set_first_name(std::string_view fn) {
+		first_name = fn;
+}
+	void set_last_name(std::string_view  ln){
+		last_name = ln;
+}
+private:
+	std::string first_name{"Mysterious"};
+	std::string last_name{"Person"};	
+};
+#endif
+
+3) Try changing the name for person
+#include <iostream>
+#include <player.h>
+
+int main() {
+	Player p1 ("Basketball");
+	p1.set_first_name("John");
+	p1.set_last_name("Snow");
+	std::cout<<"player" <<p1 << std::endl;
+
+	return 0;
+}
+
+
+
+Output:
+	player : Player : [game: Basketball names : John Snow]
+
+What did we prove? public member from base class are inherited and used in ->derived class that does public inheritence
+		cannot use private member data in derived class
+
+How did we access and change public stuff from base class? Setters 
+		where are these setters? public score of base class
+		Where  used from? outside -> inherited in derived class as public
+		Is private data from base accessible from outside? No

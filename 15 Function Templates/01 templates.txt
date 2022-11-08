@@ -1,0 +1,55 @@
+What problem we had with function overloads?
+we had multiple overload for max(a,b)
+	But  body of function was same 
+
+	How to avoid repeating this code?
+	Function template
+
+What  are function templates? blueprint that decides what function to generate (depending what argument passed)
+			avoid several overload, one point of control
+				//advantage, if dont use string, function overload for string wont be created
+					only which overload genrated by compiler? ones that are called  
+
+Is function template real function? NO, real function is generated when they are called
+What feature of function template? once a template generated(for ex int version of max function template
+				-> if when needed again, compiler will reuse)
+
+1) Set up blueprint for "maximum" function
+
+What is T? type we use in function	//note: all types have to be same		
+
+	template <typename T>
+	T maximum(T a, T b){
+	  return (a  >  b) ? a : b;
+}
+
+
+2) Who will generate actual function? compiler
+	When? when we call
+
+3) Checks for types passed to function call
+	for ex a , b are int
+
+4) replace T with int
+Code:
+
+template <typename T>			//Template declaration
+	T maximum(T a, T b);
+
+int main(int argc, char **argv)
+{
+  int a{10};
+  int b{23};
+
+ double c{34.7};
+ double d{23.4};
+
+ std::string e {"hello"};
+ std::string f {"hello"}; 
+
+ std::cout<<maximum(a,b) <<std:;endl;
+ std::cout<<maximum(c,d) <<std:;endl;
+ std::cout<<maximum(e,f) <<std:;endl;
+
+return 0;
+}

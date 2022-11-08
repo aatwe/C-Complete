@@ -1,0 +1,16 @@
+We learnt ? capture a variable from outside lambda function context , how? put variable in capture list
+
+
+How to capture everything outside context of lambda function? Put "=" in capture list
+Changes can be made both ways, use to your advantage
+int c{42};
+
+auto func = [=]() {
+	std::cout<<"Inner value"<<c;
+};
+
+for (size_t i{} ; i< 5 ; ++i){
+	std::cout<<""Outer value<<c<<std::endl;
+	func();
+	++c;
+}

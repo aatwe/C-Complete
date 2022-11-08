@@ -1,0 +1,21 @@
+
+HOW TO DECLARE CLASS
+
+
+
+For ex how to model a cylinder?
+What info we have about cylinder?
+	Cylinder has r and h
+
+class Cylinder {
+public :	//Define member variables(define what class is) for cylinder	//what is public? members(in this class) are accessible from outside of class
+  double base_radius {1.0};	
+  double height {1.0};
+
+public :	//Define member functions(behaviour) for cylinder
+  double volume() {
+	return PI*base_radius*base_radius*height;
+}
+};
+
+What is default value of member variables? 0

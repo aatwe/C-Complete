@@ -1,0 +1,41 @@
+Bad way
+	many permutation for many types
+	What if the code in it is v long 
+
+#include<iostream>
+int maxium (int a, int b){
+   return (a> b)? a : b;
+}
+
+std::string maxium (const std::string& a, const std::string& b){
+   return (a> b)? a : b;
+}
+long long int maxium (long long a, long long b){
+   return (a> b)? a : b;
+}
+
+int main() {
+  return 0;
+}
+++++++++++++++++++++++++++++++++++++++++++++
+Solution?Good way
+set  up 1 point of control for all overloads
+
+
+template <typename T> 
+//function in terms of T
+T maximum (T a , T b){
+	return (a>b)? a : b;
+}
+
+int main () {
+  int x{5};
+  int y{7};
+  int result = maximum (x,y);	//call the function	//compiler doesnt find declaration //compiler looks for function template
+			//compiler finds arg is int //compiler replaces t by int
+			//function will be defined for this call
+  std::cout << result ;
+ return 0;
+}
+Output: 7
+

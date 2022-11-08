@@ -1,0 +1,28 @@
+1) Simple requirement : How to check expressions using concept?
+template <typename T>
+concept TinyType = requires (T t){
+	sizeof(T) <=4;	//What is this checking? just the syntax not the expression 
+			ex if char as parameter (<4) still valid
+			How to check expressions using concept? nested requirement
+};
+
+2) nested
+template <typename T>
+concept TinyType = requires (T t){
+	requires sizeof(T) <=4;	//What is this checking? just the syntax and the expression 
+			ex if char as parameter (<4) not valid			
+};
+
+
+3) Compound	//can also check return type of expression and enforce it to satisfy some type trait
+		//Summary: syntax for adding a and b must be correct and supported + result of a and b must be convertible to int	 	
+template <typename T>
+concept Addable = requires (T t){
+	{a + b} noexcept -> std::convertible_to<int>	//What is this checking? valid syntax,  does not throw exception, result is convertible to int (for ex string is not convertible to int -> error)
+			ex if char as parameter (<4) not valid			
+	
+};
+
+
+
+4) Type

@@ -1,0 +1,50 @@
+Q) When do we have to  manage class objects through pointers? Dynamic  Memory allocation
+Q) How to access member functions of pointer? * dereferencing +  dot notation(.) [*c2.volume()] //have to dereference pointer
+				//why have to dereference? pointer is just pointing, not storing any information about about type
+					OR
+					Pointer access notation  ->	        [c2->volume]	//can access directly using pointer
+										//dereferences internally 
+
+Q) How to store address of cylinder stack objects on dynamic objects ? store address of stack object on pointer,
+								dereference = dot or ->
+						Cylinder *p_Cylinder = &cylinder1
+Q) Our project template has changed now
+	we will have files:
+		constants.h, cylinder.cpp, cylinder.h, main.cpp + VS Code folder 	//start from here
+Q)  How to create new Cylinder object on heap?	
+	Cylinder *p_cylinder2  = new Cylinder(11,20)	//can keep calling
+	std::cout<< p_cylinder2 -> volume(); 
+	delete 	p_cylinder2;			//remember to delete in end
+
+#include<iostream>
+#include"constants.h"
+#include"cylinder.h"
+
+int main(int argc, char **argv) {
+
+	Cylinder c1(10,2);			//Create Cylinder object on  stack
+	std::cout<< c1.volume() 
+	
+	Cylinder *c2  = new Cylinder(11,20)	//Create new Cylinder object in heap
+	std::cout<< (*c2).volume();
+	std::cout<<c2 - volume;	
+
+	delete c2;			//
+}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#include <iostream>
+#include "cylinder.h"
+
+int main() {
+	Cylindercylinder1(10,10);
+	cylinder1.volume();
+
+	Cylinder *p_Cylinder = &cylinder1;
+	std::cout << (*p_cylinder1).volume();
+		      p_cylinder1-> volume();
+
+}
+
+
+ 

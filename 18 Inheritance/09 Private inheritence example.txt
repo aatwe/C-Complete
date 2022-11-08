@@ -1,0 +1,154 @@
+If member variable is private -> can be inherited anyway	// Doesnt matter what inheritence
+1) set up base class person
+	public:
+	Person() = default;
+	Person(const std::string& fullname, int age,
+	const std::string address);
+	~Person();
+
+	m1  : public
+	m2  : protected
+	m3  :private
+
+2) set up engineer class inheriting person privately
+	
+	class Person;	//Forward Declaration
+	class Engineer : private Person		//Nobody can take things from Engineer class	//How private inheritence constraints
+	m1  : private
+	m2  : private
+	m3  :private
+
+
+3)  Setup CivilEng class -> inheriting from Engineer publicly	//despite doing public inheritence civilEng cannot access membervariables private to engineer class
+	class CivilEng : public Engineer
+	m1  : private	//in accessible
+	m2  : private
+	m3  :private
+
+a)  
+
+	
+	class Person;	//Forward Declaration
+	class Engineer : private Person		//Nobody can take things from Engineer class	//How private inheritence constraints
+	{
+	friend std::ostream& operator<<(std::ostream& out, const Engineer& operand);
+	public:
+		Engineer();
+		~Engineer();
+		void build_something() {
+		
+	}
+
+	class Engineer;	//Forward Declaration
+	class CivilEngineer : private Engineer		//Nobody can take things from Engineer class	//How private inheritence constraints	//Can civil engineer access members (variables / functions) from Engineer class
+	{					//selfish class //takes from current class and forwards nothing downstream
+	friend std::ostream& operator<<(std::ostream& out, const Engineer& operand);
+	public:
+		Engineer();
+		~Engineer();
+		void build_something() {
+		
+	}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+main .cpp
+
+#include <iostream>
+#include<person.h>
+#include "engineer.h"]
+
+int main() {
+
+  return 0;
+}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Person.h
+
+#ifndef PERSON_H
+#define PERSON_H
+
+#include <string>
+#include <string_view>
+class Person
+{
+	friend :: ostream& operator<< (std::ostream&, const Person& person);
+ public:
+	Person() = default;
+	Person(std::string_view fullname, int age,
+	const std::string address);
+	~Person();
+
+	//Getters
+	std::string get_full_name()const{
+	   return m_full_name;
+}
+	int get_age()const{
+	 return m_age;
+}
+	int get_address()const{
+	 return m_address;		//Private in base class //not accessible to inherited class	
+}
+
+public:
+	std::string m_full_name{"None'};
+protected
+	int m_age{0};
+private :
+	std::string m_address{"None"};
+};
+#endif
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+civilengineer.h
+#ifndef CIVIL_ENGINEER_H
+#define CIVIL_ENGINEER_H
+
+#include "engineer.h"
+class CivilEngineer : public Engineer	//Cant access anything	//full_name variable remains private
+{
+	friend std::ostream& operator<<(std::ostream&. const  CivilEngineer& operand);
+   public:
+	CivilEngineer();
+	~CivilEngineer();
+
+	void build_road() {}
+
+  private :
+	std::string m_speciality{"None"};
+};
+#endif
+
+civilengineer.cpp
+	
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Main Message: Private Inheritence strips down anything from upstream class -> Makes them private
+
+
+Q) Why ostream is not working below? despite being friend of civil engineer class
+civilengineer.cpp
+#include  "person.h"
+#include"engineer.h"
+#include "civilengineer.h"
+#include <iostream>
+
+CivilEngineer:CivilEngineer(){}
+
+std::ostream& operator<<(std::)							//friend of civil engineer class, what does being friend do? have access to evthn in civil engineer class	
+	out<< "CivilEngineer [Full name : "<<operand.get_full_name() <<			
+										//But still not working, why? made private to engineer class  //getters are public members of Person()
+		",age" <<operand.get_age() <<					//But class Engineer : private Person	///here inheritence class is doing private inheritence
+		",contract_count : "<< operand.contract_count <<			//Makes everything public in person -> private  in Engineer	//when? in engineer.h //civil Engineer : private Person
+		",speciality : "<<operand.m_speciality <<"]";										///getters become private to engineer during this private inheritence 
+									//SInce private to engineer-> also inherited as private to CivilEngineer	//cant even call them from function (ostream)(friend of civil engineer class)
+	return out;							//When mark something as friend -> 
+
+	CivilEngineer::~CivilEngineer(){}
+
+
+std::ostream&operator<<(std::ostream &out, const CivilEngineer& operand){	//ostream operator has access to civil engineer class
+								//But still not works, why? made private to ostream 
+	out<< "CivilEngineer [Full name: " <<operand.get_full_name() << ",contract_count" <<operand.contract_count <<"speciality : " <<operand.m_speciality << "]";
+	return out;
+}
+	

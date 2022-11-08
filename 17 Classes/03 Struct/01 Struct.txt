@@ -1,0 +1,82 @@
+What is struct? Another syntax to create classes in C++
+
+How to create classes ?
+	Class keyword
+	Struct
+
+how to create class?
+class Dog{
+	std::string name{"none"};
+};
+
+
+Q) how to create structure
+struct Cat {
+	std::string name;
+}
+
+Q) What is main difference between structure and class?
+	Members can be directly accessed from outside
+	  why?
+		struct members : public
+		class members : private
+     Are class members private or public? private by default
+     Are struct members private or public by default? public by default
+	Can be accessed by outside
+
+Q) How to change this default behaviour?
+	explictly declare public/private
+Q) Where are struct commonly used?
+	setup classes with only public member variables and no methods inside class
+
+#include <iostream>
+
+class Dog {
+	std::string m_name;
+};
+
+struct Cat 
+{
+	std::string m_name;
+}
+
+int main() {
+	Dog dog1;
+	Cat cat1;
+	
+	dog1.m_name = "Fluffy";	//Error
+	cat1.m_name= "Juny";	//Not error
+}
+How to use structure?
+
+class Dog {
+	std::string m_name;
+};
+
+struct Point {
+   double x;
+   double y;
+};
+
+void print_point (const Point &point);
+{
+	std::cout<< point.x <<point.y;	
+}
+int main() {
+	Dog dog1;
+	Cat cat1;
+	dog1.m_name = "Fluffy";
+	cat1.m_name = "Juny";
+	std::cout<< dog1.m_name <<std::endl;
+	std::cout<< cat1.m)name << std::endl;
+
+	Point point1;
+	point1.x = 10;
+	point1.y = 55.55;	 
+	print_point(point1);	
+	point1.x = 40.4;
+	point1.y= 2.7;
+
+	return 0
+
+}	

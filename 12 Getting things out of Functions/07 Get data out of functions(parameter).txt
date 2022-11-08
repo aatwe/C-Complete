@@ -1,0 +1,121 @@
+How to get output from function using function paremeters as channel?
+Checks:
+ output parameters should be modifiable (references/pointers)
+ input parameters shouldnt be modified ,they get data in function
+
+
+1) Using references	//preferred
+
+Given 3 functions:
+		parameters?	//input 2 strings	//1 output string(modifiable reference)
+								why modifiable reference?
+								  by using reference, changes made in function, visible outside also
+								why input parameter is const? input not meant to be changed
+								why output parameter has no const?
+								  we want to modify output variable in function
+								  output1 = input2 	//modifying
+								what is funcn of max_str? compute max from 2 strings, and store in output1	
+								How changes will be reflected outside function? o/p parameter is reference, changes will be visible
+								 
+
+max_str(const std::string& input1, const std::string input2, std::string& output)
+{
+	if(input1 > input2){
+	output = input1;
+}else{
+	output = input2;
+}
+}
+
+//similar for below
+
+2) Using Pointers
+void max_int(int input1 , int input2, int &output)
+
+
+max_double(double input1, double input2, double* output){
+	if(input1 > input2){
+	*output = input1;		//gotta dereference since output is pointer
+}	else{
+	*output = input2;
+}
+}
+
+
+CODE1:
+
+#include <iostream>
+#include<string>
+void max_str(const std::string& input1, const std::string input2, std::string& output)
+{
+	if(input1 > input2){
+	output = input1;
+}else{
+	output = input2;}}
+
+int main() {
+//Declare 3 strings
+  std::string out_str;
+  std::string string1("Alabama");
+  std::string string2("Bellevue");
+max_str(string1, string2, out_str);	//function call
+std::cout<<out_str;			//print output parameter from the function
+  return  0;
+}
+
+Run task -> GCC -> clear terminal -> ./rooster.exe
+
+
+
+CODE2 //Inputs are no longer references
+#include <iostream>
+#include<string>
+void max_int(int input1,int input2, int& output)		
+		//Why are inputs no longer references
+			we are ok with copying fundamental types in c++(can pass int by value)
+			output stilll reference, have to modify //any change inside function will reflect
+
+{
+	if(input1 > input2){
+	output = input1;
+}else{
+	output = input2;}}
+
+int main() {
+//Declare 3 strings
+  int out_str;
+  int in1{45};
+  int in3{23};
+max_int(in1, in2, out_int);	//function call
+std::cout<<out_int;			//print output parameter from the function
+  return  0;
+}
+
+Run task -> GCC -> clear terminal -> ./rooster.exe
+max_int : 45
+
+CODE3) 
+
+Using Pointers
+void max_int(int input1 , int input2, int &output)
+
+
+max_double(double input1, double input2, double* output){
+	if(input1 > input2){
+	*output = input1;		//gotta dereference since output is pointer
+}	else{
+	*output = input2;
+}
+}
+int main() {
+//Declare 3 strings
+ double out_double;
+ double in_double1{45.8};
+ double in_ double2{6.9};
+max_double(in_double1, in_double2, &out_double);	//function call
+std::cout<<out_double;			//print output parameter from the function
+  return  0;
+}
+
+Run task -> GCC -> clear terminal -> ./rooster.exe
+max_int : 45.8

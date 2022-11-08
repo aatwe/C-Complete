@@ -1,0 +1,302 @@
+ Objective:
+	set up class Person {...};
+	set up class Engineer : private Person	//private inheritence
+Solution:
+1) set up class person
+	 default constructor
+	parameterized constructor
+	destructor
+	getters
+	public member variables
+	protected member variables
+	private member variables
+	
+2) in Implementation file
+//Constructor forwards data to member vavriabless
+//ostream operator will print all this info going through getters, why through getters?person object is passed as parameter
+
+3) Include person class in main.cpp file
+	create person class object	//pass parameters
+	Output the person 1 object
+
+4) How to inherit from this person class ///that was objective
+	Set up player class : which will inherit publicly from person class
+	class Player : public Person
+		what is class access specifier? public
+			-> implies? whatever public/protected/private in Person stays public/protected/private in Player class
+
+	We will use public and protected members
+	m_full_name;
+	m_age;
+	How to use?	
+
+5) Setup player implementation ( player.cpp)
+	Player :: Player() 
+ 	setup empty constructor	
+	setup output stream to print data -> how? using getters in base class, how do we have access to them? publc inheritence keeps them public -> can be called from outside
+					//Note const Player& player is outside player object and we call outside public members
+
+6) Try to access things from base class?
+	player.h
+
+	void play(){
+	 	m_full_name =  "John Snow";
+		m_age = 55;
+		m_address = "23432g34uigi"	//cant access this since private
+}
+
+Access m_full_name using a player object	//Defining feature of protected
+main.cpp
+	Player player;		//this will call the default constructor
+	player.m_full_name = "Samuel Jackson";	//accesible
+	player.m_age = 55;		//cannot access, why? inherited as protected
+
+So was accesible in below 
+player.h
+	void play(){
+	 	m_full_name =  "John Snow";
+		//m_age = 55;			//cant access outside since protected
+		//m_address = "23432g34uigi"	//cant access this since private
+
+but not accesible outside in main
+main.cpp
+	Player player;		//this will call the default constructor
+	player.m_full_name = "Samuel Jackson";	//accesible
+	player.m_age = 55;		//cannot access, why? inherited as protected
+
+
+7) Test out protected inheritence: 
+	protected will stay protected
+	private will stay private to base class
+	nurse.h
+	
+	nurse.cpp
+		In implementation put
+		constructor, output stream, destructor	
+			//destructor wont do anything, because no dynamic memory allocation
+
+	Output: can call operand.get_full_name() and others from outside using dot operator
+		Why able to call using dot ? << operator is friend of nurse class
+//Nurse.h
+	void treat_unwell_person(){
+		m_full_name = "John Snow";		//Works
+		m_age = 23;			//Works
+		m_address=  23fw23"		//Does not work	//it is private to base class
+}
+
+
+8)  Similarly 
+	a) Add engineer.cpp
+	b) Engineer class in header file -> class Engineer : private Person
+		{
+			//private inheritence rules apply
+				public in base- > becomes private in inherited class
+				private in base -> becomes private in inherited		 
+		}
+	c) Make thigns work from inside
+	    Put Implementations in cpp file
+	         What in .cpp?
+		Default constructor for engineer
+		ostream operator	//why works still in .cpp? friend of engineer class
+		What ever inherited to private remains private to engineer class
+			//can callget_age(), get_full_name() , get_address() etc
+	
+		Try to access
+			How?
+			Engineer.h
+
+			After constructor and destructor
+			void build_something() {
+			  m_full_name = "John Snow"	;	//Works why? public to base class, private in inherited
+			  m_age = 23;			//Works	        protected in base , private in inherited	
+			  m_address = "34534t"		//Does not work, Compiler error.Why? m_address private in base class  , private in inherited
+									//Error: m_address private within context	//cannot change this, no derived class can modify this
+}	d) Make things work from outside
+		main.cpp
+		#include <engineer.h>
+		std::cout<< "----"
+		Engineer engineer1;
+		engineer1.m_full_name = "Oliver  twist";	//wont work, why? m_full_name  is private to Engineer class	//Compiler Error
+		engineer1.m_age = 55;			//private to base class -> private to engineer //cant access from outside	//Compiler Error 
+		engineer1.m_address = ""			//private to base class //cannot access from derived		//Compiler Error
+	
+______________________________________________________________________________________________________________
+Code:
+______________________________________________________________________________________________________________
+
+main.cpp
+#include<iostream>
+#include<player.h>
+#include <nurse.h>
+
+int main() {
+	
+ Person person1("Daniel Gray",27,"Blue Sky St 233 #56);
+ std::cout << "person1 : "<< person1 <<std::endl;
+std::cout<<"-----------------------------------"
+Player player;
+player.m_full_name = "Samuel Jackson";
+	player.m_age = 55;
+
+std::cout<< "-------------------" <<std:;endl;
+
+Nurse nurse1;
+nurse1.m_full_name = "Davy jones";	//Compiler error	//m_full_name is inaccessible within this context //why?it was protected in nurse class and inherited as protected	//cant access from outside	
+										//Can access from inside
+
+nurse1.m_age = 5;			
+  return 0;
+}
+______________________________________________________________________________________________________________
+person.h
+#ifndef PERSON_H
+#define PERSON_H
+
+#include <string>
+#include <string_view>	//why include? passing const string by reference in param constructor
+			//Person(std::string & full_name  -> Person(std::string_view full_name, int age, const std::string address);		//find why no &
+#include <iostream>
+
+class Person
+{
+	friend std::ostream& operator <<(std::ostream& out, const Person& person);
+ 
+public:
+	Person() = default;		//since no dynamic memory allocn, constructor wont do anything
+	Person(std::string_view full_name, int age, const std::string address);
+	~Person();
+//Getters
+	std::string get_full_name() const{
+		return m_full_name;
+}
+	int get_age() const {
+	return m_age;
+}
+	std::string get_full_name() const{
+		return m_address;
+}
+public:
+	std::string m_full_name{"None"};
+protected:
+	int m_age{0};
+private :
+	std::string m_address{"None"};
+};
+#endif
+
+ ______________________________________________________________________________________________________________
+person.cpp	//Implementation
+
+#include "person.h"
+
+Person::Person(const std::string_view fullname_param, int age, const std::string address)		//Constructor forwards data to member vavriabless
+	: m_full_name{fullname}, m_age{age}, m_address{address} {}
+
+std:;ostream& operator<<(std::ostream& out, const Person& person){
+	out<< "Person [" person.first_name << " " <<person.last_name << "]";
+	 	<< "names : " <<player.get_first_name()
+		  	 <<"  " << player.get_last_name();
+	return out;
+}
+
+Person :: ~Person() {
+
+}
+ ______________________________________________________________________________________________________________
+Player.h
+
+Player.h
+
+#ifndef PLAYER_H
+#define PLAYER_H
+
+#include "person.h"
+
+class Player : public Person
+{
+	friend std::ostream& operator <<(std::ostream& out, const Player& player);
+public:
+	Player() = default;
+	Player(std::string_view game_param);
+	//~Player();//no need to use, will use that compiler generated
+
+	void play(){
+	 	m_full_name =  "John Snow";
+		m_age = 55;
+		//m_address = "23432g34uigi"	//cant access this since private
+
+}
+
+private:
+	std:string m_game{"None"};	
+};
+
+#endif
+
+ ______________________________________________________________________________________________________________
+Player.cpp
+
+#include<person.h>
+#include<player.h>
+
+Player::Player(std::string_view & game_param)
+  : m_game(game_param)
+{
+}
+std::ostream& operator<<(std::ostream& out, const Player& player){	////Note const Player& player is outside player object and we call outside public members
+	out<< "Player : [ game :" <<player.m_game
+		<< "names : " <<player.get_first_name()
+			<< " " << player.get_last_name() << "]";
+	return out;
+} 
+
+
+ ______________________________________________________________________________________________________________
+Nurse.h
+#ifndef NURSE_H
+#define NURSE_H
+
+#include "person.h"
+
+
+clas Nurse : protected Person
+{
+	friend std::ostream& operator <<(std::ostream& , const Nurse& operand);
+
+ public:
+	Nurse();
+	~Nurse();
+
+	void treat_unwell_person(){
+		m_full_name = "John Snow";		//Works
+		m_age = 23;			//Works
+		m_address=  23fw23"		//Does not work
+}
+
+ private:
+	int practice_certificate_id{0};
+};
+
+#endif
+
+ ______________________________________________________________________________________________________________
+Nurse.cpp
+#include person.h
+#include "nurse.h"
+#include <iostream>
+
+Nurse::Nurse()
+{
+
+}
+
+std::ostream& operator <<(std::ostream&out , const Nurse& operand){
+	out<<operand.get_full_name()
+	     <<operand.get_age()
+	    <<operand.get_address()
+
+	return out;
+}
+
+Nurse::~Nurse(){
+}

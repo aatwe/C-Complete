@@ -1,0 +1,99 @@
+How to split class information across multiple files
+What is advantage? can access 1000s of constants by just including one file for ex constants.h	//preprocessor will paste
+
+What was in our main.cpp?
+our global variable : PI
+our class Cylinder 
+our main function
+
+What is good design?
+Everything at one place, difficult to read code. Low level detail should be split into different files
+What can be done?
+1) move const out
+	Why? users dont care about it
+	How? Move into constants.h
+	           Move cylinder class 
+		 declaration in cylinder.h	//preview
+		 definition in cylinder.cpp	//implementation details
+	
+
+2)  includer headers in main.cpp
+	#include "constants"
+	#include "cylinder"
+	
+
+Code:
+Q) What if a constant gets included twice in 2 separate programs? Compiler error
+	What solution? 
+		#ifndef CONSTANTS_H	//Basically Preprocessor syntax (underscore for dot)
+		#define CONSTANTS_H 	//if already defined it will skip in file
+
+		//Code			//if not defined, will include code, if defined will skip code
+		#endif
+							//No Compiler error
+_______________________________________________________________________________________________________________________
+1) Open template files in VSCode
+2) 
+a) coinstants.h	//Include all constants in one file
+	const double PI {3.14159}
+
+b) cylinder.h {
+	#include "constants.h"
+}
+	
+c) main.cpp	
+	#include "constants.h"
+
+
+#include <iostream>
+	class Cylinder {
+	 public:
+		.....
+	}
+
+	int main() {
+	
+	return 0;
+}
+int main()  {
+	Cylinder cylinder1(10,10);
+	std::cout<< cyinder1.volume();
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Split class into 2 files, why? People coming to class are interested in class definition 
+			Not in Implementation details
+
+want to use volume function, dont want to know implementation details
+Q) What is scope resolution operator? 
+	Cylinder::volume()
+	 Tells compiler that function volume lives in scope of class Cylinder
+
+Q) What if we have 2 definitions for same functions?Compiler error	
+Solution? keep only prototype in header
+1) Cylinder.h	//header file
+	Cylinder() = default;	//Default contructor	
+	Cylinder::Cylinder(double rad_param,double height_param){ //Parameterized constuctor , definition prototype only
+}	
+}
+2) Cylinder.cpp	//Implementation file			
+				//How to move default constructor in cpp file? Use :: (Scope resolution operator)
+#include "cylinder.h"
+Cylinder::Cylinder(double rad_param,double height_param){	//Implementation moved into cpp using :: (scope resolution operator)
+	   base_radius = rad_param;
+	   height = height_param;
+}
+	double Cylinder::volume() {
+		return PI*base_radius*height;
+	}
+	double Cylinder::get_base_radius() {
+		return base_radius;
+	}
+3) main.cpp
+	#include <iostream>
+	#include "cylinder.h"
+
+	int main() {
+	   Cylinder cylinder1(10,10);
+	   std::cout<< "volume" <<cylinder1.volume();
+	   return 0;
+}

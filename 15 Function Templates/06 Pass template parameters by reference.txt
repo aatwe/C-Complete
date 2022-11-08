@@ -1,0 +1,19 @@
+template <typename T > const T& maximum(const T& a, const T& b);
+
+int main(int argc,  char **argv)
+{
+  double a{23.5}; 
+  double b{51.2};
+
+
+ std::cout<< &a ;					//will be visible outside	
+  double max1 = maximum(a,b);
+  std::cout<<max1;
+
+ return 0;
+}
+
+template <typename T> T maximum (const T& a, const T& b){
+	std::cout<<&a;				//any modification in
+	return (a > b) ? a : b ;
+}

@@ -1,0 +1,425 @@
+#include <iostream>
+#include "person.h"
+#include "engineer.h"
+#include "civilengineer.h"
+
+Logic Flow:
+1) Engineer will publicly inherit from Person
+2) Civil Engineer will inherit from Engineer
+	//What is our goal to setup copy constructors?
+ 	Should be able to Build objects from others
+	For ex
+		Create another engineer from eng1 objects
+		Engineer eng1("Daniel Gray", 41,"Green Sky oh Blue",12);
+		Engineer eng2(eng1);
+3) Compiler inserts a copy constructor for us
+	Constructor will copy memberwise
+		i.e a) takes contract_count from eng1
+		     b) Copy that into eng2
+	For ex  
+		Engineer eng1("Daniel Gray", 41,"Green Sky oh Blue",12);
+		Engineer eng2(eng1);
+		std::cout << "eng2"<< eng2 <<std:;endl;
+
+		O/P:	
+			Custom constructor for Person called
+			Custom constructor for Engineer called
+			Full name :Daniel Gray, age: 41 address: Green Sky oh Blue contract_count : 12)
+
+Q) Why do we need our own copy constructor? if doing dynamic memory allocation in classes 
+		(for ex person class has dynamic memory allocation
+						i.e has a) pointer variable	b) pointer initiliazed in custom constructor
+		Similarly Engineer and Civil Engineer level
+		//WE ARE FORCED TO SETUP OUR OWN COPY CONSTRUCTOR
+
+Q) What if you want to setup our own copy constructor?
+a) Start in Person class
+	//setup copy constructor above destructor
+	Person(const Person& source);
+	~Person();	
+	//put copy constructor implementation in person.cpp
+	Person::Person(const Person& source);	//just copy data from? source person
+	  : m_full_name(source.m_full_name), m_age(source.m_age),
+		m_address(source.m_address)
+	//Now constructor is set up
+{
+
+}	
+	Q) Why passing by const reference in copy constructor? If we done -> endless chain of copy constructor calls
+
+Q) Setup at engineer level?
+a) 	construct from const Engineer object as parameter
+b) 	Implement constructor in cpp
+	//Bad way
+	Engineer::Engineer (const Engineer& source) 	//This copy constructor is after custom constructor//Use scope resolution operator
+	: contract_count(source.contract_count)	//What will this do? initilaize Engineer with junk data
+						//cannot call base constructor, but can call contract_count/twas private in engineer.h
+	{
+						//How person part initialized? Calls default constructor of person to initialize person part	//This will initialize person part with junk data
+						//How we know? if we print eng2 
+						we get: eng2 : Engineer [Full name : None, age : 0,address : None,contract_count : 12] //we are getting the default data
+						//What issue? in copy constructor we are not doing anything to get our custom constructor in person to be called
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Final Output:
+Custom constructor for Person called
+Custom constructor for Engineer called
+-------------------------------------------
+Default constructor for Person called	//Sets up person in engineer copy construct
+Custom copy constructor for Engineer called
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	}
+c) What good way we can use?
+	
+	Engineer::Engineer (const Engineer& source) 	//This copy constructor is after custom constructor//Use scope resolution operator
+	: Person(source.m_full_name, source.m_age, source.m_address)	//What we did here?Built person object -> initialized -> person part
+                  , contract_count(source.contract_count)	//What will this do? initilaize Engineer with junk data
+	Basically we are calling the other person constructor from person.h (1 with 3 parameters)
+		Person(std::string_view fullname, int age,
+		const std::string address);
+
+	 //What problems with this? creates temporary person object -> which is copied to set up person
+				no access to m_address from Engineer constructor	//Cannot access in Engineer.cpp file
+	//probable solution? go into person class -> setup public getter method -> this is inherited by  Engineer -> call it to return address
+	Person.h
+	std::string get_address()const{
+	   return m_address;
+}
+		
+d) Now run the program	
+	Things work exactly		
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++													
+Final Output:
+Custom constructor for Person called
+Custom constructor for Engineer called
+-------------------------------------------
+Default constructor for Person called	//Sets up person in engineer copy construct
+Custom copy constructor for Engineer called
+eng2 : Engineer [Full name : Daniel Gray, age: 41, address : green Sky Oh Blue, contract_count : 12]	//Information is forwarded properly
+			//We set up person copy
+			  this is copied from 
+			    we copy this to forward data to person part	//Not good design
+	What solution we want?
+		Setup that allows us to call copy constructor of base class
+		i.e Person.h
+			Person(const Person& source);
+
+How can we reuse copy constructor in person in engineer class											
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
+Best solution: 
+a) Call Person and Directly pass in source object
+b) No need to setup temporary person object
+c) Do we need to setup a temporary person object? No , we will copy directly from engineer obejct
+d) We know layers:
+	Inner layer: Person
+	Outer layer : Engineer 
+	Compiler sees : we are passing engineer object ,(why? to initilaize person part)
+		Compiler understands that we just need red Person part and NOT the Engineer part
+		Compiler slices off Engineer layer
+		Person part left . Person part of object initialized
+		Copy constructer reused in person
+
+This is best way to setup copy constructor in inheritence hierarchy	
+
+
+Engineer ::Engineer(const Engineer& source):
+Person(source)			
+{
+	std::cout<< "Custom constructor for Engineer called" <<std::endl;
+}
+
+Check output:
+Custom constructor for Person called
+Custom constructor for Engineer called
+-------------------------------------------
+Default constructor for Person called	//Sets up person in engineer copy construct
+Custom copy constructor for Engineer called
+Full name : Daniel Gray, age : ,41, address : Green Sky Blue, contract_count : 12	//proof that copy constructor is working
+
+
+Similarly add in CivilEngineer.h
+a) CivilEngineer.h
+ 	CivilEngineer(const CivilEngineer& source);
+b) CivilEngineer.cpp
+	In implementation -> in initializer list -> call copy constructor
+///
+CivilEngineer::CivilEngineer(const CivilEngineer& source);	//We know civil engineer is inheriting from engineer class
+   :  Engineer(source) , m_speciality(source.m_speciality)				//Call copy constructor from initializer list from Engineer	//Slices off civil engineer part  //What copy constructor gives us? sliced off engineer	
+{							//We only use engineer part to construct object from sliced off engineer object we get from copy constructor
+	std::cout<<"Custom Copy constructor called for CivilEngineer" <<std::endl;
+}							// use m_speciality to initialize civil engineer part	
+
+
+std::ostream & operator<<(std::ostream& out, const Engineer& operand){
+	out<<"CivilEngineer"<<operand.get_full_name() << "age" <<operand.get_age() << "address" << operand.get_address() <<"contract count" << operand.contract_count <<"speciality" <<operand.m_speciality <"]"
+	return out;
+}
+///
+c) Test: Build Civil Engineer object and copy construct
+
+	int main(int argc, char **argv)
+{
+	CivilEngineer eng1("Daniel Gray",41,"Green Sky Blue",12, "Road Strength");
+	std::cout<<"-------------------------------------------";
+	CivilEngineer eng2(eng1);
+	std::cout<<eng2;			//What happens when we copy construct them?
+
+	return 0;
+
+
+d) Output:
+
+Custom constructor for Person called
+Custom constructor for Engineer called
+Custom constructor called for CivilEngineer
+-------------------------------------------
+Default constructor for Person called	//Sets up person in engineer copy construct
+Custom copy constructor for Engineer called
+Custom copy constructor for CivilEngineer
+eng2 : CivilEngineer [Full name : Daniel Gray, age : 41,address : Green Sky Oh Blue, contract_count : 12, speciality : Road Strength]
+Full name : Daniel Gray, age : ,41, address : Green Sky Blue, contract_count : 12	//proof that copy constructor is working
+
+SUMMARY: WE ARE REUSING COPY CONSTRUCTOR IN OUR INHERITENCE HIERARCHY
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+TEST IT OUT Code:
+main.cpp
+
+int main(int argc, char **argv)
+{
+	Engineer eng1("Daniel Gray",41,"Green Sky Blue",12);
+	std::cout<<"-------------------------------------------";
+	Engineer eng2(eng1);
+	std::cout<<eng2;
+
+	return 0;
+} 	
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Code
+int main(int argc, char **argv)
+{
+	Engineer eng1("Daniel Gray",41,"Green Sky Blue",12);
+	
+	Engineer eng2(eng1);
+	std::cout<<eng2;
+
+	return 0;
+} 	
+
+In what order constructor called?
+1) Person default arg constructor
+2) Engineer default arg constructor called
+	3) Civil Engineer default arg constructor called
+	//After this object can be used
+
+This why you should always provide default constructor for classes
+Why should we always give default constructor for classes?
+	Compiler may call default constructor in unexpected way in inheritence heirachies
+
+For ex
+	what if building civil engineer object
+		and we dont have default constructor
+			Compiler Error
+
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Person.h
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#include <string>
+#include <string_view>
+class Person
+
+  friend std::ostream& operator<<(std::ostream&, const Person& person);
+public:
+	Person();		//not defaulting constructor by Person() = default; ///why? we can put output statements in body
+	Person(std::string_view fullname, int age,
+	const std::string address);
+	Person(const Person& source);
+	~Person();
+
+	//Getters
+	std::string get_full_name()const{
+		return m_full_name;
+}
+	int get_age()const{
+	   return m_age;
+}
+	std::string get_address()const{
+	   return m_address;
+}
+
+Person.cpp
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#include <Person.h>
+#include <iostream>
+
+Person::Person(){
+	std::cout <<"Default Constructor for Person Called" <<std::endl;
+}
+Person::Person(const Person & source)
+	:  m_full_name(source.m_full_name) , m_age(source.m_age),
+	    m_address(source.m_address)
+{
+	std::cout<<"Custom constructor for Person called";
+}
+
+
+#include "person.h"
+class Engineer : public Person
+{
+  friend std::ostream& operator<<(std::ostream&, const Engineer& operand);
+public:
+	Engineer();
+	~Engineer();
+
+	void build_something(){
+	m_full_name = "John Snow";
+	m_age = 23;
+}
+
+int get_contract_count() const{
+	return contract_count;
+}
+}
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Engineer.h
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+#include "person.h"
+class Engineer : public Person
+{
+  friend std::ostream& operator<<(std::ostream&, const Engineer& operand);
+public:
+	Engineer();
+	Engineer(std::string_view fullname, int age, const std::string_view address, int contract_count); //This will help forward information to member variables
+	~Person();
+	Engineer (const Engineer& source);
+	~Engineer();
+
+	void build_something(){
+	m_full_name = "John Snow";
+	m_age = 23;
+}
+
+int get_contract_count() const{
+	return contract_count;
+}
+}
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Engineer.cpp
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#include "person.h"
+#include "engineer.h"
+#include <iostream>
+
+Engineer ::Engineer() {
+	//What will default constructor do?
+	std::cout<< "Default constructor for engineer called " <<std:;endl;
+} 
+Engineer ::Engineer(std::string_view fullname, int age, std::string_view address, int contract_count_param):
+Person(fullname,age,address),contract_count(contract_count_param)
+{
+	std::cout<< "Custom constructor for Engineer called" <<std::endl;
+}
+/*
+Engineer::Engineer (const Engineer& source) 
+	: contract_count(source.contract_count)
+{
+	std::cout<< "Custom Copy constructor for Engineer called" <<std::endl;
+} */
+Engineer::Engineer (const Engineer& source) 	//This copy constructor is after custom constructor//Use scope resolution operator
+	: Person(source.m_full_name, source.m_age, source.m_address)	//What we did here?Built person object -> initialized -> person part
+                  , contract_count(source.contract_count)	//What will this do? initilaize Engineer with junk data
+		
+std::ostream & operator<<(std::ostream& out, const Engineer& operand){
+	out<<"Engineer"<<operand.get_full_name() << "age" <<operand.get_age() << "address" << operand.get_address() <<"contract count" << operand.contract_count;
+
+return out;
+}
+
+Engineer::~Engineer() {
+
+}
+
+
+CivilEngineer.h
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#ifndef CIVIL_ENGINEER_H
+#define CIVIL_ENGINEER_H
+
+#include "engineer.h"
+class CivilEngineer : public Engineer
+{
+	  friend std::ostream& operator<<(std::ostream&, const Engineer& operand);
+public:
+	CivilEngineer();
+	CivilEngineer)std::string_view fullname, int age, std::string_view address, int contract_count, std::string_view speciality);
+	CivilEngineer(const CivilEngineer& source);
+	~CivilEngineer();
+
+	void build_road(){
+	add(10,2);
+	add(10,2,4);
+}
+public
+
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+CivilEngineer.cpp
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#include "person.h"
+#include "engineer.h"
+#include <iostream>
+#include "civilengineer.h"
+
+CivilEngineer:CivilEngineer()
+{
+	std::cout<<"Default constructor called for Civil Engineer" <<std::endl;
+}
+//Q What order constructor called, if we build civil engineer object
+
+CivilEngineer::CivilEngineer(std::string_view fullname, int age, std::string_view address, int contract_count, std::string_view speciality)
+	: Engineer(fullname, age,address,contract_count), m_speciality(speciality)
+{
+	std::cout<<"Custom constructor called for CivilEngineer" <<std::endl;
+}
+
+CivilEngineer::CivilEngineer(const CivilEngineer& source);	//We know civil engineer is inheriting from engineer class
+   :  Engineer(source) , m_speciality(source.m_speciality)				//Call copy constructor from initializer list from Engineer	//Slices off civil engineer part  //What copy constructor gives us? sliced off engineer	
+{							//We only use engineer part to construct object from sliced off engineer object we get from copy constructor
+	std::cout<<"Custom Copy constructor called for CivilEngineer" <<std::endl;
+}							// use m_speciality to initialize civil engineer part	
+
+
+std::ostream & operator<<(std::ostream& out, const Engineer& operand){
+	out<<"CivilEngineer"<<operand.get_full_name() << "age" <<operand.get_age() << "address" << operand.get_address() <<"contract count" << operand.contract_count <<"speciality" <<operand.m_speciality <"]"
+	return out;
+}
+
+CivilEngineer::~CivilEngineer()
+
+Main..cpp
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+#include <iostream>
+#include "person.h"
+#include "engineer.h"=
+#include "civilengineer.h"
+
+int main() {
+	CivilEngineer ce1;
+	std::cout<<"Hello" <<std::endl;
+	return 0;
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Run -> Output
+1) Default constructor for Person called
+2) Default constructor for Engineer called
+3) Default constructor for Civil Engineer

@@ -1,0 +1,14 @@
+Build Player class on fundamental class Person
+Left new class
+Right old Class
+
+class Player : public Person
+
+
+
+What is the public here?:
+	What can derived/new class access?
+		public members of fundamental/base class
+		     can be accessed by whom? Derived class
+	What cant derived/new class access?	
+		private members

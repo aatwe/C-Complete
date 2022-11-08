@@ -1,0 +1,43 @@
+#include <iostream>
+
+//Get global variables
+//How to get pi?
+	const double PI {3.14159265}
+	
+// How to Declare and define class ? class className {};
+class Cylinder {
+
+//How to declare and define member functions?
+double volume() {
+	return PI * base_radius*base_radius*height;
+}
+
+
+//How to declare Member variables
+double base_radius{};
+double height{};
+
+
+}; 
+
+int main() {
+
+//How to use class?Where using class?(main) //what is instancename?cylinder1
+
+Cylinder cylinder1;
+
+//How to access member function of class? Instance - dot notation-methodname()
+std::cout<< cylinder1.volume()
+  return 0;
+}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+OUTPUT:
+
+Build with GCC ->volume()
+Cylinder:volume in accessible , why? members private by default 
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Should member variables be private orpublic?  private
+users care about member functions not member variables
+Solution? member variables: private, member functions: public

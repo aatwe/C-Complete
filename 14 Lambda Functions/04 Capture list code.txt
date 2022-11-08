@@ -1,0 +1,65 @@
+int main() {
+
+double a{10};
+double b{20};
+
+
+auto func = [a,b](){		//values passed through capture list
+	std::cout<< a + b;
+};
+func();
+
+return 0;
+}
+
+//Output: 30
+++++++++++++++++++++++++++++++++++++++++++++++
+1) Capture list by value
+
+#include
+int c{42};			//OUter value increments
+
+auto func = [c](){		//this c is copy
+   std::cout <<c<< std::endl;	//wont reflect changing value of c{42};	//Inner value stays same
+};
+
+for (size_t i = 0; i< 5 ; ++5){
+   std::cout<<"Outer value" << c;
+   func();
+   ++c;
+}
+return 0;
+++++++++++++++++++++++++++++++++++++++++++++++
+Check that var is copied
+inner address and outer address different -> proves what inside lambda function is copy
+#include
+int c{42};			//OUter value increments
+
+auto func = [c](){		//this c is copy
+   std::cout <<c<< &c << std::endl;	//wont reflect changing value of c{42};	//Inner value stays same
+};
+
+for (size_t i = 0; i< 5 ; ++5){
+   std::cout<<"Outer value" << c << &c ;
+   func();
+   ++c;
+}
+return 0;
+++++++++++++++++++++++++++++++++++++++++++++++
+2) Capture list by reference
+Changes in outer value -> visible inside lambda function
+outer variable and inner variable have same address
+
+#include
+int c{42};			//OUter value increments
+
+auto func = [&c](){		//this c is copy
+   std::cout <<c<< &c << std::endl;	//wont reflect changing value of c{42};	//Inner value stays same
+};
+
+for (size_t i = 0; i< 5 ; ++5){
+   std::cout<<"Outer value" << c << &c ;
+   func();
+   ++c;
+}
+return 0;	

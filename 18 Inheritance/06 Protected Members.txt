@@ -1,0 +1,136 @@
+Where used ? in C++ Class
+What issue? Are private accesible by derived classes with public inheritence? No
+
+What objective? base class private members  be accesible by derived class	//not by outside of derived class!
+	How to achieve? Protected access specifier
+	How will we modify? derived class methods
+
+
+Setup protected member variables,
+	Accessible by ? any direct class doing public in heritence
+			not accessible from outside
+
+1) Make private member variables of base class as protected
+2) derived class inheriting base PUBLICLY (class Player : public Person)
+3) Set up player object in main.cpp
+4)Try to access protected members from derived
+	they still wont be accessible from outside
+5) john snow is assigned
+	by using constructor(Player::Player) and/or setters from base class (	p1.set_first_name("John");)
+6) Successfully changed priotected data from Mysterious Person  to John Snow
+
+Output:
+	player : Player : [game : Basketball names : John Snow]
+7) lets pass a few more params 
+		Add below to player.h and player.cpp
+	Player(std::string_view game_param, std::string_view first_name_param, std::string_view last_name_param);
+
+m_game = game_param;			
+	first_name = first_name_param;	//first_name = "John";		//This will start working
+	last_name = last_name_param;	//last_name = "Snow";
+
+No we can specify first name and last name from main in constructor
+		Player p1("Basketball", "John", "Snow");
+	//how this helps? can build objects easily and forge data back into base class using protected mechanism
+
+	Output:
+	player : Player : [game : Basketball names : John Snow]
+
+
+8) Check if it is accessible from outside?
+	p1.first_name = "Daniel"
+
+In Future we will learn about protected and private inheritence
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Person.h //Base class
+#include <string>
+#include <iostream>
+
+class Person
+{
+	friend std::ostream& operator <<(std::ostream& out, const Person& person);
+ 
+public:
+	Person();		//since no dynamic memory allocn, constructor wont do anything
+	Person(std::string& first_name_param, std::string& last_name_param);
+	~Person();
+//Getters
+	std::string get_first_name() const{
+		return first_name;
+}
+	std::string get_last_name() const{
+		return first_name;
+}
+//Setters
+	void set_first_name(std::string_view fn){
+		first_name = fn;
+}
+	void set_last_name(std::string_view fn){
+		last_name = fn;
+}
+protected:
+	std::string first_name{"Mysterious"};
+	std::string last_name{"Person"};
+	
+};
+#endif
+________________________________________________________________________________________
+Player.h
+
+
+#ifndef PLAYER_H
+#define PLAYER_H
+
+#include<string>
+#include<iostream>
+#include "person.h"
+
+class Player : public Person
+{
+	friend std::ostream& operator <<(std::ostream& out, const Player& player);
+public:
+	Player() = default;
+	Player(std::string_view game_param, std::string_view first_name_param, std::string_view last_name_param);
+	//~Player();//no need to use, will use that compiler generated
+
+private:
+	std:string m_game{"None"};	
+};
+
+#endif
+
+___________________________________________________________________________________________
+main,.cpp
+main.cpp
+#include <iostream>
+#include "player.h"
+
+
+	int main() {
+		Player p1("Basketball", "John", "Snow");
+		p1.first_name = "Daniel"			//This wont work	//protected members not accessible from outside	//only accesible from member functions of derived classes
+		std::cout<< "player" << p1 <<std::endl;
+		
+ return 0;
+}
+___________________________________________________________________________________________
+Player.cpp
+
+#include<person.h>
+#include<player.h>
+
+Player::Player(std::string_view game_param, std::string_view first_name_param, std::string_view last_name_param);)
+  : m_game(game_param)
+{			
+	m_game = game_param;			
+	first_name = first_name_param;	//first_name = "John";		//This will start working
+	last_name = last_name_param;	//last_name = "Snow";
+
+}
+std::ostream& operator<<(std::ostream& out, const Player& player){
+	out<< "Player : [ game :" <<player.m_game
+		<< "names : " <<player.get_first_name()
+			<< " " << player.get_last_name() << "]";
+	return out;
+}

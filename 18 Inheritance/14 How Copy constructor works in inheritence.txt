@@ -1,0 +1,74 @@
+Q) What are copy constructors?
+Creates object from another object
+	How are things copied? By reference
+
+
+#include <iostream>
+#include "person.h"
+#include "engineer.h"=
+#include "civilengineer.h"
+
+int main() {
+	Engineer eng1("Daniel Gray",41,"Green Sky On Blue',12);
+	std::cout<< "eng1 : " <<eng1 <<std::endl;
+		
+	Engineer eng2(eng1);	//Copy Constructor
+				//Create another object from this engineer object	
+	std::cout<< eng2;
+	return 0;
+}
+
+
+Q) How to setup your own copy constructor?
+Objective: 1 Setup your copy constructor for Person class
+	 Copy from source object
+	initialize member var in current object
+
+Person::Person(const Person& source)
+	: m_full_name(source,m_full_name),
+          m_age{source.m_age},
+	m_address{source.m_address}
+
+{
+	std::cout<< "Person copy constructor called" << std::endl;
+}
+
+
+Obejctive : 2 Setup your copy constructor from Engineer class (Note: Inheriting from person)
+
+Why below bad design?
+		initializing engineer layer of class
+		Person part not initialized
+Engineer::Engineer(const Engineer& source)		//Default constructor gets called -> initialize person part -> left with junk data (initiailizing person object by default)
+	: contract_count{source.contract_count}	//all data in parameter engineer object gets lost for person part
+
+						//Q) Cant we call other constructor? In copy constructor -> (const Engineer& source) //Engineer is an object
+						//	Compiler sets up temporary person object -> compiler sets up copy from that object
+							//use this copy to initialize person part -> Creates temporary copy object -> contains same data that we had in Engineer object
+							//Might work till extend
+							but still what problem? m_address is used from Engineer object 
+										//Private to person -> cannot access from Engineer constructor //Compiler Error
+							Solution?Getter
+							//Can we setup getter in Engineer class to return this address? Yes
+							//Call getter and initialize 
+{
+	std::cout<< "Engineer copy constructor called" << std::endl;
+}
+//Summary: Bad Design
+	a) Cannot reuse copy constructor we set up in Person //Code duplication
+	b) m_address is private to person //cannot access from Engineer		//possible to set up getter for that but BAD DESIGN since forced to set up getter
+	c) temporary copy of person created -> from which we copying to initialize  person 
+	
+
+
+//Solution?
+Directly pass Engineer object -> which initilaize a person object	//Compiler understands
+	Compile strips out all the Engineer part => We left with Person part -> pass to initilaize person object
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Engineer::Engineer(const Engineer& source)
+	: Person(source)
+		contract_count{source.contract_count}
+{
+	std::cout<<"Engineer copy constructor called" <<std::endl;
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -1,0 +1,67 @@
+Q) What is syntax for default constructor?
+	Cylinder() = default;	//compiler will generate	
+
+	Cylinder() {		//you have to manually
+		
+		 }
+			
+
+Q) What is syntax for parameterized constructor?
+	Cylinder(double radius_param, double height_param)){	//Parameter constructor
+		base_radius =radius_param;		//initialize member variables with parameter
+		height= height_param
+}
+Q) What is ex?
+
+class Cylinder {
+ public:
+	double base_radius;{1.0}	
+	double height{1.0}
+public:
+	Cylinder() = default;
+	Cylinder(double radius_param, double height_param)){	//Parameter constructor
+		base_radius =radius_param;		//initialize member variables with parameter
+		height= height_param
+}
+double volume() {
+	return PI*base_radius*base_radius*height;
+}
+}
+
+Q) Will default constructor be generated, if we setup our own constructor(param)? NO
+	What if we wanted to construct objects without parameter? Create your own default constructor	
+
+	Q) How to setup own default constructor?
+		Cylinder() = default;	//compiler will generate
+		OR
+		Cylinder() {		//you have to manually
+		
+		 }
+		
+Ex how to check? remove defualt constructor, and initialize object
+#include<iostream>
+const double PI {3.14159}
+
+class Cylinder {
+ public:
+	double base_radius;{1.0}	
+	double height{1.0}
+public:
+	Cylinder(double radius_param, double height_param)){	//Parameter constructor
+		base_radius =radius_param;		//initialize member variables with parameter
+		height= height_param
+}
+double volume() {
+	return PI*base_radius*base_radius*height;
+}
+}
+int main() {
+	Cylinder cylinder1;		//no matching function error
+	cylinder1.volume()
+	return 0;
+}
+
+
+
+Q) If constructor is also a function, can it be called from private? NO
+	Constructor has to be in public			//Error otherwise : Cylinder Cylinder1() is inaccessible		

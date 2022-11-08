@@ -1,0 +1,95 @@
+What are lambda function? way to set up anonymous function
+
+
+What anonymous fn? function without name
+
+Why would we need function without name?
+
+Lambda function syntax:
+1) Lambda function Without parameter
+[capture list] (parameters) -> return type {
+	//function body
+};	//why ; , coz this is C++ expression
++++++++++++++++++++++++++++++++++
+without passign parameters to lambda fn 
+[] () ->  {
+	//function body
+}; 
+Can we call the above function?NO why?
+	has no name	//can we call almbda function without name though? yes
+
+How to give name?
+
+auto func = [] () ->  {
+	//function body
+};
+//Call it -> func();	//prints hello world
+
+++++++++++++++++++++++++++++++++++
+//capturelist	  //parameters	       //no return type
+Lambda function with parameter and returning something
+
+2) [capture list] (parameters) -> return type {
+	//function body
+}(parameter1, parameter2...);
+
+auto result = [] (double a, double b) ->  {	//double literal parameters
+	std::cout << "a + b" << (a+ b);	//lambda function returning , where returns? assigned to result
+	return (a + b);
+	//function body
+}(12.1, 5.7);				//double literal parameter arguments 
+std::cout<< result;				//print result outside function
+					//trick? consider everything after [] as single value
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How to specify return type to lambda function?
+[capture list] (parameters) -> return type {
+	//function body
+}(parameter1, parameter2);
+
+auto result = [] (double a, double b) -> double {	//double literal parameters		//return double type , what if we pass parameters that are not double?return type implicit convert to double
+	std::cout << "a + b" << (a+ b);	//lambda function returning , where returns? assigned to result
+	return (a + b);
+	//function body
+}(12.1, 5.7);				//double literal parameter arguments 
+std::cout<< result;				//print result outside function
+					//trick? consider everything after [] as single value
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Note:
+Below works
+[] () -> {
+  std::cout<< "Hello World" <<std::endl;
+};
+
+to call it just give it a name
+auto func = [] () -> {
+  std::cout<< "Hello World" <<std::endl;
+};
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++=
+How to call lambda function directly(no need to call) without giving it name? add () in end
+	//dont have to name also
+[]() -> {
+  std::cout<< "Hello World" <<std::endl;
+}();;
+
+O/p :
+	Hello World!
+	Done!
+
+When to use this?What drawbacks? if you want to use once, and dont want to call ever again
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Can we print lambda function entirely?Yes
+std::cout<<"Result"<< auto result = [](double a, double b){
+   return a + b;
+}(10,20) << std::endl;
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Give name to lambda function
+auto func1	 = [](double a, double b){
+   return a + b;
+}
+auto result1 = func1(23,7);
+auto result2 = func1(9,45);
+std::cout<< func1(23,7) <<func(5,2) << std::endl;		

@@ -1,0 +1,26 @@
+Set up constraints on template parameters
+Core language concepts: Make our function templates safe
+
+Q) When is concept true? When type trait returns true
+
+#include<concepts>
+
+What type of constraints?
+For ex
+Call function only with integer parameters
+, if call with any thing other than integer -> compiler error
+
+Earlier we saw similar,
+
+type traits and static asserts
+Static assert like below : will force number n to be of type int
+
+template <typename T>
+void print_number(T,n){
+	static _assert(std::is_integral<T>::value, "Must pass in an integral argument")
+	std:;cout<< n;
+}
+
+
+1) DO same using concepts
+	in concepts, logic is not in body, it is in declaration

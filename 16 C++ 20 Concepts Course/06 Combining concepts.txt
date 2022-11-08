@@ -1,0 +1,20 @@
+How to combine concepts? logical operators
+1)
+template <typename T>
+concept TinyType = requires (T t){
+	sizeof(T)<=4;		//syntax check
+	requires sizeof(T) <=4;	//expression size <= 4
+};
+
+template <typename T>
+
+//How to normally combine concepts?
+//T func(T t) requires std::integral<T> ||  std::floating_point<T> 		//2 standard concepts combined
+//T func(T t) requires std::integral<T> &&  Tine_type <T> 			//2 concepts 1 custom
+
+T func(T t) requires std::integral<T> && requires (T t) {			//tineType specified in this case //not recom
+				      sizeof(T) <=4;
+				      requires sizeof(T) <=4 ;}
+{
+
+}

@@ -1,0 +1,241 @@
+Copy paste code from last project into ---> new  project
+
+What objective? Call own custom constructors when building objects
+Info flow? using constructors	
+	Civil Eng object -> Engineer -> Person
+
+
+
+1) create constructor for person  ?/why ? to forward information using initializer list
+2) create constructor for engineer class
+	Engineer::Engineer(std::string_view fullname, int age, std::string_view address, int contract_count_param) :
+	Person(fullname, age,address), contract_count(contract_count_param)	
+		//initialize contruct_count
+3) Create custom constructor in civil engineer class, add specialized member
+	put implementation in cpp file
+		Call Engineer constructor in Civil Engineer 
+		pass in fullname,age,address,contract_count
+		//Also pass in mspeciality(speciality) //speciality member variable
+4) Include all classes in main file 
+5) Create person obejct
+	Build this program ->> see which constructor gets called
+	Person person1("John Snow",27,"Winterfell Cold");
+
+	Person constructor called -> where parameters forwarded? member variables (how? initializer list)
+	Build with GCC -> powershell -> Run
+	
+	Custom Constructor for Person called										//Base
+	person1 : Person [Full name: John Snow, Age:27, Address: Winterfell Cold]	//Proof our constructor is getting called
+	Custom Constructor for Engineer called									//last specialized
+	eng1 : Engineer [Full name: Daniel Gray, Age:41, Address:Green sky oh blue]	//Proof our constructor is getting called
+	
+	//Also try setting up engineer object
+Code:
+Person.h
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#include <string>
+#include <string_view>
+class Person
+
+  friend std::ostream& operator<<(std::ostream&, const Person& person);
+public:
+	Person();		//not defaulting constructor by Person() = default; ///why? we can put output statements in body
+	Person(std::string_view fullname, int age, const std::string_view address); //This will help forward information to member variables
+	~Person();
+
+	//Getters
+	std::string get_full_name()const{
+		return m_full_name;	
+	}
+
+	int get_age() const{
+		return m_age;
+	}
+	std::string get_address()const{
+		return m_address;	
+}
+	int add(int a, int b)const {
+		return a + b;
+}
+	int add(int a, int b, int c) const{
+		return a + b + c;
+}
+	void do_something() const;
+
+public:
+	std::string m_full_name{"None"}
+protected:
+	int m_age{0};
+private:
+	std::string m_address{"None"};
+};
+#endif
+
+
+Person.cpp
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#include <Person.h>
+#include <iostream>
+
+#include <string>
+#include <string_view>
+
+Person::Person(std::string_view fullname, int age, const std::string_view address){
+	: m_full_name{fullname}, m_age{age},
+		m_address{address}		
+{
+	std::cout<<"Custom constructor called for Civil Engineer" <<std::endl;
+}
+
+void person::do_something() const{
+	std::cout<< "Hello" <<std::endl;
+}
+
+std::ostream& operator<<(std::ostream& out, const Person& person){
+	out<< person.get_full_name() <<person.get_age() <<person.get_address();
+}
+return out;
+}
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Engineer.h
+
+#include "person.h"
+class Engineer : public Person
+{
+  friend std::ostream& operator<<(std::ostream&, const Engineer& operand);
+public:
+	Engineer();
+	Engineer(std::string_view fullname, int age, const std::string_view address, int contract_count); //This will help forward information to member variables
+	~Person();
+	~Engineer();
+
+	void build_something(){
+	m_full_name = "John Snow";
+	m_age = 23;
+}
+
+int get_contract_count() const{
+	return contract_count;
+}
+}
+
+
+Engineer.cpp
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#include "person.h"
+#include "engineer.h"
+#include <iostream>
+
+Engineer ::Engineer() {
+	//What will default constructor do?
+	std::cout<< "Default constructor for engineer called " <<std:;endl;
+}
+
+Engineer::Engineer(std::string_view fullname, int age, std::string_view address, int contract_count) :
+	Person(fullname, age,address),contract_count(contract_count_param)
+	{
+		
+}	
+
+
+std::ostream & operator<<(std::ostream& out, const Engineer& operand){
+	out<<"Engineer"<<operand.get_full_name() << "age" <<operand.get_age() << "address" << operand.get_address() <<"contract count" << operand.contract_count;
+				
+return out;
+}
+
+Engineer::~Engineer() {
+
+}
+
+
+CivilEngineer.h
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#ifndef CIVIL_ENGINEER_H
+#define CIVIL_ENGINEER_H
+
+#include "engineer.h"
+class CivilEngineer : public Engineer
+{
+	  friend std::ostream& operator<<(std::ostream&, const Engineer& operand);
+public:
+	CivilEngineer();
+	CivilEngineer(std::string_view fullname, int age, const std::string_view address, int contract_count, sdtd:;string_view speciality); 
+	~CivilEngineer();
+
+	void build_road(){
+	add(10,2);
+	add(10,2,4);
+}
+public
+
+
+
+
+CivilEngineer.cpp
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#include "person.h"
+#include "engineer.h"
+#include <iostream>
+#include "civilengineer.h"
+
+CivilEngineer:CivilEngineer()
+{
+	std::cout<<"Default constructor called for Civil Engineer" <<std::endl;
+}
+
+CivilEngineer :: CivilEngineer(std::string_view fullname, int age,std::string_view address, int  contract_count, std::string_view speciality);
+	: Engineer(fullname,age,address,contract_count) , mspeciality(speciality)
+{
+		// info forwarded to base classes -> if we build civil engineer object : proper information forwarded to Engineer part and person part 
+		std::cout<<"Custom constructor called for Civil Engineer" <<std::endl;
+}
+
+
+std::ostream & operator<<(std::ostream& out, const Engineer& operand){
+	out<<"CivilEngineer"<<operand.get_full_name() << "age" <<operand.get_age() << "address" << operand.get_address() <<"contract count" << operand.contract_count <<"speciality" <<operand.m_speciality <"]"
+
+	return out;
+
+}
+
+CivilEngineer::~CivilEngineer()
+
+Main..cpp
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+#include <iostream>
+#include "person.h"
+#include "engineer.h"=
+#include "civilengineer.h"
+
+int main() {
+	Person person1("John Snow",27,"Winterfell Cold");	
+	std::cout<<"person1" << person1 <<std::endl;
+	return 0;
+	Engineer eng1("Daniel Gray",41,"Green Sky On Blue',12);
+	std::cout<< "eng1 : " <<eng1 <<std::endl;
+	
+	return 0;
+}	
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Debugging this
+std::cout<< civil_eng1 //breakpoint
+
+Variables
+  Locals
+    civil_eng1
+    Engineer (base): Engineer
+	Person (base) L: Person
+	  m_full_name
+
+	 _m_dataplus
+		"John Travolta"
+	_m_string_length: 13
+
+	<anonymous union>
+	m_address
+	m_age
+		m_age: 51;
+	contract_count : 31 
+    m_speciality

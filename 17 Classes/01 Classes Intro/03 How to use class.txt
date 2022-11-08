@@ -1,0 +1,47 @@
+int main() {
+// Howset up class variables(object)? Typename varname
+  Cylinder cylinder1; 
+
+// What do objects contain? runtime data
+	for ex cylinder1.height = 8 ;	//runtime information stored in cylinder 1
+
+//How to call member function? dot notation
+  std::cout<<cylinder1.volume();
+
+//How to modify member variables/functions?
+ cylinder.base_radius = 3.0;
+ cylinder.height = 2;
+
+// How to call member function with updated values?dotnotation
+ std::cout<<cylinder.volume() << std:;endl;  
+}
+
+//Where are member variables stored? stack
+
+//What can be member variables? stack var, pointers , but NOT references
+	Why member variables cant be references? reference cant be left uninitialized
+	In class imp to have ability leave var uninitialized
+
+
+Q) Are class members private or public by default? 
+	private by default
+	   implies? not accessible from outside class (for ex main)
+
+
+How to check? remove public keyword
+What if class is private? cannot use volume from outside (main)
+		Error:Classname:method inaccessible
+class Cylinder {
+//public
+	double base_radius {1.0};
+	double height {1.0};
+	return PI*base_radius*base_radius*height;
+//public
+	double volume() {	
+}}
+    Are they accessible from inside of class? Yes
+
+
+Should member variables be private orpublic?  private
+users care about member functions not member variables
+Solution? member variables: private, member functions: public

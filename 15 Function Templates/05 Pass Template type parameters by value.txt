@@ -1,0 +1,19 @@
+template <typename T > T maximum(T a, T b);
+
+int main(int argc,  char **argv)
+{
+  double a{23.5};
+  double b{51.2};
+
+
+ std::cout<< &a ;			Different outside address
+  double max1 = maximum(a,b);
+  std::cout<<max1;
+
+ return 0;
+}
+
+template <typename T> T maximum (T a, T b){
+	std::cout<<&a;				//Different inside address
+	return (a > b) ? a : b ;
+}

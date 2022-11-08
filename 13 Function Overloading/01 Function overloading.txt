@@ -1,0 +1,94 @@
+Q) What is function overloading?
+same function => multiple copies(different overloads) => different parameters
+
+overload 1 : int max(int a, int b);
+
+overload 2: double max( double a, double b);
+
+std::string max ( const std::string& a, const std::string& b);
+
+
+Q) Why use overloads? Dont have to worry if we have correct arguments in function call use
+
+ How to find best overload for the case?
+Compiler finds what overloading to use
+suppoose we call max(a,b)
+
+if you give integer arguments : compiler chooses overload 1
+if you five double arguments  : compiler choses overload 2
+
+
+Q) How to overload function? 
+
+//how to legally overload then? change parameters type
+			      change parameters order
+			      change number of parameters
+
+overload 1
+int max(int a, int b){
+   return (a>b)?a : b;
+}
+
+is the below an overloaded function?NO , just changing return type wont work
+double max (int a, int b){
+  return (a>b)? a : b;
+}
+
+//how to legally overload then? change parameters type
+			      change parameters order
+			      change number of parameters
+
+overload 2
+double max (double a, double b){
+  return (a>b)? a : b;
+}
+
+
+overload 3
+std::string_view max (std::string_view a , std::string_view b){
+  return (a>b)? a : b;
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++
+max(5,7)
+max("dog,"cat"); 
+++++++++++++++++++++++++++++++++++++++++++++++++++
+double max (int a, int b){
+  return (a>b)? a : b;
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+Code:	//Parameter type difference in overload
+double max (int a, int b){
+  return (a>b)? a : b;
+}
+
+double max (double a, double b){
+  return (a>b)? a : b;
+}
+int main() {
+ int x{};
+ int y{};
+ double a{5};
+ double b{7.4};
+
+ auto result = max(x,y);		//using overloading, compiler deduces what is returned
+			//x , y are integers -> compiler calls integer overload of max
+}
+
+Code: Parameter order difference in overload
+
+double max (int a, double b){
+  return (a>b)? a : b;
+}
+double max (double a, int b){
+  return (a>b)? a : b;
+}
+
+
+Code: no. of Parameter  difference in overload
+
+double max (int a, double b){
+  return (a>b)? a : b;
+}
+double max (double a, int b, int c){
+  return (a>b)? a : b;
+}

@@ -1,0 +1,53 @@
+Code:
+#include <iostream>
+
+class Dog
+{
+ public :
+  Dog() = default;							//Default constructor
+  Dog(std::string name_param, std::string breed_param, int age_param);	//Param constructor
+  ~Dog();
+ 
+ private:
+   std::string name;
+   std::string breed;	
+   int * p_age{nullptr};
+}
+Dog(std::string_view name_param, std::string_view breed_param, int p_age_param){	//Constructor
+	name = name_param;
+	breed = breed_param;
+	p_age = new int;
+	 *p_age = age_param;
+	  std:;cout<<"Dog constructor called for " <<name;
+}
+Dog ::~Dog()	//Destructor
+{
+	delete dog_age;
+	std:;cout<<"Destructor called for "<<dog_name;
+}
+
+int main() {
+	Dad dog1("Doggy1", "Shepherd", 2);
+	Dad dog1("Doggy1", "Shepherd", 2);
+	Dad dog1("Doggy1", "Shepherd", 2);
+	Dad dog1("Doggy1", "Shepherd", 2);
+return 0
+}
+Q) What if we create 4 objects, what order constructor and destructor called?
+
+Dog dog1("Doggy1","Shepherd",1 );
+Dog dog1("Doggy2","Shepherd",2 );
+Dog dog1("Doggy3","Shepherd",3 );
+Dog dog1("Doggy4","Shepherd",4 );
+
+Answer: Why below? Compiler does it because, easy for it to manage memory of objects
+		Why object created last is deleted first? so there are no dependents on it (Object created first might have dependants)
+
+	Constructor for Doggy 1
+	Constructor for Doggy 2
+	Constructor for Doggy 3
+	Constructor for Doggy 4
+	Destructor   for Doggy 4
+	Destructor   for Doggy 3
+	Destructor   for Doggy 2
+	Destructor   for Doggy 1	

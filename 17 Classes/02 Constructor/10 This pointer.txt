@@ -1,0 +1,129 @@
+1) create class with method
+2) create class instance
+3) Call method via instance
+	How to call method? with valid object
+	this points to the object
+
+For ex: below objective: assign member variables x and y with values from parameters x and y of constructor
+	What problem : Compiler cant understand bw 2 xs
+	Solution? find someway to reference  x and y that "BELONG TO CLASS" 
+		What we know about this? it is pointer to current instance
+			this-> x = x;
+			point it to current instance of x	i.e this->x
+			
+class Entity
+{
+ public:
+	int x,y;
+	
+	Entity(int x, int y)
+	{
+	this -> x = x;
+	}
+}
+int main() {
+	std::cin.get();
+}
+++++++++++++++++++++++++++++++++++++++++++++++++
+What is this? Pointer to current object instance to which method belongs	 
+this keyword is only accessible through member function 
+	what is member function? function that belongs to a class
+
+What is use? Helps manipulate current object
+	What is current object? for which given method is executed
+
+1) Objective? Print address where object was created from inside of function,
+	How? this keyword for current object
+			What is current object? for which given method is executed
+				What method here? constructor
+
+	Where to use this keyword? special function of class object being called
+
+WHERE IS THIS KEYWORD USED
+Ex 1) //What will be this here? address in memory of current object being constructed by constructor
+
+Dog::Dog() {
+dog_name = "None";
+dog_breed = "None"
+dog_age = new int;
+*dog_age = 0;
+
+std::cout<< dog_name <<this;
+}
+	
+Dog::Dog(const std::string& name_param, const std::string& breed_param, int age_param)
+{
+	dog_name = name_param;
+	dog_breed = breed_param;	
+	dog_age = new int;
+	*dog_age = age_param;
+
+	std::cout<<"Dog "<< dog_name <<"Constructed at"<<this;   //where used? in param constructor
+}
+
+Ex2 CONFLICTING NAMES
+ We have parameter and member variable named same
+
+void set_name(const std::string& dog_name){
+	this->dog_name = dog_name;
+		//How will compiler know which dog name we refer? Solution : this -> dogname //member variable
+						assign parameter to member variable
+			
+}
+
+Ex3 CHAINED CALLS USING POINTERS
+Dog* set_name(const std::string& dog_name){
+	this -> dog_name = dog_name;
+	return this;
+}
+Dog * set_dog_breed(const std::string& breed){
+	this -> dog_breed = breed;
+	return this;
+}
+Dog *set_dog_age(int age){
+	if(this->dog_age){
+	  *(this->dog_age)
+}
+return this;
+}
+
+
+
+Dog *p_dog1 = new Dog("Milou", "Shepherd", 3);
+p_dog1 -> print_info();
+
+std::cout<< std::endl;
+std::cout<<  "After chained call" <<std:;endl;
+
+p_dog1 -> set_name("Mario")->set_dog_breed("Wire fox Terrier") -> set_dog_age(5);	//set_name returns pointer here
+p_dog1-> print)info();
+delete p_dog1;
+
+
+Ex4) CHAINED CALL USING REFERENCES
+
+Dog& set_name(const std::string& dog_name){
+	this -> dog_name = dog_name;
+	return *this;
+}
+Dog& set_dog_breed(const std::string& breed){
+	this -> dog_breed = breed;
+	return *this;
+}
+Dog& set_dog_age(int age){
+	if(this->dog_age){
+	  *(this->dog_age)
+}
+return *this;
+}
+
+
+Dog *p_dog1 = new Dog("Milou", "Shepherd", 3);
+p_dog1 -> print_info();
+
+std::cout<< std::endl;
+std::cout<<  "After chained call" <<std:;endl;
+
+p_dog1 -> set_name("Mario")->set_dog_breed("Wire fox Terrier") -> set_dog_age(5);	//set_name returns reference here
+p_dog1-> print_info();
+delete p_dog1;
