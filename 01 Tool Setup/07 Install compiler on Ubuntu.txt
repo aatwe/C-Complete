@@ -1,0 +1,12 @@
+GCC	//select
+Clang llvm
+
+sudo apt-get install gcc-10
+sudo apt-get install g++-10
+sudo apt-get install gdb
+sudo apt-get install clang12
+
+
+
+Alternative: homebrew.sh
+copy link paste in terminal

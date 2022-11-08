@@ -1,0 +1,17 @@
+dereferencing = 
+	What do pointers store? address
+	How to go through address and read what value contained there? dereferencing
+
+SYNTAX:
+	*p_var	
+
+
+Code:
+
+int *p_int 2{nullptr};
+int int_data {56};
+
+p_int2 = &int_data;
+
+
+std::cout<<*p_int2		//Output : 56

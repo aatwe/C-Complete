@@ -1,0 +1,68 @@
+1) What is the program?
+#include <iostream>
+
+int addNumbers (int a, int b) {
+    return a + b;
+}
+
+int main ()
+{
+   int a = 10;
+   int b = 5;
+   int c;
+
+  std::cout<<"Statement1"<<std::endl;
+  std::cout<<"Statement2"<<std::endl;
+ 
+  c = addNumbers(a,b);
+  std::cout << "Statement 3" <<std::endl;
+  std::cout	 << "Statement 4" <<std::endl;
+
+return 0;
+}
+
+
+2) Compiler converts into binary executable (CPU Understands)
+	how to view?  cant open roooster.exe	//cannot be read by ide
+		way to view assembly code, disassembler
+			gcc -S helloworld.c
+
+
+3) Where is program stored? Somewhere on harddrive (binary format)
+4) where is data stored in Memory?
+	0) Disks: Magnetic tapes/floppies/CDs/DVDs/Bluray/HDD/SSD
+	1) main memory (DRAM and DDR Family)
+	2) Caches
+	3) Registersa
+4) Where is program executed? RAM
+	How memory is allocated and used by program	(Memory model)
+	a ) when we double click file etc
+	b ) file loaded in memory (not stored)
+		//id : session #			
+		RAM	//loaded program					CPU Memory
+		0001	a=10 (int)
+		0002	b=5(int)
+		0003	c (int)
+		0004 	print("statement1") 
+		0005	print("statement2")
+		0006	c = f_add(a,b)		------->			0001  RET = 0006	//stores 6 in return m	
+		0007	print("statement3")
+		0008	print("statement4")
+		0009
+		0010
+		.....
+
+		
+	c)		//CPU runs program
+		0020	10	//a
+		....	 5	//b
+			xxx	//c//junk  //prints statement 1 and 2 on console
+
+
+				//function is stored somewhere away //cpu needs to reference return address in CPU memory
+		0030	10	//param1
+		.....	5	//param2		
+			Param1 + Param2	//prints statement 3 and 4 on console
+
+for simple addition have to go to very far memory location? Solution?
+CPU Optimizes function call to nearest(20 our case). How?( Inline function)

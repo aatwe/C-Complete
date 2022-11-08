@@ -1,0 +1,31 @@
+Objective how to print I Love C++ 10 times using while loop
+
+#include <iostream>
+
+int main() {
+
+const size_t COUNT {10};
+size_t i {0};
+while (i< COUNT)
+{
+std::cout<< "I love C++";
+++i;			//NOTE: in case of ++i or i++ doubt comes when expression is there
+			//for ex a = i++ or a = ++i, because
+			i++ evalueates i to a first and then increments	a = i . i = i++
+			++i increments i and then evaluates		a = i++ , i= i++
+}
+
+return 0;
+
+Output:
+0: I love C++
+1: I love C++
+2: I love C++
+3: I love C++
+4: I love C++
+5: I love C++
+6: I love C++
+7: I love C++
+8: I love C++
+9: I love C++
+Loop Done

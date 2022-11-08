@@ -1,0 +1,35 @@
+What are ternary operators?
+
+result = (condition)? option1 : option2;
+          if condn true 
+	  excute result = option1 
+	else 
+ 	  execute result = option 2
+
+1) 
+	//if else based on condition
+if (a > b){
+   max = a;
+} else {
+   max = b;
+}
+
+2) 	//xTernary operator
+max = (a>b)?a : b;
+
+//What data type a and b? either same or convertible
+	if not compiler error
+
+
+ex case: IMPLICIT CONVERSION
+
+int a{35};
+int b{200};
+auto max1 = (a > b)? a : 22.5f;
+Output: 22
+what are we comparing? a(int) b (float)
+	compiler implicitly converts float to int
+
+How implicit conversion was done?What type compiler used? how to find what type compiler used?
+auto max1 = (a>b)? a : 22.5f  
+Output max1 : 22.5		//conversion happened from int to float actually

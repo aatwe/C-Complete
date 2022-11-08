@@ -1,0 +1,16 @@
+What are bounds of array?
+	bounds within which only we can store array elements
+	any location other than specified for array is out of bounds
+
+	When we declare array what is size of each element? specified by us or deduced by compiler
+		and hence of array
+	Only provided  locations are allowed to manipulated
+
+	
+	Any other memory location apart from specified: might be for other program or used by OS //BAD
+
+
+	Does c++ allow to access  out of bounds? Yes
+
+	Can we modify data beyond bounds? Yes but careful	
+			even if you change someother program might change it again

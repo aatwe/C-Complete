@@ -1,0 +1,51 @@
+Why? use ? helps working with string data
+
+What we did till now? worked with char arrays
+		    point to char arrays with pointers
+		  allocate array on heap
+
+
+What problem with char arrays?Track size  (i.e define bounds)
+				going overbound , crashes program
+			   Track null character ()
+
+How to avoid these details tracking? High level type
+
+abstraction over C string and arrays
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+DECLARE  (have to use std::string)
+
+#include<string>
+std::string full_name;				//empty string
+std::string planet {"Earth, where the sky is blue"};		//initialized with literal
+std::string preferred_planet {planet};			//initialized with string
+std::string message {"Hello brother", 5};		//initilaized with part of literal (5 char)	//Hello
+std::string message1 {4,'e'};				//initialized with multiple copies of character
+strd::string say_hello {message,4,5}			//initilaize with starting index + no. of char
+
+std::cout<< full_name;....
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Feature of std::string? //Change std::string size at runtime
+		   //earlier memory returned to OS
+
+How std::string grows automatically?
+#include<iostream>
+#include<string>
+
+int main() {
+std::string planet {"Earth, where the sky is blue"};		//auto adjust size
+						//Change std::string size at runtime
+planet ="Earth flksdajflaskdflksjfdlskjfslkdjfs";		//updated	//earlier memory returned to OS
+std::cout<< planet;					
+   return 0;
+}
+
+
+//What if we do this with array?
+const char* planet1 {"Earth where the sky is blue"};	//Declare array pointed by const char pointer
+planet1 = "Earth where the sky is blue, Earth where the sky is blue, Earth where the sky is blue" //char pointer points to another array
+std::cout<< planet1;				//prev array pointed, memory wasted
+
+IN STRING, INITIAL MEMORY GETS RETURNED TO OS
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

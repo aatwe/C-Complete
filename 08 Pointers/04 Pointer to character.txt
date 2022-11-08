@@ -1,0 +1,45 @@
+Q) Declare pointer to character
+
+char *p_char_var {nullptr};
+
+
+Q) Assign character to character ptr
+
+char char_var {'A'};
+
+p_char_var = &char_var;
+
+std::cout<< *p_char_var;
+
+Q) Assign new character to char ptr
+
+char char_var1{'C'};
+p_char_var = &char_var1;
+std::cout<< *p_char_var;
+
+
+Q) What is special about char ptr?
+	Can initiliaze with string literal
+
+	char  *p_message {"Hello World"};	//Some compilers wont compile, why? expands to const char[] but our ptr aint cosnt char
+		What will it store? String (Hello World) -> expands to char array ,
+				Where ptr points/stores address? first char of array
+		
+		
+	std::cout<< p_message;	//Output 
+	std::cout<< *p_message;	//Output Hello World 	//not just H	//char pointer magic
+
+Q) What if we try to assign new value to char ptr initialized with string literal?
+	wont allow since array is const char
+		instead use const char *p_message {"Hello World"}	//then will allow to assign new value
+
+Q) How to modify char array init with string literal?
+
+char message2[] {"Hello There"};
+message2[0] = 'T';
+std::cout<< message2 ;	//Tello There
+
+Q) When are char pointers helpful?
+	When we want to store a string and not change it
+
+

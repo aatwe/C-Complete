@@ -1,0 +1,54 @@
+How to use heap storage to get additional memory?
+ we use pointers to manipulate variables
+
+
+STACK
+	how much stack memory? finite
+	What is memory lifetime? programmer not in control
+	how is lifetime controlled? scope mech	//variable dies after scope ends
+
+HEAP
+	what is memory lifetime? programmer in control of when allocated & when released (return to OS)
+	#include<iostream>
+	int main(int argc, char**argv) {
+	  {
+		int local_var{33};		//dies
+		int *local_ptr_var = new int;  //doesnt die, lives on heap after scoe
+}
+	return 0;
+}
+
+	how is lifetime controlled? new & delete operator
+
+
+
+USING DYNAMIC MEMORY
+
+//setup pointer
+int *p_number4{nullptr};
+
+//how to allocate memory	(new int)
+//how to point and access it? p_number4
+			//os will allocate memory on heap (how big memory? large enough for int) 
+			//Can another program use? no other program can use
+
+p_number4 = new int;
+------------------------------------------
+
+//how to release memory? (delete)
+delete p_number4;
+
+//After deleting set to nullptr	//implies no valid data in memory
+p_number4 = nullptr
+
+------------------------------------------
+How to allocate and initialize in same statement?
+int *p_number4 {new int};
+
+
+What if we call delete twice on pointer? BAD
+	p_number6 = new int{77};		//allocated memory location
+	delete p_number6;			//return to system
+	delete p_number6;			//CRASH
+	p_number6 = nullptr;
+

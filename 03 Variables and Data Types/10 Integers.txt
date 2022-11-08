@@ -1,0 +1,50 @@
+Q) What is a variable? named piece of memory
+	What are variable naming convention? cannot start with number	
+					can use underscore
+					spaces+specialchar  not allowed
+	Are variables case sensitive? yes   int var1 vs int Var1
+
+Q) Why use variable? can store different types of data in it
+			can do operations with that data
+
+Q) What are integer variables? variables/piece of memory that store whole numbers
+
+Q) How much size integer variables occupy? 4 bytes in memory
+
+Q) What ex of integer variable? int age;
+
+Q) How to declare integer variable?
+  
+	typename variable_name {initializer_value};	//braced
+						//similar for functional and assignment
+
+			braced	        Functional		Assignment
+Q) How to initialize integer?    {} 	or 	() 	or	       =
+	{} vs () vs =
+	int var() vs int var{} 
+	int var(2.9);	//turns 2.9 to 2	//implicit conversions 	
+	int var{2.9};	//shows errors/warnings
+	int var = 2.9;	
+int ants;	//initializes as garbage value
+
+int dodo2();  //
+int dodo{}; //initializes to zero by default
+
+int dog_count {10};	//initializes to 10
+
+int cat_count {15};	//initializes to 10
+
+
+Q) How to use expression to initialize?
+int pet_animals = { dog_count{10} + cat_count{15}};
+
+
+Q) What if we use undefined/undeclared variables? Compilation error //Rules break //program wont run
+int bad_initialization { doesnt_exist1 + doesnt_exist2};
+
+Q) What if we store fractional number in integer variable? Error/warning
+					can store but size problem -> data might be lost (fractional number size > integer size)
+int narrowing_conversion {2.9};
+
+Q) How to get/query size of integer data type/ integer variable? sizeof(int)   or sizeof(var1);
+	4 bytes

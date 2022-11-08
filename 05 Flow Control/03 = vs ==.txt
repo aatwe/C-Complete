@@ -1,0 +1,3 @@
+== : Test for equality	//check if equal	//not always evaluated to true
+
+=   :  Assignment		//assigns a value, always evaluated to  true 

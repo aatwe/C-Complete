@@ -1,0 +1,131 @@
+Function:
+Use below machine repetitively
+
+Machine:
+takes input
+	does processing
+		output optionally
+
+SETUP
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q0) How to declare and define function 
+Syntax:					//arguments
+	output_return_type     function_name (input_parameters)  {
+	//Operations and processing
+}
+
+
+Q00) How to catch output of a function?
+result_var = function_name (arg1, arg2)	//catch output of function
+ 
+
+Q1) What if a function has no input/output
+
+	void function_name () {
+		//processing
+	return ;	//can also omit return statement
+}
+
+Q11) What if function takes no input, returns something
+
+int lucky_number() {}
+  return 13;
+}
+
+Q2) Do functions have to be unique? yes
+	How to check if function is unique?
+	Signature: function name+  function parameters 
+
+Q3) What if we have 2 functions with same signature? Compiler Error: Redefinition of in max(int, int)
+	Q) Will renaming parameters work? no
+for ex
+int max( int a, int b)	//same signature 2wice
+void max ( int a, int b)
+
+int max( int a, int b)	//same signature 2wice
+void max ( int c, int d)	//renaming wont work
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+CALLING FUNCTIONS
+
+int main (int argc, char**argv){
+  enter_bar(22);
+ int maximum_number {max(a_value, b_value)};	//store return value in variable
+ std::cout<<lucky_number();			//print out function output
+
+
+Q3) How implicit conversion takes place in function call?
+double f{12.33};
+double g{51.25};
+
+minimum_number = min(f,g)		//f,g are implicitly converted to int
+
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q) How function takes parameters?
+	As copies
+	//i.e the proceessing and operation inside function, will NOT manipulate the orginal parameters a and b
+	//Changes in body of function will only afffect copies
+	//inside body : What function works with? copies of parameters passed
+	doubleincrement_multiply( double a, double b){
+	
+	What happens to the copies after function completed? Dies
+
+Q) How to make sure copies of arguments are passed to function  as parameters?
+ outside function: before increment : h3 i4
+ inside function :before increment : h3, i4 
+ outside function: after increment : h3 i4
+ inside function: after increment : h4 i5
+
+//Summary only inside function copies affected //
+
+TEST below
+double increment_multiply(double a, double b){
+  double result = ((++a)* (++b));
+}
+int main(){
+ double h{3.00};
+ double i{4.00};
+ 
+ double incr_mult_result = increment_multiply(h,i)l	//pass h and i to function  // a & b incremented
+  return result;	
+}
+
+Q) Can we have function without return type in C++? NO
+Q) How many parameters we can have? many
+Q) Can we avoid return with void , YES(or just return; ) , only this, other types need return 
+CODE:
+
+#include<iostream>
+RT	
+void enter_bar(unsigned int age) 
+	if(age>18){
+	std::cout<<"you are legal"
+}	else {
+	std::cout<<"you are illegal"
+})
+
+int main() {
+
+enter_bar(22);
+enter_bar(15);
+ return 0;
+} 
+
+Q) Can we pass the argument in a loop? Yes
+
+for(size_t i= 0; i< 20 ;  i++){
+   enter_bar(i);
+} 
+
+Q)How arguments are passed? Arguments are copied into parameters
+
+int result = max(10,20);		//10 and 20 are arguments
+
+int max (int a, int b){		//arguments are copied into parameters
+  if(a>b)
+	return a;
+  else
+	return b;	
+}
+
+Q) Why declare our function before main()? C++ requirement to declare function before using

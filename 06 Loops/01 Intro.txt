@@ -1,0 +1,8 @@
+doing repetitive tasks for ex printing i love you 10 times.
+Why wanna do labour.
+How to program computer to print 10 times
+
+
+What is solution? Loops
+
+What is loop? sequence of instruction(What to repeat) , that is repeated in same sequence till some specified condition is reached(Till when to repeat)

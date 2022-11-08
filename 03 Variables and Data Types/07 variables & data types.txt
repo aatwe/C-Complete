@@ -1,0 +1,32 @@
+How is data stored in memory? 1s and 0s
+How to make sense? group them
+1 bit grouped into -> byte
+
+How to transform binary data (1s and 0s) -------->  human readable forms(22.38, Alex,,22 etc)?
+Number system
+What number systems do we know?
+1) binary
+2) octal
+3) hexadecimal
+
+
+predefined types in C++
+
+Numbers
+int
+
+Decimals
+double : 
+float     :
+
+Characters
+char
+
+binary
+bool
+
+typeless
+void
+
+keyword for deducing other types 
+auto

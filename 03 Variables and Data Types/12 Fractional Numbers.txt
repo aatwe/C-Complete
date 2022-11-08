@@ -1,0 +1,99 @@
+Q)  What are fractional numbers?
+	floating types : Numbers with fractional parts
+
+all data in C++ of form of 1s and 0s 
+
+
+
+Fractional number types:
+	 how much memory
+	 occupies
+Type		Size		Precision
+
+1) float		4	  	    7
+2) double	8	 	   15			Recommended	//by default if dont put apt suffixes
+3) long double	12/16(compiler) 	  >double
+
+
+Q) What is precision?
+no. of digits to the right starting(including) from digit left of decimal point
+or
+in case of integer : total number of digits
+
+Q) why need precision? to find correct accomodating data type, each data type has its own precision
+for ex
+1.23456780001
+	//precision = 12
+
+we know float precision = 7 bits
+the fractional number wont fit in float
+How would you represent the number then? double //precision 15	
+
+Q) how to declare floating point number? //write f otherwise bydfeault considered double
+	float number1 {1.1234567890f};	//more than float can handle	
+	double number2 {1.1234567890};	//can handle
+	long double number3 {1.1234567890L}; //can handle	//write L
+
+	std::cout<< "size of float :" << sizeof(float) <<std::endl;
+	std::cout<< "size of double :" << sizeof(double) <<std::endl;
+	std::cout<< "size of long double :" << sizeof(long double) <<std::endl;
+	
+
+Q) What if we store higher precision number in float?(>7)?
+	float number4 {19240003};	
+	
+Q) How to print precision of fractional numbers?
+
+Q) how to set  max precision we can see in std::cout?std::setprecision(20);
+	#include<iomanip>
+	std::cout << std::setprecision(20);
+	std::cout << "number1 is :" <<number1 <<std::endl;	//o/p 7 digits  //after 7 digits haywire w number   1.1234568876
+							//7 numbers accurately represented 
+	std::cout << "number2 is :" <<number2 <<std::endl;	//o/p 15 digits (precision)
+	std::cout << "number3 is :" <<number3 <<std::endl;	//o/p 15+ digits
+							//specific dependent on compiler
+
+Q) In case of integer can precision store? 192400023
+precision = 9
+float can store 7
+COMPILER ERROR
+
+
+
+Q) What are scientific notation?
+double number9 {3.498e-11};	means 3.498x10^-11	
+
+
+Q) Do floating point also use number systems like integer?NO
+	we use Floating Point numbers Memory representation
+
+Q) What extra features floating point have over integers?
+	1) can divide by 0 -> +/- infinity	//add anything to infinity will give infinity
+	double number11{};	//initialized to 0 
+	double number12{};	//initialized to 0
+	2/number11		//O/p    Infinity
+	-2number11		//O/p -infinity
+	2) 0.0/ 0.0 -> NaN	//naughty number
+	doubel result = number11/number12 = NaN O/p
+
+Q) What if we store more than 7 digits in float
+for ex
+float number4 {192400023.0f};
+std::cout << "number4 :" <<number4 <<std::endl;
+
+O/p 192400016	//no. chopped off after  7 digits
+
+
+Q) What if we write
+double number4 {192400023.0f};	//still error
+				//suffix is important
+				//stored as float in memory, remove f to make double
+
+		
+Q) What if
+double number8 {0.0000000003498};
+std::cout<< number8;
+
+	o/p:  3.497999999999e-11
+
+//prints scientific notation why? really huge number

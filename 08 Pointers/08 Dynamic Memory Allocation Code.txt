@@ -1,0 +1,69 @@
+learnt to use basic pointer
+
+WHAT NOT TO DO?
+
+1) dont write on uninitialized memory
+int *p_number2;			//pointer could be pointing anywhere
+   *p_number2 = 55;	//Writing on junk address //BAD //programc crashes, wont even run ./rooster.exe
+
+or
+
+will the below work?
+int *p_number3 {};		//CRASHES
+	*p_number = 33;
+
+
+
+2) dont end program b4 releasing allocated dynamic memory
+
+____________________________________________________________________________________________________________________________
+
+How to Dynamically allcoate memory?
+int *p_number4{nullptr};
+p_number4 = new int;	//whom belongs?memory belongs to program
+			//who can use? nobody else can use
+			//What will it store? type pointed by pointer
+
+//How to write on dynamic memory
+*p_number4 = 77;		//Where is this variable stored? on heap
+
+std::cout<<*p_number4;	//Output: 77	
+
+
+//How to return memory to system?
+delete p_number4;		//What happens after release? memory contains junk again, dont use
+			//What to do with released memory? point to null ptr
+				//reset pointers after deleting
+p_number4 = nullptr;
+
+//What if we try to use delted memory?
+*p_number4 = 45;		//write on released memory
+			//Output: 
+
+____________________________________________________________________________________________________________________________________
+How to dynamically initiliaze pointer on declaration //dont have to nullptr at start
+			What contains?
+int *p_number5 {new int}		//junk address with junk value
+int *p_number6 {new int (22)};	//address with 22 value	[direct init]
+int *p_number7 {new int {23}};	//address with 23 value	[uniform init]
+_____________________________________________________________________________________________________________________________________
+
+Can we use pointers after deleting + nullptr pointing? YES
+
+delete p_number5;
+p_number5 = nullptr;
+
+p_number5 = new int(81);	//reuse allocate new memory int type(4 bytes)
+			//note dont forget to release again
+std::cout<< *p_number5;
+
+delete p_number5;
+p_number5 = nullptr;
+
+______________________________________________________________________________________________________________________________________
+How to check if program is ending well.? Trty cout something just before return 0
+
+______________________________________________________________________________________________________________________________________'
+Why deleting twice is bad? compiler wont stop, but part after this wont run , program killed here
+When can this go wrong? multiple files , ptr pointing to same memory , chance fo deleting twice
+______________________________________________________________________________________________________________________________________

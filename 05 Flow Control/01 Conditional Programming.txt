@@ -1,0 +1,42 @@
+Q) What is conditional programing?
+	set up some conditions
+	do things based on those conditions
+
+Q) Why conditional programming?
+	simulate person who can make decisions and take actions
+
+Q) Ex
+For ex Conditionally programming a traffic light rules for a driver
+
+What conditions?
+	Traffic light
+		red
+			true / false
+		green
+			true / false
+		yellow
+			true / false
+	police_stop
+			true /. false
+
+
+//initialize the conditions		
+bool red = false;	
+bool green {true};
+bool yellow {false};
+bool police_stop{true};
+
+
+//Do logical things  based on conditions
+
+if (red) {
+  std::cout<<"Stop"<<std::endl;
+}
+if (yellow) {
+  std::cout<<"Slow down"<<std::endl;
+}
+if (green) {
+  std::cout<<"Go"<<std::endl;
+}
+
+Q) 

@@ -1,0 +1,46 @@
+1)What is memory leak?
+	What memory allcoated? heap 
+
+	What if you forget to delete it after use?OS thinks still using it
+	What if we cant access the memory /& object in it?
+		Memory leak	
+
+2) What memory leak effects? can lead to program crashing if program keeps running extended time
+		program running for 3 months -> leaking memory => too much heap used -> terminate program
+
+3) What precaution? When not using a memory , delet and return to OS
+			//Safer C++
+Ex1)
+int *p_number {new int{67}};	//dynamic memory allocated
+
+int number{55};		//which memory?stack memory allocated
+
+			//assign stack memory address to dynamic memory pointer
+p_number = &number;	//but p_number already has dynamic memory address allocated
+
+What will happen?
+where pointer pointing ? stack
+did we delete/release dynamic memory before reassigning its pointer? No
+Can we use that dynamic memory again? NO
+Can OS use that dynamic memory again> No
+
+
+
+Ex2) 
+int *p_number1 {new int{55}};	//dynamically allocate memory
+
+p_number1 = new int{44};		//point pointer to new memory	
+				lose access to first, data lost
+
+
+Ex3) 
+#include <iostream>
+int main (int argc, char **argv)
+{
+
+{
+	int *p_number2 {new int{52}};
+}					//What when scope ends? p_number2 pointer dies, dynamic memory wont die
+					//Cant access 52 again
+					//Memory leak
+}

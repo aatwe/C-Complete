@@ -1,0 +1,66 @@
+Which library?
+#include <limits>
+
+
+How to use?
+std::numeric_limits<T>::min()
+			What is min () -> smallest positive number for the typer	//cannot be 0
+
+std::numeric_limits<T>::max()
+			What is max () -> largest positive number for the typer
+
+std::numeric_limits<T>::lowest()
+			What is lowest () -> smallest number for the type	//no value to left
+
+
+What does it mean?
+For ex 
+1) Float
+	
+	lowest() -> -3.40282e +38
+	
+	min()      ->   1.17549e-38
+		What is min () -> smallest positive number for the typer
+	max()     ->    3.40282e +38	
+
+
+2) signed int
+	lowest() -> -32768
+	
+	min()      ->   NA
+		What is min () -> smallest positive number for the typer
+	max()     ->    32767
+
+3) Unsigned int(Short)
+	lowest() -> NA
+	
+	min()      ->   0
+		What is min () -> smallest positive number for the typer
+	max()     ->    65535
+
+
+Code:
+#include <iostream>
+#include <limits>
+
+
+int main() {
+	std::cout<<"The min for short is"<< std::numeric_limits<short>::min();
+	std::cout<<"The max for short is"<< std::numeric_limits<short>::max()
+	...
+	return 0
+}
+
+Run program:
+New termina -> Run task -> ./rooster.exe
+	-32768 to 32767
+
+
+
+Extra:
+Which library? std::numeric_limits
+	gives ways to query properties of data types
+	
+for ex largest possible value for int?
+	std::numeric_limits<int>::max()
+std::cout<<std::numeric_limits<int>::is_signed;

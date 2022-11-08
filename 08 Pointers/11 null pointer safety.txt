@@ -1,0 +1,33 @@
+How to make sure that pointer contains valid address?
+	if it wont have valid address we wont use it
+
+
+
+1) //initilaize pointer 
+	int *p_number {};
+
+2) check for null pointer
+	if(!(p_number==nullptr)) {
+   std::cout<< "points to valid address"<<p_number <<std::endl;	// p_number is not null pointer, contains valid address
+							//do what you want with that address
+}else {
+  std::cout<< "points to invalid address"<< p_number <<std::endl;
+}
+
+
+
+Quick question?
+Can we delete a pointer var containing null ptr?  YEs
+How?
+ 
+int *p_number1 {};
+delete p_number1;
+
+
+What will be overkill?
+if(p_number1 != nullptr) {
+	delete p_number1;	//overkill	//works though
+}
+
+
+    

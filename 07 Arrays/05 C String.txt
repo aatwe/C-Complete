@@ -1,0 +1,25 @@
+1) C String
+    Manually put null terminator
+    char message1 [5] {"H', 'e', 'l', 'l', 'o', '\0'};
+	//sizeof(message1) =>  6
+
+
+2) C String
+	 Compiler adds null terminator
+	keep 1 extra space
+    char message2 [6] {'H', 'e', 'l', 'l' , 'o',}; 
+	//sizeof(message2) => 6
+
+
+3)  Not a C String
+    char message3 [] {'H', 'e', 'l', 'l' , 'o',}; 	//Is this a C string? NO . Why? there is no null char
+				//compiler deduces size 5  
+
+4) String literal	//PREFERED WAY TO STORE STRING IN A PROGRAM
+    char message4 [] {"Hello String"}	//has null terminator
+
+
+Note: Direct console printting only works for char arrays
+int numbers [] {1,2,3,4,5};
+ std::cout<< numbers;
+	//Output: 0x6fd90

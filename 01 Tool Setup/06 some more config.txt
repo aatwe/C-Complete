@@ -1,0 +1,11 @@
+View -> Command palette
+
+C/C++:Edit Configuration
+
+//Where are all these configurations saved? c.cpp.properties.json
+
+Configuration name: Win32
+inellisese mode: windows-msvc-x64
+Compiler path	//can chose any compiler
+C standard: C 17
+C++ standard: C20	

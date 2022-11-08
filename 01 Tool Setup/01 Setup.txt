@@ -1,0 +1,69 @@
+SUMMARY : WE GET ALL 3 COMPILERS + VS Code (User installer) + C++ Extension
+Editor + Compiler
+
+What compiler does? compiles code(written by us in editor) -->into code that can run on hardware (binary executable)
+
+
+Editor/IDEs:
+	VS Code			*
+	XCode
+	CodeLite
+
+GCC = GNU Compiler collection
+Compilers:	(gccc/clang/msvc most common)
+	Mingw	//gives access to gcc like compiler on windows
+	Msvc
+	Clang llvm
+
+
+Different compiler -> different Features 
+
+
+How to install gcc + clang?
+winlibs -> (llvm/clang version)
+
+//mingw64 Folder : This will be your compiler
+in bin folder -> find compilers
+
+
+How to install microsoft c++ compiler
+	VS Code(IDE) -> Desktop Development with C++ (Compiler)
+
+How to check if microsoft c++ compiler installed?
+	Developer powershell for VS in Start menu
+	Developer command prompt for VS 
+		Opens terminal :  Ready to start using compiler
+			Test: cl.exe
+
+How to add compiler to envt variable in windows?
+Copy folder path -> 
+System properties -> Environment variables ->
+				User variable
+				System variable
+					Path: -> Edit
+					C:\mingw64\bin
+
+How to test if environment variable is working?
+			CMD
+				g++ --version
+				clang --version
+
+
+What are environment varible? variable with $
+			Accessible by all processes/users running under OS
+		Ex of envt variable?
+			PATH : windows will search  executable programs(.exe/.bat/.com) in this directory
+			OS
+			COMPUTERNAME
+			SYSTEMROOT
+			HOMEDRIVE
+
+how to display a envt variable?
+		CMD -> set var_name
+			   or
+		              echo %var_name%	//prints the value
+How to append?
+		set PATH=c:\myBin;%PATH%
+
+
+SUMMARY : WE GET ALL 3 COMPILERS

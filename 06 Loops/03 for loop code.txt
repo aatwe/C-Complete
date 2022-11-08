@@ -1,0 +1,31 @@
+int main () {
+for (unsigned int i{0}; i < 10; ++i){
+	std::cout<< i<< " I Love c++";
+} 
+std::cout<<"Loop done";
+return 0  
+}
+---------------------------------------------
+OR
+---------------------------------------------
+int main () {
+for (size_t int i{0}; i < 10; ++i){			//C++ standard library convention is 
+	std::cout<< i<< " I Love c++";
+} 
+std::cout<<"Loop done";
+
+return 0  
+}
+
+
+Output :
+0 I love c++
+1 I love c++
+2 I love c++
+3 I love c++
+4 I love c++
+5 I love c++
+6 I love c++
+7 I love c++
+8 I love c++
+9 I love c++

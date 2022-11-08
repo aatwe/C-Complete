@@ -1,0 +1,45 @@
+Which library? 
+#include <cmath>	//lots of functions in cmath
+ 
+Which reference? https://en.cppreference.com/w/cpp/header/cmath
+
+std::floor()
+double weight { 7.7};
+std::cout<< std::floor(weight)	//7
+
+std::ceil()
+double weight { 7.7};
+std::cout<< std::ceil(weight)		//8
+
+std::abs()	//absolute = value without sign
+double savings {-5000}
+weight = 7.7;
+std::abs(savings);			//5000
+std::abs(weight);			//7
+
+std::cos()
+
+
+std::exp()
+double exponential = std::exp(10);
+std::cout << exponential <<std::endl;	// 2.7^10
+
+
+std::log()
+std::cout<<std::log(54.59);		//e^x = 54.59	//x= 
+std::cout<<std::log10(10000);	//4
+
+std::pow()
+std::cout<<std::pow(3,4) << std::endl;	//3^4
+
+std::sqrt()
+std::cout<<std::sqrt(81) << std::endl;	//9
+
+
+std::round()
+
+
+std::sin()
+
+
+std::tan()

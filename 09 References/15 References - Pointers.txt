@@ -1,0 +1,57 @@
+How did we learn to modify variables?
+	1) Use pointer
+	2) Use references
+
+References
+no need to use * to dereference
+can we change and make reference point somewhere else?no
+cannot be left uninitiliazed on declaration
+
+Pointers
+gotta use *
+Can we change and make  pointer point somewhere else? yes
+can be left uninit on declaration (garbage address )
+
+why use reference if pointer exists?
+
+
+Code:
+double double_value {12.34};
+double &ref_double_value = {double_value};	//reference to double_value variable
+double *ptr_double_value = {&double_value};	//pointer to double_value variable
+
+//Print data
+std::cout<<ref_double_value;	  	//no * required to dereference
+std::cout<<*ptr_double_value;	// * required to dereference 
+std::cout<<ptr_double_value;		//this is just address
+
+//Write data			
+*ptr_double_value = 15.44;		//* required
+ref_double_value = 18.44		//no * required
+
+//Change and assign elsewhere
+//reference
+
+double double_value {12.34};
+double &ref_double_value {double_value};	//reference referencing double_value
+double other_double_value{100.23};
+
+ref_double_value = other_double_value;		//Change reference to reference other_double_value now
+
+std::cout<<ref_double_value;	 		
+std::cout<< double_value;
+
+//Summary:
+reference will store other_double_value
+reference address will still be double_value	
+
+//pointer
+int *p_double_value = &other_double_value;
+*p_double_value = 555.66	//pointer will point to new addess
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+References are like const pointers: Also named to point somewhere else
+Cannot point const pointer elsewhere
+CANNOT CHANGE REFERENCE TO REFERENCE OTHER VARIABLE
+double*const const_p_double_value {&double_value};
+const_p_double_value = &other_double_value;	//COmpiler error

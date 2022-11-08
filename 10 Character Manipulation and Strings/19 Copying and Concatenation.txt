@@ -1,0 +1,37 @@
+1) Concatenation	STRCAT		
+Ex1)  char array
+#include<cstring>	
+				//concats and adds to dest string //adds \0 null terminator to  the string
+char dest[50] = "Hello";		//make sure dest string is big enough, why?everything concatted to it
+char src[50] = "World!";
+
+	std::strcat(dest, src); 
+	std::strcat(dest, "Goodbye World");
+	std::cout<< "dest" <<dest;	//Hello World Goodbye World
+
+
+
+Ex2)  		//Dynamic array
+char *dest1 = new char[30]{'F','i','r','e','l','o','r','d','\0'};
+
+char *source1 = new char[30]{'P','h','e','o','n','i','x','!','\0'};
+
+
+stdd::cout<< std::strcat(dest1,source1);
+
+	STRNCAT	//specify how many char want to concat from source to dest
+std::strncar(dest1,source1,3);	//want 3 char copied from source
+	FirelordPhe
+===========================================================
+2) Copying strings : strcpy(dest,source);
+
+const char* source3  = "C++ is a multipurpose language";
+char *dest3	= new char [std:strlen(source3) + 1];
+
+
+std::strcpy(dest3,source3);	//copy from source, overwrites to dest	//if prev anything in dest, overwritten
+
+std::cout<<std::strlen(dest3);
+std::cout<< dest3;
+
+strncpy(dest,source,5);	//copies and overwrites only 5 characters from source

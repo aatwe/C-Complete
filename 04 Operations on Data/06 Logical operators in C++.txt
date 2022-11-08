@@ -1,0 +1,25 @@
+What are logical operators?
+Operators that work on boolean operands
+
+&& 	//And
+	F && F -> F
+	F &&T -> F
+	T &&F -> F
+	T &&T -> T 
+
+||	//Or
+	F || F -> T
+	F ||T -> T
+	T ||F -> T
+	T ||T -> F 
+
+
+!	//not equal	//Negating operator
+	T 	!T = F
+	F	!F = T
+
+
+
+Expressions may combine all 3
+//check precedance & associativity
+//put parenthesis to avoid confusion

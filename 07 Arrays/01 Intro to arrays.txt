@@ -1,0 +1,92 @@
+What data we have been working with? single integer variables
+
+
+How to work with multiple variables and manipulate under 1 variable name?
+Arrays
+
+How memory allocated for array? contagious 
+
+Why array? group variables and manipulate as 1 unit / reference with single entity
+
+How to refer to multiple variables? [] index
+	What is starting index of array? 0
+
+DECLARE ARRAY
+int scores[10];	//10 integers grouped into 1 logical entity scores
+		//memory allocated
+		//unintialized array variables contain? garbage data
+
+Can we declare array as const?Yes, cant modify elements of that array then
+    Try modifying
+	const int multipliers [] {22,3015};
+	multipliers[1] = 20;	//Compiler error
+
+SIZE OF ARRAY
+if we give 10 elements in array	
+   Can we read outside this array? Yes  but problems crash etc
+	you'll be reading memory not allocated to array
+
+  Can we put only 3 elements in size 5 array? yes, rest will be 0
+  Can we skip not specifying size? Yes,compiler deduces. how? auto var : array_name
+	for ex. print size of class_sizes
+							//range based for loop
+							//no iterator etc needed //just read and use value
+				
+
+
+ 	int class_sizes[] = {10,12,15,11,18,17};
+	for (auto value: class_sizes){
+		std::cout<<value;
+
+//Range based for loop use case
+int scores[] {2,5,8,2,5,6,9};	
+	int sum {0};
+	for (int element : scores) {
+	  sum += element;
+}
+
+
+READ DATA FROM ARRAY
+1) read individual element
+	usind index : score[1];
+
+2) read all data in array?
+	use index with incrementing iterator (for loop)
+	for (size_t i{0}; i< 10 ; i ++){
+	  std::cout<< scores[i] ;
+}
+
+WRITE DATA IN ARRAY
+1) individual data
+	assign data to element using index
+	scores[0] = 10;
+
+2) multiple elements : for loop and incrementing iterator
+	for (size_t{0}; i<10; ++i){
+	  scores[i] = i*3;
+}
+  //Can we modify already present data in array? Yes
+	const int multipliers [] {22,30,15};
+	multipliers[1] = 20;
+
+
+DECLARE AND INITIALIZE ARRAY  
+
+double salaries[5] = {12.7,7.5,13.2,8.1,9.3};
+
+//print
+for(size_t{0}; i<5; ++i){
+  std::cout<<	salaries[i];
+}
+
+
+OPERATIONS ON DATA IN ARRAY
+for ex add elements of array	
+	int scores[] {2,5,8,2,5,6,9};	
+	int sum {0};
+	for (int element : scores) {
+	  sum += element;
+}
+std::cout<< "Score sum : " << sum;
+return 0;
+	

@@ -1,0 +1,63 @@
+1) What we have been working with ? variables
+	Where are variables stored? at address
+
+How to store & manipulate the address of other variables? pointers 
+
+2)Syntax: int * p_var 
+What data types can pointer point to ?double,int.float, custom types etc
+
+//DECLARE POINTERS
+int * p_number {};		//int pointer can only store int address	
+			//Where pointing initially? nowhere : null
+				cannot use address values of null pointers
+or
+
+int * p_number1{nullptr};
+
+//DEFINE POINTER VARIABLES?
+int var1 {43};
+int *p {&var1};		//&var1 = address of var1
+
+
+3) Do all type of pointers have same size? Yes they store address to variables (all same size)
+
+4) Does * position matter NO, can put left or right or middle
+	int* p_num1{nullptr}
+	int * p_num1{nullptr}
+	int  *p_num1{nullptr}
+//CHANGE ADDRESS ASSIGNED TO predefined POINTER VARIABLES
+int var2= {65};
+int  *p = {&var2}
+
+5) Can we store different data type var in different data type pointer
+	for ex int *p_int1{nullptr};	//Compiler error	//cant store nullptr in int pointer
+
+
+6) What if we declare pointer and integer together inline?compiler only checks for first one
+			But avoid putting pointer and int together
+
+int*p_var{}, int_var{};
+
+// p_var : considered pointer	//size 8
+    int_var : considered	// size 4
+
+
+7) PRINT ADDRESS STORED IN POINTER
+
+int int_var {43};
+int *p_int{&int_var};
+
+std::cout<<int_var;
+
+8) CHANGE ADDRESS STORED IN POINTER
+int int_var{43};
+int int_var1 {65};
+	int *p_int{&int_var}
+	p_int = &int_var1;	//change address
+std::cout<< p_int;
+
+8) PRINT VALUE STORED IN POINTER
+ Dereferencing
+
+9) DONT USE uninitialized pointer
+	initilaize to null

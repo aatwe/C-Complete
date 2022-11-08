@@ -1,0 +1,30 @@
+1) Cant assign an array of const char to a char
+	Use const char* if dont want to allow to change
+#include <iostream>
+
+int main() {
+ char * message {"Hello World"};	//Compiler error w GCC
+  return 0;
+}
+
+use instead
+
+#include <iostream>
+
+int main() {
+const char * message {"Hello World"};		//Hello World string literal is converted to array of const char and 1st element pointed by pointer of type const char
+std::cout<< message;			//Build w GCC
+
+*message = "B"				//Why error?Since const char cannot modify
+std::cout<*message			//What if we dereference? we dereference to H (first element)
+						
+  return 0;
+}
+
+
+2) How to allow user to make change in String literal? Dont use pointer, use char array
+char message1[] {"Hello World"};	
+message1[0] = 'B';
+std::cout<<message1;	//Output: Hello World 
+
+ 

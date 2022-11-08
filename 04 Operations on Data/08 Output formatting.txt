@@ -1,0 +1,118 @@
+How to format stuff we sent to std::cout
+
+For ex given:  table
+Names		Age
+Daniel Gray	25
+Jordan parker	33
+joe ball		45
+josh carr		27
+
+
+Objective turn it into
+Lastname		Firstname	Age
+
+How? Output formatting
+
+What libraries?
+#include <ios>
+#include <iomanip>
+
+What input output manipulators we will see?
+1)
+std::endl	//flushes output buffer
+or
+"Hello\n"	//does not flush output buffer 
+
+	//Prints a newline character
+
+	std::cout<< "Hello"
+	std::cout<<"World"
+		//O/p Hello World
+	
+
+	std::cout<< "Hello" << std::endl;
+	std::cout<< "World" << std::endl;
+	
+	
+2) std::flush
+	Send data from output buffer to terminal
+	What is an output buffer?
+	
+What happens when we print?
+	std::cout<<"Hello World how are you";
+
+	Data sent from program --> Interemediate buffer storage ---> Terminal
+		//Data sent together in 1 go from buffer to terminal
+
+	
+
+3) std::setw()	
+	Specifies width for text to be printed    
+	
+	int col_width{14};
+	set::cout<<std::setw(cold_width)<<"Lastname" << std::setw(col_width) << "Firstname"
+	Lastname		Firstname
+
+	How to modify position of fill character in output stream	//Output std::left or std::right
+	std::cout << std::left;
+	 set::cout<<std::setw(cold_width)<<"Lastname" << std::setw(col_width) << "Firstname"	
+
+4)  std::internal
+	Sign goes left , data goes to right in output
+	When useful? when displaying tabular data                  
+
+5) std::setfill('-')
+	Fills empty spaces with dash
+	///if there is width using setwidth --> filled with ----
+
+6) std::showpos;	//shows + sign for positive numbers
+	cout<< pos_num;
+	cout<<neg_num;	
+    std::noshowpos;	//does not show = sign for positive numbers 
+
+7) 
+How to force output to hex/ decimal/octal?
+
+	std::dec, std::hex, std::oct	//does not work coz number systems dont work  for floating point numbers
+	int pos_int {717171}
+	int neg_int{-47347}
+	double double_var {498.32};
+//By default
+	std::cout<<"post_int(dec) :" <<pos_int;			
+	std::cout<<"post_int(hex) :" <<pos_int;			
+	std::cout<<"post_int(oct) :" <<pos_int;			
+//pos in different formats					//Works for positive number
+	std::cout<<"post_int(dec) :" <<std::dec << pos_int;	//717171
+	std::cout<<"post_int(hex) :" <<std::hex << pos_int;	//af173
+	std::cout<<"post_int(oct) :" <<std::oct << pos_int;	//2570563 	
+//neg in different formats					//Works for negative number
+	std::cout<<"neg_int(dec) :" <<std::dec << neg_int;	//-47347
+	std::cout<<"neg_int(hex) :" <<std::hex << neg_int;	//ffff470d
+	std::cout<<"neg_int(oct) :" <<std::oct << neg_int;	//37777643415
+
+//doubel in different formats					///Doesnt work, double/floating point dont work with number systems	
+	std::cout<<"neg_int(dec) :" <<std::dec << neg_int;	//498.32
+	std::cout<<"neg_int(hex) :" <<std::hex << neg_int;	//498.32
+	std::cout<<"neg_int(oct) :" <<std::oct << neg_int;	//498.32
+
+
+8) std::uppercase;
+ Show upper case
+
+std::cout<<std::uppercase;
+std::cout<<"neg_int(hex) :" <<std::hex << neg_int;	//FFFF470D
+
+
+9) std::fixed
+    std::scientific
+	
+	double a{ 3.14159265....};
+	std::cout.unsetf(std::ios::scientific | std::ios::fixed)	//hack way, why? 
+	std::cout<<"a : " << a << std::endl;	// 3.141593E+00	//prints scientific notation
+		
+ fixed vs scientific notation
+
+10) std::showbase
+
+11) std::dec
+

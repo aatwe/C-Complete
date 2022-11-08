@@ -1,0 +1,55 @@
+What are references? alias for variables //can be used to modify the og variable
+		   even have same address
+Syntax: 
+int& reference_var_name {og_var_name};
+int& reference_var_name = og_var_name;
+
+How to declare reference?
+
+int int_value {45};
+
+1) int& reference_value {int_value};
+
+2) int& reference_value = int_value;
+
+
+
+std::cout<<reference_value;		//Output: 45   
+std::cout<< &reference_value	//xxxx
+std::cout<< &int_value		//xxxx
+
+
+What if we modify reference value? changes reflected in original var & reference
+
+
+#include <iostream>
+
+int main () {
+   int int_data{3}
+  double double_data{55};
+
+  int & refintdata {int_data};;			//Reference1
+  double refdouble {double_data};		//Reference2 
+
+ std::cout<<&refintdata;	//xxxx
+ std::cout<<&int_data;	//xxxx	
+ 
+std::cout<<refintdata;	//3
+ std::cout<<int_data;	//3
+ 
+
+int_data = 111;
+double_data = 67.2;
+
+std::cout<<refintdata;	//111
+ std::cout<<int_data;	//111
+
+return 0
+ 
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+What is use of references?
+used in functions
+
+ Note: Can you change address of variables using &?  NO, can only point
+ 

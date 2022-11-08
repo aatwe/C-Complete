@@ -1,0 +1,60 @@
+ DECLARE ARRAY OF CHARACTERS
+
+char message [5] {'H', 'e', 'l' , 'l' , 'o'};
+
+
+What is the type of elements? char
+
+
+How to print array of characters? Loop
+
+for (auto c : message) {
+  std::cout<< c;
+}
+
+
+How to modify char elements in array? index & assignment
+message[1] = 'a'
+
+
+Q) Why are char arrrays cool than normal?
+Can print char arrays without loop
+How?
+Also can print char arrays direct on console.
+
+char message[5] {'H' , 'e', 'l' , 'l' , 'o'};
+std::cout<< "message"		//might get garbage characters
+
+
+Prefer:
+String
+char message[5] {'H' , 'e', 'l' , 'l' , 'o', \0};
+std::cout<< "message"	
+	//why /0? tells std::cout -> reached end of string
+		null termination character
+	//What is null terminated char array called? C String
+			
+				
+	//How to auto fill \0? //provide 1 extra size (6 for 5 char)
+			//No garbage character in this case
+	char message2[6] {'H','e','l','l','o'};
+	std::cout<< message2;
+	//compiler auto fills null
+
+
+	What if we dont specify size?No, coz compiler will deduce size 5
+	char message3 [] {'H', 'e', 'l', 'l', 'o'};
+
+	//PREFER
+	What if we use literal c string?works , an implicit \0 appended to end of string
+	char message4 [] {"Hello"};
+	std::cout<<message4;
+	What cool about strings ?
+	Can put spaces in string
+
+	char messages[] {"Hello World! "};
+
+	//Can we print 
+
+
+is /0 considered in size of array? Yes 

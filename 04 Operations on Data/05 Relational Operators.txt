@@ -1,0 +1,27 @@
+What are relational operators?
+<,>,<=,>=,!=
+
+What do relational operators return?
+boolean
+
+How to use? with parenthesis
+why use parenthesis?
+	if stid::cout << number1< number2;																			
+What operators are used in this case? << and <
+	precedance table : << has higher precedance than <
+	//compiler will print number1 in stream and then encounter < operator
+		//problem
+	solution? use parenthesis
+
+ 
+
+int number1 {45};
+int number2 {60};
+std::cout << std::boolalpha;	//why bool alpha? output format to true/false instead of 1/0
+
+std::cout << (number1 <number2 ) << std::endl;	 	//true
+std::cout << (number1 >number2 ) << std::endl;	 	//false
+std::cout << (number1 <=number2 ) << std::endl;	 //true
+std::cout << (number1 >=number2 ) << std::endl;	 //false
+std::cout << (number1 !=number2 ) << std::endl;	 	 //true
+std::cout << (number1 ==number2 ) << std::endl;	 //false

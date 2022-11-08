@@ -1,0 +1,130 @@
+What is string manipulation?
+Few operations and properties
+====================================================================
+1) length of string
+	What function? 
+	  std::strlen(input_string);
+	//does it count null? no
+
+How to use?
+1a) 
+#include<iostream>
+#include<cstring>
+
+int main() {
+char array
+
+const char message [] {"He is"};		//Can be char array
+
+
+std::cout<< std::strlen(message);		//Output: : 5	//does not count /0
+
+
+1b) char pointer array			//Can be char pointer array
+const char* message1[] {"He is"};
+std::cout<< std::strlen(message1);		//Output: 5
+}
+====================================================================
+2) Size of string
+
+	What function?
+	  std::sizeof(input_string);
+	//does it count null? Yes
+
+How to use?
+2a) char array
+const char message [] {"He is"}
+std::cout<< std::sizeof(message);		//Output: 6
+
+2b) char pointer array
+const char* message1[] {"He is"};
+std::cout<< std::sizeof(message1);		//Output: 5
+
+====================================================================
+3) compare strings
+
+What function?
+                  int strcmp(const char *lhs, const char *rhs);
+	  std::strcmp :(string1,string2);
+	  std::strcmp :(string3,string4);
+
+	What input?  2 character strings or 2 character pointers
+		char string_data1[] {"Alabama"};
+		char string_data2[] {"Blabama"};
+		const char* string_data3[] {"Alabama"};
+		const char*string_data4[] {"Blabama"};
+	What output?
+		if -ve : 1st string before 2nd string lexicographically	//smaller to higher
+								//a smaller than b lexicographically
+								//also a smaller than b
+									ab smaller than aba
+		if +ve: 2nd string before 1st string lexicographically
+		if   0  :lhs and rhs compare equal
+How to use ?
+2a) 
+const char message [] {"He is"}
+std::cout<< std::sizeof(message);		
+
+2b) char pointer array
+const char* message1[] {"He is"};
+const char* message2[] {"She is"};
+std::cout<< std::strcmp(message1,message2));	
+
+	//Output : -ve	
+	
+
+Can we change char pointers later? yes
+	const char* string_data2{"Blabama"}
+	string_data2 = "Blabama";
+
+Can we change char array layer? NO Compiler error
+	char string3[]{"Alabama"}
+	char string4[]{"blabama"}
+	string_data3 = "Alabama";	//Array cant point to other location
+	string_data4 = "Blabama";
+====================================================================
+4) Search for 1st character in a string
+
+What function? 	std::strchr(result,target)
+
+	What input? target variable
+		    result char pt
+	What output? Return pointer to that target
+			if no found result will be nullptr	
+
+
+How to use?
+	//Declare character array
+const char * const str {"toura toura song"};
+	//Declare variable that you want to search
+char target = 'T';
+	//Declare char array to store result
+const char *result - strl; 	//assigned to what? str char pointer
+
+size_t iterations{};
+	
+while((result = std::chr(result,target))!= nullptr) {	//finds what? target 'T' at index 0
+ std::cout<<"Found"<<target<<"Starting at" << result << "\n";
+	
+++result;	//Why increment result? to point to next character. loop continues till it finds null character
+++iterations;	//test fails after 2 iterations
+}
+std::cout<<"Iterations"<<iterations;
+
+Note: Make str -> * const str	//cant modify const ptr //for ex ++str will give compiler error
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+5) Search for last occurence
+
+	What function?std::cout<< "std::strrchr(input, '/')"
+		finds last "/" and stores pointer to that in output char *
+	What input? char array
+	What output? char pointer
+
+How to use?
+char input[] = "/home/user/hello,cpp";
+char * output = std::strrchr(input, '/');	//pointer to char we found
+				//returns null pointer if not found
+if(output)
+  std::cout<<output+1 <<std::endl;	//stdout:: prints till /0 
+}
+

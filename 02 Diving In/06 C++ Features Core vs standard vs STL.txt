@@ -1,0 +1,21 @@
+C++ has 
+
+1) Core features (foundation)
+	basic variables and data types
+	rules
+
+2) Standard Library feature
+special components to use in C++ programs
+
+
+	#include<iostream>
+		std::cout
+		std::cin
+	#include<string>
+
+	
+	
+3) STL feature
+Part of Standard Library
+What is STL?
+collection of container types

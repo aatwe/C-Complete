@@ -1,0 +1,42 @@
+What is statement = unit of computation
+Syntax? end with ;
+What order of statement execution? top to bottom
+
+program = statements +  order
+
+
+What is a function? reusable bit of code
+Give inputs , it gives output
+inputs = parameters
+return to OS	
+
+What ex of function?
+int function_name (int input1, int input2) {
+   int output = input1 + input2 ;
+   return output;
+}
+
+
+Ex
+
+
+int addNumbers (int number1, int number2) {
+   int output = number1 + number2 ;
+   return output;
+}
+
+int main (int argc, char **argv)
+{
+   int firstNumber = 7;
+   int secondNumber = 9;
+
+sum = addNumbers(firstNumber, secondNumber);
+sum = addNumbers(4,5);
+
+std::cout << output;
+return 0;
+}
+_________________________________________________________
+Can we cout a function direct ? (instead of storing in variable)
+YES
+std::cout << "Sum : " << addNumbers(3,42) << std :: endl;

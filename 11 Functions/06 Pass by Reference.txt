@@ -1,0 +1,21 @@
+Why avoid passing by value?
+How to avoid passing by value #2
+
+//Original variable gets changed , why? reference are alias to original
+
+
+void say_age(int& age);			//Declaration //address as input parameter
+
+int main(int argc, char **argv) {
+ int age {23};	//local variable		
+ std::cout<<age <<&age;				//23	//print address to check if it is same variable that got modified // & = xxx
+ say_age(age)	//pass  variable as argument to & parameter	//compiler will convert to reference
+ std::cout<<age <<&age;				//24	//original value incremented				        // & = xxx
+
+return 0; 
+}
+
+void say_age(int& age){			//pass pointer as Parameter		//Definition	
+ ++age;				//why no dereferencing	//reference can be used directly
+ std::cout<<*age <<"years old";
+}

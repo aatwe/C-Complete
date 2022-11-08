@@ -1,0 +1,49 @@
+What is C++ Dev Workflow?
+
+1) C++ Program in IDE ----> Compiler ---> binary executable(.exe)
+2) binary executable(.exe) -------> Operating System(program loaded in memory RAM)------>	Stored in Program area section of memory
+
+
+What is memory map(virtual memory)? the idea our program has of memory
+	Standard format defined byOS. Why cant we run .exe from windows on linux? coz memory map
+	All programs conform to memroy map for that OS	
+
+Why program is not loaded on real memory? so many programs, can run out of memory.
+	Virtual memory
+		makes program think  it is the only 1 running on OS, all resources belong to it 	
+		virtual memory view = memory map
+
+	Program --> abstracted to Process
+	each process has access to memory range 0 -2^n-1
+			n = 32 on 32 bit system, 64 on 64 bit	//program thinks it owns all this memory	//Virtual Memory
+
+	//Basically binary file will be representation of how things will be laid out in memory	(Memory Map)
+
+What types of memory we have now?
+1) RAM
+2) Virtual Memory (0 - 2^n - 1)
+
+
+What happens when we run the program?
+Binary Executable (Memory Map) ---> Memory Management unit (CPU Section) ----> Real Memory
+
+
+Is entire program loaded in real memory? No , only parts really needed
+				     not required parst on hard-drive	//Complicated
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+What does memory map look like?
+
+Sections of memory map
+
+Stack	//imp	
+	stores local variables
+
+Heap	//imp
+	additional memory
+Data
+
+Text
+	actual binary for CPU to execute 

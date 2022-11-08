@@ -1,0 +1,50 @@
+Q ) How do integers store negative number by default?
+	they are signed by default
+	integers sare signed by default
+	int value1 {10}; ---> signed int value {10};
+	int value2 {-300};---> signed int value2 {-300}
+
+
+Q) can we use integer modifiers with int/float? No only work with int
+
+
+Q) What are integer modifiers?
+1) signed 
+	4 bytes
+2) unsigned
+	4 bytes
+3) short (basically an int split in 2)
+	2 bytes
+	short			//2bytes
+	short int			//2bytes
+	signed short 		//2bytes
+	signed short int		//2bytes
+	unsigned short int		//2bytes
+
+4) long
+	long var1 {88}		//4 bytes
+	long int var1 {33};		//4 bytes
+	signed long var1 {44};	//4 bytes
+	signed long int var1 {44};	//4 bytes
+	unsigned long int var1{44};	//4 bytes	
+
+	long long var1 {888};		//8 bytes
+	long long int var1 {999};		//8 bytes
+	signed long long var1 {444};		//8 bytes
+	signed long long int var1 {1234};	//8 bytes
+	unsigned long long int var1 {1234};	//8 bytes
+
+
+Q ) what is unsigned range? for n bits
+	[0 - 2^n - 1]
+	
+     what is unsigned size?
+	4 Bytes
+                 0  -    4,294,967,295
+
+Q ) What is signed range? for n bits		//Range divided in half
+	[-2^(n-1)  ~   2^(n-1) - 1 ]
+
+    what is signed size?
+	4 Bytes
+                 0  -    4,294,967,295

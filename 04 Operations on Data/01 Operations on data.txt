@@ -1,0 +1,29 @@
+Whata are operations on data of variables?
+
+
+int num1{5};
+int num2 {6};
+
+Addition: (*)
+
+int sum{num1  +num2};
+
+Subtraction:(-)
+int diff {num1 - num2};
+
+Multiplication:(*)
+int mult{num1 * num2};
+
+Division(/)
+How many times denominator divides numerator
+31/10 -> 3	//dont get fractional //if any 1 is float -> get output floating point
+why?  using int
+int number1{2};
+int number2{7};
+
+int result = 
+
+
+Modulus(%): remainder after division
+31%10 -> 1
+Can we do modulus on fractional? Someother day

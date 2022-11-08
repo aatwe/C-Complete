@@ -1,0 +1,28 @@
+Ex. Compiler implictly converts char / short int to int 
+	Why?  for doing operations
+
+ 	
+Quick fact: Integral type < 4 bytes do not support Operations (+-/*)
+	Why? processor design
+	//What if we give smaller int type -> compiler implicitly convert it to int
+For ex
+1) char var1 {40};		//1 byte		//< 4 bytes
+    char var2 {40};
+
+2) short int var3{10};	//2 byte	//<4 bytes
+    short int var4 {10};
+
+//use auto keyword to convert char to 
+
+auto result1= var1 + var2;	//Wont do operations	//what does auto do? 
+auto result1 = var3 + var3; 				//ideally: should convert result to char
+				
+std::cout<< sizeof(result1);			//4	//But output is int. Why? int is smallest type supported for operations
+std::cout<<sizeof(result2);			//4
+
+}
+
+
+Key takeaway? Application logic depending on size of data
+
+

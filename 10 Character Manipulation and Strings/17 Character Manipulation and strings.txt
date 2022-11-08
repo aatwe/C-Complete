@@ -1,0 +1,176 @@
+we store characters in a array
+Learn how to handle text data
+Facilities in C++:
+	find length of string
+	concat string 
+	copy string
+	search for data in string etc
+
+RESOURCE:standard library header <cctype> 	//cppreference
+	
+
+Why C String not convinient? memory etc have to track how big string is, check if ends correct, many issues
+
+C String: Not safe/ Not convinient
+C++ Solution? Character Manipulation
+
+What is character manipulation?	
+Things we need to check
+
+1) Is character alphanumeric
+	(letters and numbers)
+   which function from C++ STL : 
+					
+		std::isalnum(input_char)
+
+		What output? 0 : false not alphanumeric
+	 	       other value :  true yes alphanumeric
+
+		
+How to use?
+char input = {*};
+if (std::isalnum(input)) {
+  std::cout <<"Is alphanumeric"
+}
+else {
+ std::cout<<"Not alphanumeric";
+}
+O/p : Is alphanumeric
+
+
+2)  Is character alphabetic?
+	(letter)
+
+ which function from C++ STL : 
+					
+		std::isalpha(input_char)
+
+		What output? 0 : false not alphabetic
+	 	       other value :  true yes alphabetic
+		
+How to use?
+char input = {*};
+if (std::isalalpha(input)) {
+  std::cout <<"Is alphabetic"
+}
+else {
+ std::cout<<"Not alphabetic";
+}
+O/p : Not alphabetic
+
+
+
+3)  Is character blank?
+	(letter)
+
+ which function from C++ STL : 
+					
+		std::isblank(input_char)
+
+		What output? 0 : false not blank
+	 	       other value :  true yes blank
+		
+How to use?
+char input_message = {"Hello What is up is there any black character here"};
+	//Can we pass char array direct as input? No have to do char by char
+
+int blank_count {};
+
+for(size_t i{0}; i< std::size(input_message); ++i) {
+  if(std::isblank(input_message[i])) {
+	std::cout <<"found blank character at position i";
+	++blank_count;
+}
+ 	std::cout<<"No. of blank characters found are i ";
+}
+
+4) Is character lowercase/uppercase?
+	(letter)
+
+ which function from C++ STL : 
+					
+		std::islower(input_character)
+		std::isupper(input_character)
+
+		What output? 0 : false
+	 	       other value :  true 
+		
+How to use?
+char input_message = {"Hello What is up is there any black character here"};
+	//Can we pass char array direct as input? No have to do char by char
+
+int lower_count {};
+int upper_count {};
+
+
+for(size_t i{0}; i< std::size(input_message); ++i) {
+  if(std::islower(input_message[i])) {
+	std::cout <<"found lower case char at position i";
+	++lower_count;
+}
+ elseif ((std::isupper(input_message[i])
+ 	std::cout<<"found upper case char at position i";
+	++upper_count;
+}
+std::cout << std::endl;
+std::cout<<"upper case count"<< upper_count;
+std::cout<<"lower case count"<< lower_count;
+
+	
+5)  Is character numeric/digit?
+	(digit)
+
+ which function from C++ STL : 
+					
+		std::isdigit(character)
+
+		What output? 0 : false
+	 	       other value :  true 
+		
+How to use?
+char input_message = {"Hello What is up221 B Baker street"};
+	//Can we pass char array direct as input? No have to do char by char
+
+int digit_count {};
+
+	
+
+for(size_t i{0}; i< std::size(input_message); ++i) {
+  if(std::isdigit(input_message[i])) {
+	std::cout <<"found digit at position i";
+	++digit_count;
+  }
+ }
+std::cout << std::endl;
+std::cout<<"no. of digit found"<< digit_count;
+
+
+6) Turn character into lowercase or uppercase
+
+
+ which function from C++ STL : 
+					
+		std::tolower(input_char);
+		std::toupper(input_char);
+
+		What output? 
+	 
+		
+How to use?
+char input_string = {"Hello What is up221 B Baker street"};
+	//Can we pass char array direct as input? No have to do char by char
+
+
+char dest_string [std::size(input_string)];
+	
+for(size_t i{0}; i< std::size(input_message); ++i) {
+	dest_string[i] = std::tolower(input_string);
+ }
+std::cout << std::endl;
+std::cout<<dest_string;
+
+for(size_t i{0}; i< std::size(input_message); ++i) {
+	dest_string[i] = std::toupper(input_string);
+ }
+std::cout << std::endl;
+std::cout<<dest_	string;

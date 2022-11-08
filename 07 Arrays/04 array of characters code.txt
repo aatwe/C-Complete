@@ -1,0 +1,23 @@
+/Declare Array
+char message[5]  = {'H', 'e', 'l', 'l' , 'o'};
+
+//Print characters of array using loop
+for(auto c : message){
+	std::cout << c;;
+} 
+
+//change characters in our array
+message[1] = 'a';
+
+
+//How to print array elements easily without loop?
+char message[5]  = {'H', 'e', 'l', 'l' , 'o'};	//prints garbage
+std::cout<< message;
+	//Output: Hello&5a	
+
+
+char message[5]  = {'H', 'e', 'l', 'l' , 'o', '\0'}; //null terminated strings print correctly
+std::cout<< message;
+	//Output : Hello
+
+	//Null terminated string=  C String

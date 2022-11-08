@@ -1,0 +1,20 @@
+Summary : Open folder project folder using code . and IDE will know about compiler from microsoft
+cl.exe
+//cl.exe copiler is ot recogized
+Why? environment setting not done for
+
+How to run C++ compiler from Microsoft?Start menu -> Developer powershell for VS2019
+	cl.exe
+	//runs
+
+
+How to use  in VSCode?
+	Copy .vscode folder path
+In Powershell
+	cd //"vs code folder path" 	//project folder
+	 ls
+	//main.cpp
+	//rooster.exe
+	
+	code .	
+	//now vs code knows about compiler from Microsoft

@@ -1,0 +1,81 @@
+
+	//do based on condition being true/false
+	what should condition be? should be evaluated to boolean (True or False)
+	What is allowed as condition?
+		variable/expression	//just have to evaluated to  true / false
+	
+1) IF STATEMENT 
+//If condition is not true,code is skipped
+if(result == true)  or if (result) {
+
+}
+2) ELSE STATEMENT
+else = if (!(result == true))
+
+
+3) NESTED IF	//2 condition 1 by 1 check
+if(green) {
+  if(police_stop) {
+     std::cout<<"Stop";
+}
+}
+
+4) NESTED IF ALTERNATIVE   //2 conditions AND Operator		//Combine logical operator with conditional programming
+if(green && !police_stop)
+
+switch
+
+
+ternary
+
+
+5) ELSE IF 
+	both below help to check test for several different conditions
+	multiple if : if both are true both will be executed\
+	if - elseif 	  : if both are true , else if is not executed
+
+	i.e if : if is executed , all other else-if are skipped
+
+6) Switch statement
+	Why switch? How to test for different condtiions avoiding so many repetitive if else statement
+
+ How to use switch?
+1) declare common variable which will be checked in every condition
+int tool {Pen};
+
+2) switch with common variable as condition
+	//what is allowed in condition?all except string ""(can be short, byte,int,char(''))
+	for ex
+		std::string name {"John"};
+		switch(name){}		//compiler error	//string input as condition
+
+switch (tool) {
+
+3) write cases for each condition for common variable
+3a) condition 1 check if common var = "Pen"
+	case Pen: {
+	   std::cout<<"Active tool is pen" << std::endl;
+}
+3a2)  break particular condition1 after it is executed
+	//Why break? if a case if true, other cases must be skipped //gotta exit out of switch block
+	break;
+
+3b)
+     condition 2 check if common var = "Marker"
+       	case Marker: {
+	   std::cout<<"Active tool is pen" << std::endl;
+3b2)  break particular condition2  after it is executed
+	break;
+
+3....
+4) Write default statement, in case none of the specified condition = true
+	//where is default? inside switch block at the end
+			//can be anywhere in that
+
+default:
+   break;
+}	
+
+
+
+//Use C++ snippets (templates)

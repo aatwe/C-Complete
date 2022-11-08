@@ -1,0 +1,4 @@
+Terminal -> Run task  ->
+Build with GCC
+Build with Clang
+Build with MSVC

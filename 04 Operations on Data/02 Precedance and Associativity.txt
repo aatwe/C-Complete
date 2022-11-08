@@ -1,0 +1,17 @@
+(Advice use brackets/parenthesis)
+What is precedance? rules to follow when multiple operators in same expression
+	(which operation to do first)
+a+b*c-d/e-f+g		//different order different results
+BODMAS
+Bracket
+Order: (powers/roots)
+Division		left to right
+Multiplication	left to right
+Addition 
+Subtraction
+
+
+What if only addition and subtraction in expression? Associativity
+	
+What is associativity? Operations from left or right or right to left	
+	(which direction)

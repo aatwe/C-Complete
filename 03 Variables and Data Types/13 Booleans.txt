@@ -1,0 +1,38 @@
+Q) We learnt how to represent numbers,fractions data in program
+if we want to represent binary like values of data in program, we use boolean
+
+Q) What is boolean? data type that can store 2 states	 
+
+Q) What is size of boolean? 8 bits / 1 byte
+bool var1 {false};
+std:cout<<sizeof(var1);	
+	//O/p 1 : 1 byte
+
+Q) Can we pack mroe data in a byte?yes later
+
+Q) What bool returns?
+by default 1 or 0
+	Q) How to force output format to return true/false, how?std::boolalpha;
+
+	std::cout << std::boolalpha;
+	std::cout <<"red_light" <<red_light <<std::endl;
+	std::cout <<"green_light" <<red_light <<std::endl;
+
+Q) Code example
+bool red_light {true};
+bool green_light {false};
+
+if(red_light == true) {
+	std::cout <<"Stop" <<std::endl;
+}else  {
+	std::cout <<"Go through" <<std::endl;
+
+}
+
+if(green_light) {
+	std::cout << "The light is green" <<std::endl;
+}else {
+	std::cout << "The light is NOT green" <<std::endl;
+}
+
+Q) how to force out bool to print true/false values no matter what type of 

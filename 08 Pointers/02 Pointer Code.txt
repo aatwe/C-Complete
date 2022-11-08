@@ -1,0 +1,28 @@
+1) grab template and put in project folder
+
+2) DECLARE AND INITIALIZE
+int main (){
+  int * p_number {};			//declare and implicitly initilaize int ptr as null ptr
+or
+  int * p_number {null_ptr};			//declare and explicitly initilaize int ptr as null ptr
+
+  double p_fractional_number{};	//declare and implicitly initilaize double ptr as null ptr
+
+  return 0;
+ }
+
+
+3) SIZE OF DIFFERENT TYPES OF POINTERS
+	//same on same machine/compiler
+
+int *p_num{nullptr};
+double *p_num2 {nullptr};
+
+std::cout<< sizeof(int);		//size of int  datatype	4
+std::cout<< sizeof(int*); 		//size of integer pointertype	8
+std::cout<< sizeof(p_num); 		//size of pointer var p_num	8
+std::cout<< sizeof(p_num2);  		//size of pointer var p_num2 8
+
+
+4) Run task -> Build with GCC
+5) ./rooster.exe

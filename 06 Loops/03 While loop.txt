@@ -1,0 +1,39 @@
+What is while loop
+
+SYNTAX:
+  unsigned int i {0};
+	while(i < COUNT){
+		  std::cout << "I love C++" <<std::endl;
+		 ++i;	
+}
+
+
+ITERATOR
+//Where declared and initialized? outside of loop
+unsigned int i {0};
+
+
+
+
+TEST
+i < COUNT
+
+INCREMENT/DECREMENT
+//Where increment/decrement : Inside while loop in Body
+
+
+LOOP BODY
+//What after body executed? Check test again
+	if test true : Run body again
+	if test false : exit while loop
+
+
+
+Comparing while loop and for loop
+1) while loop iteration is in body
+2) When to use for?     when know how many iterations
+    When to use while? when dont know how many iterations and only know condition
+3) for loop initialization :  once done is not repeated
+    while loop	        :  initialization if done in condition check , gets repeated
+4)for     iteration: only after body statements executed
+   while iteration: anywhere in loop

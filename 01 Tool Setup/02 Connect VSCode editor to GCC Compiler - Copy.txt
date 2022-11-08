@@ -1,0 +1,58 @@
+C++ extension
+//Also can check C++ extension documentation in VS Code
+
+1) Setup
+--------------------------------------------
+How to test?
+1) Write code to test
+main.cpp
+#include <iostream>
+
+int main() {
+	auto resultl = (10 <=> 20) >0;
+	std::cout << result << std::endl ;
+}
+
+2) Configure
+Configure which compiler VS Code will use:
+Terminal -> Configure tasks
+		g++.exe	 	
+		clang-cpp.exe  //select	//adds entry to task.json
+
+Creates a json
+.vscode
+   tasks.json
+//as below
+
+	{
+		"version": "2.0.0",
+		"tasks" : [
+		    {
+			"type" : "cppbuild",
+			"label": "Build with GCC 11.2.0"	//we have changed label
+			"command" :  "C:\\mingw64\\bin\g++.exe"
+			"args" : [				//What options are passed to compiler
+				"-g"			//specify which compiler we using
+				"-std=c++20"		//pass option to use C++20
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBaseNameNoExtension}.exe
+]
+			"options"	 :{
+			    "cwd" : "${fileDirname}"
+}		
+			"problemMatcher"
+}]}
+
+
+
+//How to enable C++ 20 in vscode? paste "-std=c++20"
+-----------------------------------------------------------------
+2) Test
+	 Terminal -> Run task -> Build with GCC 11.2.0 -> Terminal -> Run task
+
+3) how to test if program compiled successfully?
+	main.exe file generated
+	
+4) how to run executable / binary file?
+	Terminal -> ./main.exe

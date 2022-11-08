@@ -1,0 +1,24 @@
+ Objective: set up alias/referebce to variable, make it const
+	//why make const, so we cant use it
+
+NORMAL REFERENCE
+int age {27};
+int & ref_age{age};
+
+ ref_age++;			//can modify one to change other
+std::cout<< age;	//28
+
+--------------------------------
+CONST REFERENCE
+const int & const_ref_age{age};	//cannot modify original data with const reference
+
+--------------------------------
+CONST POINTERS
+const int* const const_ptr_to_const_age{&age}	//const pointer to const var	//cannot modify
+
+--------------------------------
+Below does not exist
+const int & const weird_ref_age(age);	//Error
+==================================
+Q) 
+const int& const_ref_age{age};	//what what const applies to? const_ref_age, not age	

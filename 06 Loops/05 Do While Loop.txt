@@ -1,0 +1,32 @@
+What is Do While loop
+
+ITERATOR: 
+where declared and initialized
+outside do and while loop on top
+
+What if iterator COUNT is 0
+runs once
+
+BODY:
+inside do loop
+
+INCREMENT: 
+inside do loop
+
+TEST:
+inside while loop
+  what after test is not true: exit after do while
+
+
+const unsigned int  COUNT {10};
+unsigned int i {0};				//Initialization
+do {
+	std::cout<<"I Love C++" << std::endl;	//Body
+	++i; 				//Increment
+} while (i < COUNT);			//TEST
+-----------------------------------------------------------------------
+//Do while vs  While()
+//Will atleast run once
+1) Runs body code
+2) Tests 
+	//When is this feat helpful? for ex enter a bus first , then buy ticket

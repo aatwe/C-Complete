@@ -1,0 +1,52 @@
+1)Where dangling pointer points? not valid address
+	if used to dreference //crash program
+
+
+1.1) How to avoid dangling pointer problems?
+	a) initialize your pointers either to null ptr or something
+	b) after deleting , reset pointers to null ptr
+	c)Check if contains null ptr before using master slave	
+		int *p_number5{nullptr};
+		int *p_number6{nullptr};
+	
+		if(p_number6!= nullptr) {
+		  std::cout<<*p_number6;
+		} else {
+		  std::cout<<"Invalid address";
+	}
+}
+
+	
+
+
+
+2) Types of dangling pointers
+
+1) Uninitiialized
+int * p_number5 ;	//Dangling
+		//contains junk address
+
+2) Deleted
+int * p_number1 {new int {67}};
+std::cout<<*p_number1;
+
+delete p_number1;
+
+std::cout<<*p_number1	//try to access deleted
+
+
+3) Multiple pointing to same memory
+
+//2 pointers pointing to same memory
+int *p_number3 {new int{83}};	//if you delete this
+int *p_number4 {p_number3};	//this dangles
+	
+
+
+//Deletingp_number3
+delete p_number3;
+
+
+//What happens when we use deleted piece of memory? Anything can happen
+
+

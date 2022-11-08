@@ -1,0 +1,82 @@
+What is for loop?
+
+What is syntax for for loop?
+
+for (unsigned int i{}; i< 10; ++i){  
+  std::cout<<"I Love You"<<std::endl;
+}
+
+for (iterator ; test ;  iterator change)
+{
+body of loop
+}
+ITERATOR
+What is i? Iterator: variable m why iterator? tracks the repetition in loop
+   What is iterator initialized to?	
+	what is value of iterator variables? starting value we provide
+	//can be any value
+   What is scope of iterator variable?
+	Can only use in loop body
+      How can we use iterator outside scope of loop?
+	1) declare and initialize it outside loop, use inside/outside loop
+ 	size_t j{};
+	for(j; j<10; ++j){
+	  std::cout<< "local scope j<<j <<std::endl;
+	}
+	std::cout<<j;
+         Can we skip declaring in loop in this case?YES
+	size_t j{} ;
+	for (  ;j<10; ++j ) {
+	  std::cout<<"local j"<<std::endl;
+	}
+         Can we just declare iterator instead of leaving blank in loop? Yes
+	for (  ;j<10; ++j ) {
+	  std::cout<<"local j"<<std::endl;
+	}
+
+   What is iterator variable type?
+	size_t	//represents unsigned int (alias)  //varies compiler to compiler  //>0
+	ex for(size_t i{}; i  <  10;  ++i){	
+	   std::cout<<"I Love c++"<<std::endl;
+           }
+	What is size of size_t?
+	std:;cout<<"sizeof(size_t) :" <<sizeof(size_t) << std::endl;	//8 Bytes	
+	return 0;
+  Can iterator be negative?
+	NO , size_t unsigned , if we put -> get underflow		// less than minimum allowed
+	
+
+TEST CONDITION
+  What is our test condition(i<10)? How to control when loop ends?
+ 	your test should define how many times you want loop to run	
+  Should you hard code test condition value?
+	NO
+	Below is bad
+		for(size_t{}; j < 10 ; ++j){}
+	How should we instead? make variables accessible, dont hardcode
+		const size_t COUNT {10};	
+		for(size_t{}; j < COUNT ; ++j){}
+
+INCREMENT/DECREMENT
+What is ++i ? Increment/ decrement how iterator changes to navigate the loop
+What is code in curly braces? the body of  our loop.
+	This is the code that is repeated
+	What can you do in loop body? all types of operations like 2*i
+	//no need for {} in body if only 1 statement
+
+	
+	
+What is cycle? 
+initialize
+increment test body
+
+What is logic flow?
+1) value initialize
+2) run test
+	if true: jump into code body
+    		after codebody -> increment 
+			run test
+	if false: jump out of loop to next statement after loop
+    
+		 
+	if false: jump out of loop to next statement after loop

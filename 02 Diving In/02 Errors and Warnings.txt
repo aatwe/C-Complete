@@ -1,0 +1,44 @@
+What Types of errors in C++ Programs
+	What is final goal of C++ Program -> generate binary executable
+		How to generate binary executable? run code through compiler
+			Can compiler run any code? NO
+			What requirements/rules compiler have?
+			What if we break rules? CT Errors, RT Errors and Warnings
+
+Ex Code
+#include<iostream>
+
+int main() {
+   std::cout <<"Hello World in C++20"!" << std :: endl		//no semicolon
+  return 0;
+}
+
+1) Compile Time Errors
+cannot generate binary executable	//code will not compile
+				//incorrect syntax
+semicolon before return statement is missing
+//program didnt run
+What are compile time errors? syntactical + Semantic
+Who detects CT Errors? Compiler
+When detected? during compilation
+Example: missing ;
+	//It wont compile 
+
+
+2) Runtime Errors
+can generate binary executable but logical error in program //code will compile
+						//correct syntax
+program will fail/terminate immediately		//program crash
+//program 
+What are runtime errors? errors detected at time of running program only 
+	for ex memory leak.
+Who detects RT Errors? Virtual machine
+When detected? when program running
+Example: 7/0
+	//it wont be able give output and will terminate / fail
+
+3) Warnings
+
+can generate binary executable //code will compile
+program runs but with warnings
+What are warnings? message to warn us

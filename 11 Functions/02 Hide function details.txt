@@ -1,0 +1,33 @@
+What if you dont want to expose the function details?
+How to separate function header from implementation? separate into 2 parts, declaration and definition
+	What is declaration? also called prototype //without body
+
+What if only declaration provided, no definition: Compiler error: undefined reference
+Function  DECLARATION
+
+ int max (int a, int b);	//prototype
+	When&where to place prototype/declaration? before function call in file
+		if not- > compiler error	
+	
+	If place function definition before main -> it also works as declaration
+
+ int main(int argc. char**argv){
+  int a{3};
+  int b{4};
+
+std::cout<< max(a,b);
+std::cout<< min(a,b);
+
+ return 0;
+}
+
+//are var name compulsory for function declaration? No , only needed in definition, because they have use there
+int max (int, int);	//Valid
+
+//Function DEFINITION / implementation	//People dont care about this, they want to use
+int max (int a, int b){
+  if(a>b)
+	return a;
+  else
+	returb b;
+}

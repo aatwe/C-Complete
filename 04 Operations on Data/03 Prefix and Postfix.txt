@@ -1,0 +1,24 @@
+Operations : 
+Increment:
+	i++ -> i = i+1
+
+Decrement
+	i== -> i = i-1
+
+
+
+Post fix increment : Operand evaluated first(value of variable is returned) , then increment/decrement operation 
+What is evaluating expression? substitute variables and calculate
+
+value = 5;
+std:: cout<< value++;	//O/p : 5
+std:: cout<< value; 		//O/p : 6
+
+
+Prefix increment : First operation then evaluation
+value = 5
+std::cout << ++value <<std::endl;	//6
+std::cout << value <<std::endl;	//6
+
+
+Q) Is there var1** or var1// or **var1 or //var1 (dont confuse ** to pointer)

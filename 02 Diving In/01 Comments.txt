@@ -1,0 +1,6 @@
+//				//comment
+/* This is a comment */		//block comment
+'
+Nesting is not allowed in comments
+/* comment 1 */
+/* comment 2*/

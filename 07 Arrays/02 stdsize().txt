@@ -1,0 +1,27 @@
+How to query size of array (What if an array keeps changing)
+	//dont care for what no. you initiliazed array with
+Solution:
+  How to query at runtime?	
+  std::size(array_name)	//size of all elements
+  std::size(array_name[1])
+
+  Where can we use?
+  In loop
+	for (size_t i{0}; i< std::size(scores); ++i) {	//advantage? now dont have to care how many elements we init array with,
+	   std::cout<< scores[i];
+}
+
+
+
+What hack before std::size()?
+size_t count {sizeof(scores)/ sizeof(scores[0])};	//get count of elements using size of //total array size/ individual element size			
+					//use count in loop
+
+Note: shortest trick is
+range based for loop!
+
+int scores [] ={10,12,15,11,17,19,24};
+
+for (auto score : scores) {
+	std::cout<< "score : " <<score ;
+}

@@ -1,0 +1,96 @@
+Lets recall how program was compiled?
+	program ---> compiler ----> binary executable(rooster) ---->program executed instruction by intruction---> Output
+
+But How does compiler compiles program into binary executable?
+
+	preproc		          compilatn
+source -----------> Translation Unit-----------> Object file
+
+1) Preprocessing
+	replace include statement and paste with  Include files 
+
+	Final Output: Translation unit
+	
+2) Compilation
+Compile translation unit---> object file
+				(1 tu = 1 object file)
+
+3) Linker			linked
+	object files linked --------->  strich into 1 binary file (ready to run on target OS) 
+
+==============================================================
+Why separate compilation and linking? some files matter at compilation state, some at linking
+
+Objective
+How to split program across multiple files?
+Given: 3 functions
+	
+	std::cout<<max(a,b);
+	std::cout<<min(a,b);
+	std::cout<<incr_mul(a,b);
+	
+//split into definition and declaration
+Can definition be placed anywhere in code? yes : linker smart enough to parse entire project	 
+	max(a,b)
+		Where? in their file comparisons.h	//Prototype
+			               comparisons.cpp	//Implementation	
+		
+	min(a,b);
+		Where? in their file comparisons.h
+	incr_mult(a,b);	
+		Where? in their file operations.h	//Prototype
+ 			              operations.cpp	//Implementation 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Code :
+
+#include <iostream>
+int max(  int a, int b);
+
+int main() {
+ int maximum = max(34,56);
+std::cout<<"max"<<max;
+}
+int max (int a, int b){
+  if(a>b)
+	return a;
+  else
+	returb b;
+}
+
+Output: 56
+1) Split
+  a) compare.h//header file
+	int max(  int a, int b);
+
+  b) compare.cpp //Definition
+	int max (int a, int b){
+	  if(a>b)
+	return a;
+	  else
+	returb b;
+	}
+ c) main.cpp
+	#include<iostream>
+	#include"compare.h"			//Preprocessor copies evthing //include preprocessor directives
+	int main() {
+		int maximum = max(134,56)
+		std::cout<<maximum;
+		return 0
+}
+//Run
+//Compiler error 
+	How to solve? #include "compare.h" in main.cpp	//compiler will know the declaration
+//Run again => 134 output	//all ok
+//Summary: include header declaration in main file
+	  definition can be in any translation unit
+	    for ex try moving definition in another file some_other_file.cpp in project folder  //still works 
+
+What if we comment out definition
+ compiler will compile -> linker stiches object file into binary
+	linker Error -> cant find definition for min -> developer fixes
+		Error? ld returned, ld is the linker that gcc uses
+
+
+
+Summary: .h header files ----> usually contain declarations
+ 	 .cpp files        -----> usually contain definitions

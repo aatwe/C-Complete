@@ -1,0 +1,12 @@
+Q) What are compund assignment operators?
+value +=5 -> value = value + 5
+value -=5  -> value = value - 5 
+value *=5  -> value = value*5;
+value /=5  -> value = value/5
+value %=5 -> value = value%5
+
+
+Q) Why use compound assignments?
+	preference /compact
+
+

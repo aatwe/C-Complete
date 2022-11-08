@@ -1,0 +1,49 @@
+What is std cout/cin? Stream / highway connecting program and terminal
+	Technical what is cin? object of class iostream
+
+program---------std::cout---------Terminal
+
+why <<  and >>
+std::cout << "Hello" << std::endl;	//data going from program to std:;cout
+
+1) How to get data from terminal(console) to program (Read)
+std::cin>>name;	//data stored in name variable
+	
+	Can we chain std::cin? Yes
+	std::cin >> name >> age;	//What input into? name and age variable
+				//Takes successive inputs
+
+
+2) How to get output from program to terminal(console) )(Print)
+std::cout<<"Printing on terminal"	
+
+//When are the below statements useful? Terminal programs that support features to format different messages
+3) std::cerr
+	errors to console
+	std::cerr << "Error message : Something is wrong" << std::endl;
+
+	What is output? Error message : Something is wrong
+4) std::clog
+	log messages to console
+	std::clog << "Log message : Something happened" << std::endl;
+	
+	What is output? Log message : Something happened
+
+5) std::string
+
+
+6) Why cant we pass data with spaces?  cin object skips spaces
+What happens if we do?
+	for ex
+		cin >> name >>age1;	
+		Daniel Gakwaya
+	
+		Output only Daniel
+
+
+ How to pass in data with spaces?
+std::string full_name;
+   std::getline(std::cin, full_name);
+   
+
+

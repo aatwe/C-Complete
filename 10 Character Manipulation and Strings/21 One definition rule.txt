@@ -1,0 +1,135 @@
+"Definition cant show up more than once in entire program or translation units"
+Except? classes definition(can violate) , which can show up in multiple translation units	//in this case each translation unit has to see the definition of the class //will see ex
+
+How?
+in context of:
+	Free standing variables
+	Functions
+	Classes
+	Class member functions
+	Class static member variables
+
+Q1) What if we have multiple definition of variable in 1 program?
+#include<iostream>
+//lets try having more than 1 definition for a variable
+
+double weight{};
+double weight{};	//Error : Redefinition of double weight
+
+int main() {
+std::cout<<weight;
+
+return 0;
+} 
+Q2) What if we have multiple definition in separate programs?
+	Linker error// linker doesnt know which one to choose
+
+Q3) What if we have multiple definitions functions
+The below will work, but if 2 definitions: error: redefinition of add()
+double add(double a, double b);	//Not a definition
+
+int main() {
+	double result= add(10,20);
+	std::cout<<"result"<<result;
+
+	return 0;
+}
+
+double add(double a, double b){	
+ return a + b;	
+} 
+
+
+Q4) What if we have multiple definition of classes?
+	//note structure also class with public access by default
+	//Try putting the below in 2 separate files, (different translation unit) WORKS 
+	//Try putting the below twice one below another (same translation unit) DOES NOT WORK	
+How? 
+struct Point
+{
+  double m_x;
+  double m_y;
+}
+
+Q5) What if class has static member variables?
+Create header file : person.h
+-----------------------
+0)main.cpp
+#innclude<iostream>
+#include<person.h>
+
+double weight{};
+double add(double a, double b);
+
+struct Point
+{
+   double m_x{};
+   double m_y{};
+};
+
+int main() {
+ 
+  Person p1("John Snow", 35);
+  	p1.print_info();
+
+return 0;
+} 
+---------------------
+1)Person.h	//Definition for person class
+#ifndef PERSON_H
+#define PERSON_H
+
+#include <iostream>
+
+class Person {
+public:
+	//Constructor
+	Person(const std::string& names_param, int age_param);
+
+	//Printer function
+	void print_info() const {
+		std::cout<<"name" << full_name <<"age" <<std::endl;
+	}
+private:
+	std:: string full_name;
+	int age;
+
+public:	//static variable
+	static int person_count;
+}
+2) Put definition for static variable in some_other_file.cpp file
+
+#include "person.h"
+
+double add(double a, double b){
+   return a+b;
+}
+int Person::person_count = 8;		//initialize static variable
+	//Constructor
+Person::Person((const std::string& names_param, int age_param)
+        : full_name{names,param}, age{age_param}		//initializer
+	++person_count;				//increment static variable
++++++++++++++++++++++++++
+Output:
+name: John Snow, age: 35	//Working fine
+	
+SUMMARY:		
+WE Cant have multiple definition for same class in same translation unit
+	How
+	for ex
+	in some_other_file.cpp
+	#include "person.h"	//we have included person	//can include this in separate translation unit
+				//What if we declare another class person
+	class Person {		//this will be defining multiple times in single translation unit
+				//Also applies to static variables and member functions
+	};
+
+		For ex putting below in main, will error -> linker sees 2 definitions for static var & constructor
+int Person::person_count = 8;		//initialize static variable
+//Constructor
+Person::Person((const std::string& names_param, int age_param)
+        : full_name{names,param}, age{age_param}		//initializer
+	++person_count;				//increment static variable
+
+	Probable solution
+	remove either from other_file.cpp 	 -> then works //only 1 definition

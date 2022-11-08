@@ -1,0 +1,41 @@
+How to avoid passing by value #1
+
+How to pass parameters by pointer?
+Summary: doesnt take copy and does operations on original variable
+Objective: pass age value from main function call to function definition and manipulate
+	all by pointer
+
+What input function call takes? address as argument
+	How to pass address? &var_name
+		Where address stored? in pointer variable as parameter
+		Where pointer pointing? orginal variable
+
+1) How to pass age? pass address of age
+2) where address of age goes? pointer var *age
+3) how variable value is manipulated? dereferencing ++(*age)
+
+   &age    -->    say_age(&age)--->int *age = &age ---> ++(*age)
+ grab address   
+	
+How to modify value inside function body? referencing
+	How to modify the pointer variable? dereferencing
+		Which variable is modified? ORIGINAL //not copy
+
+Code:
+----------------------------------------------------------------------------
+void say_age(int* age);			//Declaration // tells it accepts pointer variable input i.e address
+
+int main(int argc, char **argv) {
+ int age {23};	//local variable		
+ std::cout<<age;				//23
+ say_age(&age)	//pass address as argument to pointer parameter
+ std::cout<<age;				//24	//original value incremented
+
+return 0; 
+}
+
+void say_age(int* age){			//pass pointer as Parameter		//Definition	
+ ++(*age);				//dereferencing	//Pointer has to be dereferenced
+ std::cout<<*age <<"years old";
+}
+------------------------------------------------------------------------------

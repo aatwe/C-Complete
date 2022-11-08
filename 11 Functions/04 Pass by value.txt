@@ -1,0 +1,29 @@
+How to pass parameters to functions?
+
+1) function creates local copy of age variable
+2) local copy contains argument passed to the function
+3) local copy dies when out of scope
+/try printing address of local and outside varaible and check
+outside variable before and after same value same address
+local variable at a new address(proof that copy) -> new value
+
+//Summary: remmeber that what var you working on in the body of function is a copy passed as argument when function was called
+
+What input function takes? value as argument
+
+void say_age(int age);		//Declaration
+
+int main(int argc, char **argv)
+{
+  int age{23};
+  std::cout<< age << std::endl;
+  say_age(age);			//pass age as argument
+  std::cout<< age << std::endl;
+ 
+  return 0;
+}
+
+void say_age(int age) {		//Defintiion	//age as parameter //copy of variable age
+   ++age;
+   std::cout<<age; 
+}

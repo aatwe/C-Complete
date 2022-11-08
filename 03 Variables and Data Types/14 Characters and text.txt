@@ -1,0 +1,32 @@
+q) What is char?
+
+
+Q) how to declare and initialize a char?
+char character1 {'a'}; 
+
+Q) How to print character?
+	std::cout<<  character1 ;
+
+Q) HOw much size char takes?
+	1 byte in memory = 8 bits
+Q) How to store character in memory?
+	How much size is avail for char? 8 bits or 1 byte
+	how many states? 256 states for 1 character
+
+	How to map 256 different char to 1 byte? 256 ASCII values for each character
+	ASCII enCoding Table
+	for ex
+	48-57 : 0-9
+	65-90 : A-Z
+	97-122 : a-z
+
+Q) How to print character by its ASCII value?
+
+char value = 65;
+std::cout<<value;
+O/p A
+//since 65 = A in ASCII table
+
+Q) How to print int using char? typecast char to int
+
+static_cast<int>(value) ;

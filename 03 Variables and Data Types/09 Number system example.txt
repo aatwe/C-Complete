@@ -1,0 +1,27 @@
+15
+
+1) Decimal 	: 15
+
+2)Octal      	: 017
+
+3) Hexadecimal      : 0x0f
+
+4) binary		: 0b00001111
+
+Code:
+
+objective : Store numbers using 4 number system in variables
+
+how to decide which one to use? convinience
+#include<iostream>
+
+int main () {
+	int number1 = 15;	//Decimal
+	int number2 = 017;	//Octal
+	int number3 = 0x0F; //Hexadecimal	 
+	int number4 = 0b00001111; //binary
+
+	std::cout<< "number1" <<  तोहगू
+	
+	return 0;
+}.

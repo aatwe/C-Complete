@@ -1,0 +1,15 @@
+What is auto keyword? 
+compiler will guess what type it the var is from its initializer value
+
+When is it useful? typenames that are long to type/forgot type name
+			//hover over auto var and we can find //in VSCode
+auto var1 {12};		4 bytes
+auto var2 {13.0};	double	8 bytes
+auto var0 {14.0f};	float	4 bytes
+auto var3{'e'};		16 bytes
+auto var4{123u};	unsigned	1 byte
+auto var5{123ul};	unsigned long	4 bytes
+auto var6{123ll};	long long	4 bytes
+
+cout<<sizeof(var1)		8 bytes
+.....
